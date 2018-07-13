@@ -1,0 +1,50 @@
+{
+    "index": "/index.html",
+    "assetGroups": [
+        {
+            "name": "app",
+            "installMode": "prefetch",
+            "resources": {
+                "files": ["/favicon.ico", "/index.html", "/manifest.json"],
+                "versionedFiles": ["/*.bundle.css", "/*.bundle.js", "/*.chunk.js"]
+            }
+        },
+        {
+            "name": "assets",
+            "installMode": "lazy",
+            "updateMode": "prefetch",
+            "resources": {
+                "files": ["/assets/**"]
+            }
+        },
+        {
+            "name": "icons",
+            "installMode": "prefetch",
+            "updateMode": "prefetch",
+            "resources": {
+                "files": [
+                    "/MaterialIcons-Regular.*.woff",
+                    "/MaterialIcons-Regular.*.woff2",
+                    "/MaterialIcons-Regular.*.ttf",
+                    "/MaterialIcons-Regular.*.eot"
+                ]
+            }
+        },
+        {
+            "name": "external",
+            "installMode": "prefetch",
+            "updateMode": "prefetch",
+            "resources": {
+                "urls": [
+                    "https://www.amcharts.com/lib/3/*.js",
+                    "https://www.amcharts.com/lib/3/themes/*.js",
+                    "https://www.amcharts.com/lib/3/plugins/tools/polarScatter/*.js",
+                    "https://www.amcharts.com/lib/3/plugins/dataloader/*.js",
+                    "https://www.amcharts.com/lib/3/maps/js/*.js",
+                    "https://www.amcharts.com/lib/3/plugins/export/*.js",
+                    "https://www.amcharts.com/lib/3/plugins/export/*.css"
+                ]
+            }
+        }
+    ]
+}
