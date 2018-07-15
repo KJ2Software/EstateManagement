@@ -1,0 +1,14 @@
+<div mat-dialog-title class="cardHeader">
+  SELECT AN ESTATE
+</div>
+<mat-dialog-content>
+  <mat-select placeholder="Estate" [(ngModel)]="estateKey">
+    <mat-option *ngFor="let estateOption of estates" [value]="estateOption?.key">{{estateOption?.name}}</mat-option>
+  </mat-select>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <div style="text-align: right; width:100%;">
+    <button mat-button color="primary" [disabled]="!estateKey" (click)="okClick()" mat-raised-button>OK</button>
+  </div>
+</mat-dialog-actions>

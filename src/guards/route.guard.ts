@@ -19,6 +19,14 @@ export class RouteGuard implements CanActivate {
             this._authStore.logout();
             return false;
         }
+
+        if (localStorage.getItem('estateKey') === undefined || localStorage.getItem('estateKey') === ''
+            || localStorage.getItem('estateKey') === null) {
+            this._mdSnackBar.open('Access Unauthorised!', 'Close', { duration: 5000, panelClass: ['bgc-red-700', 'text-white'] });
+            this._authStore.logout();
+            return false;
+        }
+
         if (state.url === '/') {
             return true;
         }
