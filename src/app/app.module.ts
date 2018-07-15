@@ -18,12 +18,11 @@ import { environment } from '../environments/environment';
 import { HomeComponent } from './home/home.component';
 import { CreateUserComponent, UserDetailComponent, UserRolesComponent } from './users';
 
-
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireStorageModule } from 'angularfire2/storage';
-
+import { AuthFirebaseServiceProvider } from '../services/firebase/auth-firebase-service-provider';
 
 const httpInterceptorProviders: Type<any>[] = [RequestInterceptor];
 
@@ -63,7 +62,8 @@ const httpInterceptorProviders: Type<any>[] = [RequestInterceptor];
         AuthStore,
         RolesService,
         UsersService,
-        UsersStore
+        UsersStore,
+        AuthFirebaseServiceProvider
     ],
     exports: [],
     bootstrap: [AppComponent],

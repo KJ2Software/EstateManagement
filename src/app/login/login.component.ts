@@ -6,6 +6,8 @@ import { TdLoadingService } from '@covalent/core';
 import { AuthStore } from '../../stores';
 import { HttpErrorService } from '../../services';
 import { SgNotificationService } from '../../components';
+import { AuthFirebaseServiceProvider } from '../../services/firebase/auth-firebase-service-provider';
+import { CallbackModel } from '../../models';
 
 @Component({
     selector: 'app-login',
@@ -15,7 +17,7 @@ import { SgNotificationService } from '../../components';
 export class LoginComponent implements OnInit {
 
     appTitle: string = environment.appTitle;
-    username: string;
+    email: string;
     password: string;
 
     constructor(
@@ -25,31 +27,36 @@ export class LoginComponent implements OnInit {
         private _notificationService: SgNotificationService,
         private _authStore: AuthStore,
         private _sgNotificationService: SgNotificationService,
+        private authFirebaseService: AuthFirebaseServiceProvider,
         private _httpErrorService: HttpErrorService) {
+        this.authFirebaseService.logout((e) => this.logoutCallback(e));
     }
 
     login(): void {
-
-        this._loadingService.register();
-
-        this._authStore.login({ userName: this.username, password: this.password }).subscribe(
-            (token) => {
-                this._router.navigate(['/']);
-                this._loadingService.resolve();
-                this._notificationService.displayMessage('Welcome back ' + (token.firstName ? token.firstName : token.username) + '!');
-            },
-            (error) => {
-                this._loadingService.resolve();
-                let errorMessage = this._httpErrorService.handleHttpError(error);
-            }
-        );
+        this.authFirebaseService.loginWithEmailPassword(this.email, this.password, (e) => this.loginWithEmailPasswordCallback(e));
     }
 
-    forgotPassword() {
-        this._router.navigate(['/forgot-password']);
+    loginWithEmailPasswordCallback(callbackModel: CallbackModel) {
+        if (callbackModel.success) {
+            this._notificationService.displayMessage('Logged in successfully');
+            localStorage.setItem('userKey', callbackModel.data.uid);
+            this._router.navigate(['/']);
+        } else {
+            this._notificationService.displayMessage(callbackModel.data.message);
+        }
     }
 
     ngOnInit(): void {
+        localStorage.setItem('userKey', '');
+        this.authFirebaseService.logout((e) => this.logoutCallback(e));
         this._titleService.setTitle(this.appTitle + ' | ' + 'Login');
+    }
+
+    logoutCallback(callbackModel: CallbackModel) {
+        if (callbackModel.success) {
+            this._notificationService.displayMessage('Logged out successfully');
+            return;
+        }
+        this._notificationService.displayMessage('Logged in unsuccessfully');
     }
 }
