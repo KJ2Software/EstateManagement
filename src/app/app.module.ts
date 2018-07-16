@@ -10,19 +10,32 @@ import { routedComponents, AppRoutingModule } from './app.routing';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { SharedModule, CustomModule } from '../modules';
 import { RouteGuard } from '../guards/route.guard';
-import { AuthService, HttpErrorService, RolesService, UsersService } from '../services';
-import { AppStore, AuthStore, UsersStore } from '../stores';
+import { AuthService, HttpErrorService } from '../services';
+import { AppStore, AuthStore } from '../stores';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 // import { DynamicDashboardsModule } from '@sgits/dynamic-dashboards';
 import { environment } from '../environments/environment';
 import { HomeComponent } from './home/home.component';
-import { CreateUserComponent, UserDetailComponent, UserRolesComponent } from './users';
+
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireStorageModule } from 'angularfire2/storage';
+import { AuthFirebaseServiceProvider, UserFirebaseServiceProvider, EstateFirebaseServiceProvider } from '../services';
+import { EstateDialogComponent } from './estate-dialog/estate-dialog.component';
+import { MatDialogModule } from '../../node_modules/@angular/material';
 
 const httpInterceptorProviders: Type<any>[] = [RequestInterceptor];
 
 @NgModule({
-    declarations: [AppComponent, routedComponents, HomeComponent, CreateUserComponent, UserDetailComponent, UserRolesComponent],
+    declarations: [AppComponent, routedComponents, HomeComponent, EstateDialogComponent],
     imports: [
+        MatDialogModule,
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFirestoreModule.enablePersistence(),
+        // AngularFirestoreModule,
+        AngularFireAuthModule,
+        AngularFireStorageModule,
         AppRoutingModule,
         ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
         BrowserModule,
@@ -49,12 +62,12 @@ const httpInterceptorProviders: Type<any>[] = [RequestInterceptor];
         HttpErrorService,
         AppStore,
         AuthStore,
-        RolesService,
-        UsersService,
-        UsersStore
+        AuthFirebaseServiceProvider,
+        UserFirebaseServiceProvider,
+        EstateFirebaseServiceProvider
     ],
     exports: [],
     bootstrap: [AppComponent],
-    entryComponents: [CreateUserComponent]
+    entryComponents: [EstateDialogComponent]
 })
 export class AppModule {}

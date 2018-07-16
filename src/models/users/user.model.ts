@@ -1,16 +1,9 @@
-import { UserRoleModel } from './user-role.model';
-
 export class UserModel {
-
-    userId: string;
-    firstname: string;
+    key: string;
     email: string;
-    username: string;
+    isAdmin: boolean;
+    name: string;
     surname: string;
-    isActiveDirectoryUser: boolean;
-    isActive: boolean;
-    createdDateUtc: Date;
-    createdBy: string;
-    roleCount: number;
-    roles: UserRoleModel[];
+    estateKey: string;
+    unitKey: string;
 }
