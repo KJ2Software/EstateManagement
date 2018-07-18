@@ -10,7 +10,7 @@ import { routedComponents, AppRoutingModule } from './app.routing';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { SharedModule, CustomModule } from '../modules';
 import { RouteGuard } from '../guards/route.guard';
-import { AuthService, HttpErrorService } from '../services';
+import { AuthService, HttpErrorService, ApprovalConfigFirebaseServiceProvider, ApprovalTypeFirebaseServiceProvider } from '../services';
 import { AppStore, AuthStore } from '../stores';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 // import { DynamicDashboardsModule } from '@sgits/dynamic-dashboards';
@@ -24,11 +24,14 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AuthFirebaseServiceProvider, UserFirebaseServiceProvider, EstateFirebaseServiceProvider } from '../services';
 import { EstateDialogComponent } from './estate-dialog/estate-dialog.component';
 import { MatDialogModule } from '../../node_modules/@angular/material';
+import { ApprovalConfigComponent } from './approval-config/approval-config.component';
+import { ApprovalTypeComponent } from './approval-type/approval-type.component';
+import { ApprovalTypeAddModifyComponent } from './approval-type-add-modify/approval-type-add-modify.component';
 
 const httpInterceptorProviders: Type<any>[] = [RequestInterceptor];
 
 @NgModule({
-    declarations: [AppComponent, routedComponents, HomeComponent, EstateDialogComponent],
+    declarations: [AppComponent, routedComponents, HomeComponent, EstateDialogComponent, ApprovalConfigComponent, ApprovalTypeComponent, ApprovalTypeAddModifyComponent],
     imports: [
         MatDialogModule,
         AngularFireModule.initializeApp(environment.firebase),
@@ -64,7 +67,9 @@ const httpInterceptorProviders: Type<any>[] = [RequestInterceptor];
         AuthStore,
         AuthFirebaseServiceProvider,
         UserFirebaseServiceProvider,
-        EstateFirebaseServiceProvider
+        EstateFirebaseServiceProvider,
+        ApprovalConfigFirebaseServiceProvider,
+        ApprovalTypeFirebaseServiceProvider
     ],
     exports: [],
     bootstrap: [AppComponent],

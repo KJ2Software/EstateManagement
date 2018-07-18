@@ -4,10 +4,10 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import { EstateModel } from '../../models';
 @Injectable()
-export class EstateFirebaseServiceProvider {
+export class ApprovalConfigFirebaseServiceProvider {
     // https://www.youtube.com/watch?v=-GjF9pSeFTs
 
-    private tableName: string = 'estate';
+    private tableName: string = 'approvalConfig';
 
     constructor(private db: AngularFirestore) { }
 
