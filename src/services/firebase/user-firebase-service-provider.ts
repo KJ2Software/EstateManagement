@@ -33,9 +33,9 @@ export class UserFirebaseServiceProvider {
             subscription.unsubscribe();
         });
     }
-    public getAll(callbackMethod) {
+    public getAll(estateKey: string, callbackMethod) {
         let collectionRef = this.db.collection(this.tableName, (ref) => {
-            return ref.where('key', '==', localStorage.getItem('userKey')).orderBy('name');
+            return ref.where('estateKey', '==', estateKey).orderBy('name').orderBy('surname');
         });
         // var notes = categoryCollectionRef.valueChanges();
         let snapshot = collectionRef.snapshotChanges()

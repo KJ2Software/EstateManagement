@@ -1,7 +1,7 @@
-export class ApprovalConfigModel {
+export class ApprovalSetupModel {
     key: string;
     estateKey: string;
     approvalTypeKey: string;
     userKey: string;
-    sequence: string;
+    sequence: number;
 }

@@ -5,9 +5,10 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { RouteGuard } from '../guards/route.guard';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { ApprovalConfigComponent } from './approval-config/approval-config.component';
 import { ApprovalTypeComponent } from './approval-types/approval-type/approval-type.component';
 import { ApprovalTypesComponent } from './approval-types/approval-types.component';
+import { ApprovalSetupsComponent } from './approval-setups/approval-setups.component';
+import { ApprovalSetupComponent } from './approval-setups/approval-setup/approval-setup.component';
 // import { DynamicDashboardsContainerComponent, DynamicWidgetDetailComponent } from '@sgits/dynamic-dashboards';
 
 const routes: Routes = [
@@ -28,12 +29,6 @@ const routes: Routes = [
                 data: { roles: [], url: '/', title: 'Home', icon: 'home', show: true, seq: 1 }
             },
             {
-                path: 'approval-config',
-                component: ApprovalConfigComponent,
-                canActivate: [RouteGuard],
-                data: { roles: [], url: '/approval-config', title: 'Approval Config', icon: 'home', show: true, seq: 1 }
-            },
-            {
                 path: 'approval-types',
                 component: ApprovalTypesComponent,
                 canActivate: [RouteGuard],
@@ -43,8 +38,21 @@ const routes: Routes = [
                 path: 'approval-types/:approvalTypeKey',
                 component: ApprovalTypeComponent,
                 canActivate: [RouteGuard],
-                data: { roles: [], url: '/approval-types/approval-type-add-modify', title: 'Approval Type', icon: 'home', show: false, seq: 1 }
+                data: { roles: [], url: '/approval-types/approval-type', title: 'Approval Type', icon: 'home', show: false, seq: 1 }
+            },
+            {
+                path: 'approval-setups',
+                component: ApprovalSetupsComponent,
+                canActivate: [RouteGuard],
+                data: { roles: [], url: '/approval-setups', title: 'Approval Setup', icon: 'home', show: true, seq: 1 }
+            },
+            {
+                path: 'approval-setups/:approvalSetupKey',
+                component: ApprovalSetupComponent,
+                canActivate: [RouteGuard],
+                data: { roles: [], url: '/approval-setups/approval-setup', title: 'Approval Setup', icon: 'home', show: false, seq: 1 }
             }
+
             // {
             //     path: '',
             //     component: DynamicDashboardsContainerComponent,

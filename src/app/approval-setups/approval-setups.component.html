@@ -6,20 +6,12 @@
         <mat-list>
           <mat-list-item class='listHeading'>
             <div flex fxFlexAlign="center">
-              Category
-            </div>
-
-            <div hide-xs flex fxFlexAlign="center" style="text-align: right;">
-              Budget
-            </div>
-
-            <div flex fxFlexAlign="end" style="padding-bottom:13px;  text-align: right">
-              Expense
+              Approval Setup List
             </div>
             <mat-divider></mat-divider>
           </mat-list-item>
           <mat-list-item style="height: auto">
-            <div flex  *ngIf="data.length === 0">
+            <div flex  *ngIf="approvalSetups.length === 0">
               <br/>
               <div flex layout="column" layout-align="center center" class="tc-grey-500 mat-typography pad-lg">
                 <mat-icon flex  matListAvatar class="text-super push-bottom">device_hub</mat-icon>
@@ -28,18 +20,15 @@
               </div>
             </div>
           </mat-list-item>
-          <mat-list-item *ngFor="let record of data" (click)="detailClick(record)" class="hand">
+          <mat-list-item *ngFor="let record of approvalSetups" (click)="detailClick(record)" class="hand">
             <div flex fxFlexAlign="center">
-              {{record.categoryName}}
+              {{record.key}}
+            </div>
+            <div flex fxFlexAlign="center">
+              {{record.sequence}}
             </div>
 
-            <div hide-xs flex fxFlexAlign="center" style="text-align: right; color:lightgray">
-              {{record.budget}}
-            </div>
-
-            <div flex fxFlexAlign="end" style="padding-bottom:13px;" [style.color]="record.textColor">
-              {{record.expenseValue}}
-            </div>
+          
             <mat-divider></mat-divider>
 
           </mat-list-item>
@@ -51,3 +40,9 @@
    
   </div>
 </div>
+
+
+
+<a mat-fab routerLink="/approval-setups/0" color="primary" style="top:auto; right:15px; left:auto; bottom:50px; position:fixed;">
+  <mat-icon>add</mat-icon>
+</a>

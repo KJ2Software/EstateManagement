@@ -4,5 +4,5 @@ export { IThemeModel } from './app/theme.model';
 export { CallbackModel } from './callback.model';
 export { UserModel } from './users/user.model';
 export { EstateModel } from './estates/estate.model';
-export { ApprovalConfigModel } from './approval-configs/approval-config.model';
+export { ApprovalSetupModel } from './approval-setups/approval-setup.model';
 export { ApprovalTypeModel } from './approval-types/approval-type.model';

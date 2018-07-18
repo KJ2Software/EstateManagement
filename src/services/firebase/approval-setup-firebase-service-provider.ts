@@ -2,16 +2,16 @@ import { Injectable } from '@angular/core';
 
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
-import { EstateModel } from '../../models';
+import { ApprovalSetupModel } from '../../models';
 @Injectable()
-export class ApprovalConfigFirebaseServiceProvider {
+export class ApprovalSetupFirebaseServiceProvider {
     // https://www.youtube.com/watch?v=-GjF9pSeFTs
 
-    private tableName: string = 'approvalConfig';
+    private tableName: string = 'approvalSetup';
 
     constructor(private db: AngularFirestore) { }
 
-    public insertRecord(model: EstateModel, callbackMethod) {
+    public insertRecord(model: ApprovalSetupModel, callbackMethod) {
         this.db.collection(this.tableName).doc(model.key).set(model).then((docRef) => {
             // console.log(docRef);
             callbackMethod({ success: true, data: undefined });
@@ -33,15 +33,16 @@ export class ApprovalConfigFirebaseServiceProvider {
             subscription.unsubscribe();
         });
     }
-    public getAll(callbackMethod) {
+
+    public getAll(estateKey: string, callbackMethod) {
         let collectionRef = this.db.collection(this.tableName, (ref) => {
-            return ref.orderBy('name');
+            return ref.where('estateKey', '==', estateKey).orderBy('sequence');
         });
         // var notes = categoryCollectionRef.valueChanges();
         let snapshot = collectionRef.snapshotChanges()
             .map((changes) => {
                 return changes.map((snap) => {
-                    return snap.payload.doc.data() as EstateModel;
+                    return snap.payload.doc.data() as ApprovalSetupModel;
                 });
             });
         let subscription = snapshot.subscribe((res) => {
@@ -51,7 +52,7 @@ export class ApprovalConfigFirebaseServiceProvider {
         });
     }
 
-    public updateRecord(model: EstateModel, callbackMethod) {
+    public updateRecord(model: ApprovalSetupModel, callbackMethod) {
         let docRef = this.db.doc(this.tableName + '/' + model.key);
         docRef.set(model).then((ok) => {
             callbackMethod({ success: true, data: ok });
