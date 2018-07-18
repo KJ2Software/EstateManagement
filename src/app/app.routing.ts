@@ -6,8 +6,8 @@ import { HomeComponent } from './home/home.component';
 import { RouteGuard } from '../guards/route.guard';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ApprovalConfigComponent } from './approval-config/approval-config.component';
-import { ApprovalTypeAddModifyComponent } from './approval-type-add-modify/approval-type-add-modify.component';
-import { ApprovalTypeComponent } from './approval-type/approval-type.component';
+import { ApprovalTypeComponent } from './approval-types/approval-type/approval-type.component';
+import { ApprovalTypesComponent } from './approval-types/approval-types.component';
 // import { DynamicDashboardsContainerComponent, DynamicWidgetDetailComponent } from '@sgits/dynamic-dashboards';
 
 const routes: Routes = [
@@ -34,16 +34,16 @@ const routes: Routes = [
                 data: { roles: [], url: '/approval-config', title: 'Approval Config', icon: 'home', show: true, seq: 1 }
             },
             {
-                path: 'approval-type',
-                component: ApprovalTypeComponent,
+                path: 'approval-types',
+                component: ApprovalTypesComponent,
                 canActivate: [RouteGuard],
-                data: { roles: [], url: '/approval-type', title: 'Approval Type', icon: 'home', show: true, seq: 1 }
+                data: { roles: [], url: '/approval-types', title: 'Approval Types', icon: 'home', show: true, seq: 1 }
             },
             {
-                path: 'approval-type-add-modify/:approvalTypeKey',
-                component: ApprovalTypeAddModifyComponent,
+                path: 'approval-types/:approvalTypeKey',
+                component: ApprovalTypeComponent,
                 canActivate: [RouteGuard],
-                data: { roles: [], url: '/approval-type-add-modify', title: 'Approval Type', icon: 'home', show: false, seq: 1 }
+                data: { roles: [], url: '/approval-types/approval-type-add-modify', title: 'Approval Type', icon: 'home', show: false, seq: 1 }
             }
             // {
             //     path: '',

@@ -6,11 +6,11 @@ import { TdLoadingService } from '../../../node_modules/@covalent/core';
 import { ApprovalTypeFirebaseServiceProvider } from '../../services';
 
 @Component({
-  selector: 'app-approval-type',
-  templateUrl: './approval-type.component.html',
-  styleUrls: ['./approval-type.component.scss']
+  selector: 'app-approval-types',
+  templateUrl: './approval-types.component.html',
+  styleUrls: ['./approval-types.component.scss']
 })
-export class ApprovalTypeComponent implements OnInit {
+export class ApprovalTypesComponent implements OnInit {
   approvalTypes: ApprovalTypeModel[] = [];
 
   constructor(private _snackBarService: MatSnackBar, private _router: Router,
@@ -39,7 +39,7 @@ export class ApprovalTypeComponent implements OnInit {
   }
 
   detailClick(approvalTypeModel: ApprovalTypeModel) {
-    this._router.navigate(['/approval-type-add-modify/' + approvalTypeModel.key]);
+    this._router.navigate(['/approval-types/' + approvalTypeModel.key]);
   }
 
 }

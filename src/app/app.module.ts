@@ -25,13 +25,14 @@ import { AuthFirebaseServiceProvider, UserFirebaseServiceProvider, EstateFirebas
 import { EstateDialogComponent } from './estate-dialog/estate-dialog.component';
 import { MatDialogModule } from '../../node_modules/@angular/material';
 import { ApprovalConfigComponent } from './approval-config/approval-config.component';
-import { ApprovalTypeComponent } from './approval-type/approval-type.component';
-import { ApprovalTypeAddModifyComponent } from './approval-type-add-modify/approval-type-add-modify.component';
+import { ApprovalTypesComponent } from './approval-types/approval-types.component';
+import { ApprovalTypeComponent } from './approval-types/approval-type/approval-type.component';
 
 const httpInterceptorProviders: Type<any>[] = [RequestInterceptor];
 
 @NgModule({
-    declarations: [AppComponent, routedComponents, HomeComponent, EstateDialogComponent, ApprovalConfigComponent, ApprovalTypeComponent, ApprovalTypeAddModifyComponent],
+    declarations: [AppComponent, routedComponents, HomeComponent, EstateDialogComponent,
+        ApprovalConfigComponent, ApprovalTypesComponent, ApprovalTypeComponent],
     imports: [
         MatDialogModule,
         AngularFireModule.initializeApp(environment.firebase),

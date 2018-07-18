@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { TdDialogService } from '../../../node_modules/@covalent/core';
-import { MatSnackBar } from '../../../node_modules/@angular/material';
-import { Router, ActivatedRoute } from '../../../node_modules/@angular/router';
-import { FormBuilder, FormGroup, Validators } from '../../../node_modules/@angular/forms';
-import { ApprovalTypeFirebaseServiceProvider } from '../../services';
-import { ApprovalTypeModel, CallbackModel } from '../../models';
+import { TdDialogService } from '../../../../node_modules/@covalent/core';
+import { MatSnackBar } from '../../../../node_modules/@angular/material';
+import { Router, ActivatedRoute } from '../../../../node_modules/@angular/router';
+import { FormBuilder, FormGroup, Validators } from '../../../../node_modules/@angular/forms';
+import { ApprovalTypeFirebaseServiceProvider } from '../../../services';
+import { ApprovalTypeModel, CallbackModel } from '../../../models';
 
 @Component({
-  selector: 'app-approval-type-add-modify',
-  templateUrl: './approval-type-add-modify.component.html',
-  styleUrls: ['./approval-type-add-modify.component.scss']
+  selector: 'app-approval-type',
+  templateUrl: './approval-type.component.html',
+  styleUrls: ['./approval-type.component.scss']
 })
-export class ApprovalTypeAddModifyComponent implements OnInit {
+export class ApprovalTypeComponent implements OnInit {
   private approvalTypeKey: string;
   private subscriptions: any[] = [];
   private approvalTypeModel: ApprovalTypeModel = new ApprovalTypeModel();
@@ -67,7 +67,7 @@ export class ApprovalTypeAddModifyComponent implements OnInit {
       };
 
       this.approvalTypeService.insertRecord(modelToSave, (e) => this.insertUpdateRecord(e));
-      this._router.navigate(['/approval-type']);
+      this._router.navigate(['/approval-types']);
     } else {
       // Update
       let modelToSave: ApprovalTypeModel = {
@@ -77,12 +77,12 @@ export class ApprovalTypeAddModifyComponent implements OnInit {
       };
 
       this.approvalTypeService.updateRecord(modelToSave, (e) => this.insertUpdateRecord(e));
-      this._router.navigate(['/approval-type']);
+      this._router.navigate(['/approval-types']);
     }
   }
 
   cancelClick() {
-    this._router.navigate(['/approval-type']);
+    this._router.navigate(['/approval-types']);
 
   }
   insertUpdateRecord(callback: CallbackModel) {
