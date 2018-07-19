@@ -6,3 +6,4 @@ export { UserModel } from './users/user.model';
 export { EstateModel } from './estates/estate.model';
 export { ApprovalSetupModel } from './approval-setups/approval-setup.model';
 export { ApprovalTypeModel } from './approval-types/approval-type.model';
+export { ApprovalSetupsViewModel } from './view-models/approval-setups-view.model';
