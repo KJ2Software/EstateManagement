@@ -78,6 +78,7 @@ export class ApprovalSetupsComponent implements OnInit {
   }
 
   buildModel() {
+    this.viewModels = [];
     this.approvalSetups.forEach((appSetup) => {
       let userName = '';
       this.users.forEach((user) => {

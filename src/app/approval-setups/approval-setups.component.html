@@ -29,17 +29,13 @@
             </div>
             <mat-divider></mat-divider>
           </mat-list-item>
-          <mat-list-item *ngFor="let record of viewModels" (click)="detailClick(record)" class="hand">
+          <mat-list-item *ngFor="let record of viewModels" (click)="detailClick(record)" class="hand gridRow">
             <div flex fxFlexAlign="center">
               {{record.name}}
             </div>
             <div flex fxFlexAlign="center">
               {{record.approvalType}}
             </div>
-          
-
-          
-            <mat-divider></mat-divider>
 
           </mat-list-item>
         </mat-list>
