@@ -9,6 +9,7 @@ import { ApprovalTypeComponent } from './approval-types/approval-type/approval-t
 import { ApprovalTypesComponent } from './approval-types/approval-types.component';
 import { ApprovalSetupsComponent } from './approval-setups/approval-setups.component';
 import { ApprovalSetupComponent } from './approval-setups/approval-setup/approval-setup.component';
+import { CreateApprovalComponent } from './create-approval/create-approval.component';
 // import { DynamicDashboardsContainerComponent, DynamicWidgetDetailComponent } from '@sgits/dynamic-dashboards';
 
 const routes: Routes = [
@@ -51,6 +52,12 @@ const routes: Routes = [
                 component: ApprovalSetupComponent,
                 canActivate: [RouteGuard],
                 data: { roles: [], url: '/approval-setups/approval-setup', title: 'Approval Setup', icon: 'home', show: false, seq: 1 }
+            },
+            {
+                path: 'create-approval',
+                component: CreateApprovalComponent,
+                canActivate: [RouteGuard],
+                data: { roles: [], url: '/create-approval', title: 'Create Approval', icon: 'home', show: true, seq: 1 }
             }
 
             // {

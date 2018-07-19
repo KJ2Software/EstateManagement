@@ -10,7 +10,7 @@ import { routedComponents, AppRoutingModule } from './app.routing';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { SharedModule, CustomModule } from '../modules';
 import { RouteGuard } from '../guards/route.guard';
-import { AuthService, HttpErrorService, ApprovalTypeFirebaseServiceProvider } from '../services';
+import { AuthService, HttpErrorService, ApprovalTypeFirebaseServiceProvider, CommonService } from '../services';
 import { AppStore, AuthStore } from '../stores';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 // import { DynamicDashboardsModule } from '@sgits/dynamic-dashboards';
@@ -29,12 +29,13 @@ import { ApprovalTypesComponent } from './approval-types/approval-types.componen
 import { ApprovalTypeComponent } from './approval-types/approval-type/approval-type.component';
 import { ApprovalSetupsComponent } from './approval-setups/approval-setups.component';
 import { ApprovalSetupComponent } from './approval-setups/approval-setup/approval-setup.component';
+import { CreateApprovalComponent } from './create-approval/create-approval.component';
 
 const httpInterceptorProviders: Type<any>[] = [RequestInterceptor];
 
 @NgModule({
     declarations: [AppComponent, routedComponents, HomeComponent, EstateDialogComponent,
-        ApprovalTypesComponent, ApprovalTypeComponent, ApprovalSetupsComponent, ApprovalSetupComponent],
+        ApprovalTypesComponent, ApprovalTypeComponent, ApprovalSetupsComponent, ApprovalSetupComponent, CreateApprovalComponent],
     imports: [
         MatDialogModule,
         AngularFireModule.initializeApp(environment.firebase),
@@ -72,7 +73,8 @@ const httpInterceptorProviders: Type<any>[] = [RequestInterceptor];
         UserFirebaseServiceProvider,
         EstateFirebaseServiceProvider,
         ApprovalSetupFirebaseServiceProvider,
-        ApprovalTypeFirebaseServiceProvider
+        ApprovalTypeFirebaseServiceProvider,
+        CommonService
     ],
     exports: [],
     bootstrap: [AppComponent],

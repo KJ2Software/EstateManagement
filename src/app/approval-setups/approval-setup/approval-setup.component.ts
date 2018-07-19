@@ -3,7 +3,8 @@ import { TdDialogService } from '../../../../node_modules/@covalent/core';
 import { MatSnackBar } from '../../../../node_modules/@angular/material';
 import { Router, ActivatedRoute } from '../../../../node_modules/@angular/router';
 import { FormBuilder, FormGroup, Validators } from '../../../../node_modules/@angular/forms';
-import { ApprovalSetupFirebaseServiceProvider, ApprovalTypeFirebaseServiceProvider, UserFirebaseServiceProvider } from '../../../services';
+import { ApprovalSetupFirebaseServiceProvider, ApprovalTypeFirebaseServiceProvider,
+  UserFirebaseServiceProvider, CommonService } from '../../../services';
 import { CallbackModel, ApprovalSetupModel, UserModel, ApprovalTypeModel } from '../../../models';
 
 @Component({
@@ -22,7 +23,7 @@ export class ApprovalSetupComponent implements OnInit {
   frmApprovalSetup: FormGroup;
 
   constructor(private _dialogService: TdDialogService, private _snackBarService: MatSnackBar, private _router: Router,
-    private _activatedRoute: ActivatedRoute, public builder: FormBuilder,
+    private commonService: CommonService, private _activatedRoute: ActivatedRoute, public builder: FormBuilder,
     private approvalSetupService: ApprovalSetupFirebaseServiceProvider,
     private userSetupService: UserFirebaseServiceProvider, private approvalTypeService: ApprovalTypeFirebaseServiceProvider) {
     this.frmApprovalSetup = builder.group({
@@ -97,7 +98,7 @@ export class ApprovalSetupComponent implements OnInit {
     if (this.approvalSetupKey === '') {
       // Add
       let modelToSave: ApprovalSetupModel = {
-        key: this.getNewGuid(),
+        key: this.commonService.getNewGuid(),
         estateKey: localStorage.getItem('estateKey'),
         approvalTypeKey: this.frmApprovalSetup.value.approvalTypeKey,
         userKey: this.frmApprovalSetup.value.userKey,
@@ -132,18 +133,6 @@ export class ApprovalSetupComponent implements OnInit {
       return;
     }
     this._snackBarService.open('Execute failed', undefined, { duration: 3000 });
-  }
-
-  getNewGuid(): string {
-    let d = new Date().getTime();
-    let uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-      // tslint:disable-next-line:no-bitwise
-      let r = (d + Math.random() * 16) % 16 | 0;
-      d = Math.floor(d / 16);
-      // tslint:disable-next-line:no-bitwise
-      return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
-    });
-    return uuid;
   }
 
 }
