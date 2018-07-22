@@ -1,0 +1,28 @@
+<td-layout-card-over cardTitle="Note Types">
+  <mat-card-content flex fxLayout="column">
+    <div *ngIf="noteTypes.length > 0">
+      <mat-list>
+        <mat-list-item>
+          <span class="pad-right">
+            <mat-icon matListAvatar>keyboard_arrow_right</mat-icon>
+          </span>
+          <span fxFlex="90" class="mat-body-1 tc-grey-500">Name</span>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item *ngFor="let record of noteTypes" (click)="detailClick(record)" class="hand">
+          <span class="pad-right top-bottom-padding">
+            <mat-icon color="primary" matListAvatar>keyboard_arrow_right</mat-icon>
+          </span>
+          <span fxHide fxShow.gt-md fxFlex="20">
+            {{record.name}}
+          </span>
+          <mat-divider></mat-divider>
+        </mat-list-item>
+      </mat-list>
+    </div>
+    <app-empty-state name="note types" [icon]="icon" [count]="noteTypes.length"></app-empty-state>
+  </mat-card-content>
+</td-layout-card-over>
+<a mat-fab routerLink="/note-types/0" color="primary" class="custom-fab-button">
+  <mat-icon>add</mat-icon>
+</a>

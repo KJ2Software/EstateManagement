@@ -10,13 +10,12 @@ import { routedComponents, AppRoutingModule } from './app.routing';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { SharedModule, CustomModule } from '../modules';
 import { RouteGuard } from '../guards/route.guard';
-import { AuthService, HttpErrorService, ApprovalTypeFirebaseServiceProvider, CommonService } from '../services';
+import { AuthService, HttpErrorService, ApprovalTypeFirebaseServiceProvider, CommonService, NoteTypeFirebaseServiceProvider } from '../services';
 import { AppStore, AuthStore } from '../stores';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 // import { DynamicDashboardsModule } from '@sgits/dynamic-dashboards';
 import { environment } from '../environments/environment';
 import { HomeComponent } from './home/home.component';
-
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
@@ -26,16 +25,31 @@ import { AuthFirebaseServiceProvider, UserFirebaseServiceProvider, EstateFirebas
 import { EstateDialogComponent } from './estate-dialog/estate-dialog.component';
 import { MatDialogModule } from '../../node_modules/@angular/material';
 import { ApprovalTypesComponent } from './approval-types/approval-types.component';
+import { NoteTypesComponent } from './note-types/note-types.component';
+import { NoteTypeComponent } from './note-types/note-type/note-type.component';
 import { ApprovalTypeComponent } from './approval-types/approval-type/approval-type.component';
 import { ApprovalSetupsComponent } from './approval-setups/approval-setups.component';
 import { ApprovalSetupComponent } from './approval-setups/approval-setup/approval-setup.component';
 import { CreateApprovalComponent } from './create-approval/create-approval.component';
+import { EmptyStateComponent } from '../components/empty-state/empty-state.component';
 
 const httpInterceptorProviders: Type<any>[] = [RequestInterceptor];
 
 @NgModule({
-    declarations: [AppComponent, routedComponents, HomeComponent, EstateDialogComponent,
-        ApprovalTypesComponent, ApprovalTypeComponent, ApprovalSetupsComponent, ApprovalSetupComponent, CreateApprovalComponent],
+    declarations: [
+        AppComponent,
+        routedComponents,
+        HomeComponent,
+        EstateDialogComponent,
+        ApprovalTypesComponent,
+        ApprovalTypeComponent,
+        ApprovalSetupsComponent,
+        ApprovalSetupComponent,
+        NoteTypesComponent,
+        NoteTypeComponent,
+        CreateApprovalComponent,
+        EmptyStateComponent,
+        NoteTypesComponent],
     imports: [
         MatDialogModule,
         AngularFireModule.initializeApp(environment.firebase),
@@ -74,6 +88,7 @@ const httpInterceptorProviders: Type<any>[] = [RequestInterceptor];
         EstateFirebaseServiceProvider,
         ApprovalSetupFirebaseServiceProvider,
         ApprovalTypeFirebaseServiceProvider,
+        NoteTypeFirebaseServiceProvider,
         CommonService
     ],
     exports: [],
