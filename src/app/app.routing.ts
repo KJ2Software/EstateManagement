@@ -5,6 +5,17 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { RouteGuard } from '../guards/route.guard';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ApprovalTypeComponent } from './approval-types/approval-type/approval-type.component';
+import { ApprovalTypesComponent } from './approval-types/approval-types.component';
+import { ApprovalSetupsComponent } from './approval-setups/approval-setups.component';
+import { ApprovalSetupComponent } from './approval-setups/approval-setup/approval-setup.component';
+import { CreateApprovalComponent } from './create-approval/create-approval.component';
+import { NoteTypesComponent } from './note-types/note-types.component';
+import { NoteTypeComponent } from './note-types/note-type/note-type.component';
+import { OwnersComponent } from './owners/owners.component';
+import { OwnerComponent } from './owners/owner/owner.component';
+import { ResidentsComponent } from './residents/residents.component';
+import { ResidentComponent } from './residents/resident/resident.component';
 // import { DynamicDashboardsContainerComponent, DynamicWidgetDetailComponent } from '@sgits/dynamic-dashboards';
 
 const routes: Routes = [
@@ -23,7 +34,74 @@ const routes: Routes = [
                 component: HomeComponent,
                 canActivate: [RouteGuard],
                 data: { roles: [], url: '/', title: 'Home', icon: 'home', show: true, seq: 1 }
+            },
+            {
+                path: 'approval-types',
+                component: ApprovalTypesComponent,
+                canActivate: [RouteGuard],
+                data: { roles: [], url: '/approval-types', title: 'Approval Types', icon: 'home', show: true, seq: 1 }
+            },
+            {
+                path: 'approval-types/:approvalTypeKey',
+                component: ApprovalTypeComponent,
+                canActivate: [RouteGuard],
+                data: { roles: [], url: '/approval-types/approval-type', title: 'Approval Type', icon: 'home', show: false, seq: 1 }
+            },
+            {
+                path: 'approval-setups',
+                component: ApprovalSetupsComponent,
+                canActivate: [RouteGuard],
+                data: { roles: [], url: '/approval-setups', title: 'Approval Setup', icon: 'home', show: true, seq: 1 }
+            },
+            {
+                path: 'approval-setups/:approvalSetupKey',
+                component: ApprovalSetupComponent,
+                canActivate: [RouteGuard],
+                data: { roles: [], url: '/approval-setups/approval-setup', title: 'Approval Setup', icon: 'home', show: false, seq: 1 }
+            },
+            {
+                path: 'create-approval',
+                component: CreateApprovalComponent,
+                canActivate: [RouteGuard],
+                data: { roles: [], url: '/create-approval', title: 'Create Approval', icon: 'home', show: true, seq: 1 }
+            },
+            {
+                path: 'note-types',
+                component: NoteTypesComponent,
+                canActivate: [RouteGuard],
+                data: { roles: [], url: '/note-types', title: 'Note Types', icon: 'insert_comment', show: true, seq: 1 }
+            },
+            {
+                path: 'note-types/:noteTypeKey',
+                component: NoteTypeComponent,
+                canActivate: [RouteGuard],
+                data: { roles: [], url: '/note-types/note-type', title: 'Note Type', icon: 'insert_comment', show: false, seq: 1 }
+            },
+            {
+                path: 'owners',
+                component: OwnersComponent,
+                canActivate: [RouteGuard],
+                data: { roles: [], url: '/owners', title: 'Owners', icon: 'person', show: true, seq: 1 }
+            },
+            {
+                path: 'owners/:ownerKey',
+                component: OwnerComponent,
+                canActivate: [RouteGuard],
+                data: { roles: [], url: '/owners/owner', title: 'Owner', icon: 'person', show: false, seq: 1 }
+            },
+            {
+                path: 'residents',
+                component: ResidentsComponent,
+                canActivate: [RouteGuard],
+                data: { roles: [], url: '/residents', title: 'Residents', icon: 'people', show: true, seq: 1 }
+            },
+            {
+                path: 'residents/:residentKey',
+                component: ResidentComponent,
+                canActivate: [RouteGuard],
+                data: { roles: [], url: '/residents/resident', title: 'Resident', icon: 'people', show: false, seq: 1 }
             }
+
             // {
             //     path: '',
             //     component: DynamicDashboardsContainerComponent,

@@ -13,10 +13,9 @@ export class HomeComponent implements OnInit {
     private estate = undefined;
     constructor(private estateService: EstateFirebaseServiceProvider, private _notificationService: SgNotificationService) { }
 
-    ngOnInit() { 
+    ngOnInit() {
         this.getEstate();
     }
-
 
     getEstate() {
         this.estateService.getRecord(localStorage.getItem('estateKey'), (e) => this.getEstateCallback(e));

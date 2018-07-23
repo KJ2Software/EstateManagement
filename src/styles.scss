@@ -62,3 +62,29 @@ td-layout-manage-list .mat-toolbar {
 // ::-webkit-scrollbar {
 //     display: none;
 // }
+
+
+.hand {
+    cursor: pointer;
+    cursor: hand;
+}
+
+.listHeading {
+    font-weight: bold
+}
+
+.custom-fab-button {
+    top: auto !important;
+    right: 25px !important;
+    left: auto !important;
+    bottom: 50px !important;
+    position: fixed !important;
+}
+
+.second-fab-button {
+    top: auto !important;
+    right: 100px !important;
+    left: auto !important;
+    bottom: 50px !important;
+    position: fixed !important;
+}

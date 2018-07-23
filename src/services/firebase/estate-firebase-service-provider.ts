@@ -47,7 +47,6 @@ export class EstateFirebaseServiceProvider {
         let subscription = snapshot.subscribe((res) => {
             callbackMethod({ success: true, data: res });
         }, (err) => {
-            console.log(err);
             callbackMethod({ success: false, data: err });
         });
     }
