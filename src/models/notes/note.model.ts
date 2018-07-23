@@ -1,5 +1,7 @@
 export class NoteTypeModel {
     key: string;
     estateKey: string;
-    description: string;
+    noteTypeKey: string;
+    unitKey: string;
+    comments: string;
 }
