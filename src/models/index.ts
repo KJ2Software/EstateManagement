@@ -9,3 +9,6 @@ export { ApprovalTypeModel } from './approval-types/approval-type.model';
 export { ApprovalSetupsViewModel } from './view-models/approval-setups-view.model';
 export { ApprovalModel } from './approvals/approval.model';
 export { NoteTypeModel } from './note-types/note-type.model';
+export { ResidentModel } from './residents/resident.model';
+export { OwnerModel } from './owners/owner.model';
+export { OwnersViewModel } from './view-models/owners-view.model';

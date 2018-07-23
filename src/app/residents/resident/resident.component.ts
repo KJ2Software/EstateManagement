@@ -3,19 +3,19 @@ import { TdDialogService } from '../../../../node_modules/@covalent/core';
 import { MatSnackBar } from '../../../../node_modules/@angular/material';
 import { Router, ActivatedRoute } from '../../../../node_modules/@angular/router';
 import { FormBuilder, FormGroup, Validators } from '../../../../node_modules/@angular/forms';
-import { NoteTypeFirebaseServiceProvider } from '../../../services';
-import { NoteTypeModel, CallbackModel } from '../../../models';
+import { ResidentFirebaseServiceProvider } from '../../../services';
+import { ResidentModel, CallbackModel } from '../../../models';
 
 @Component({
-    selector: 'app-note-type',
-    templateUrl: './note-type.component.html',
-    styleUrls: ['./note-type.component.scss']
+    selector: 'app-resident',
+    templateUrl: './resident.component.html',
+    styleUrls: ['./resident.component.scss']
 })
-export class NoteTypeComponent implements OnInit {
-    private noteTypeKey: string;
+export class ResidentComponent implements OnInit {
+    private residentKey: string;
     private subscriptions: any[] = [];
-    private noteTypeModel: NoteTypeModel = new NoteTypeModel();
-    frmNoteType: FormGroup;
+    private residentModel: ResidentModel = new ResidentModel();
+    frmResident: FormGroup;
 
     constructor(
         private _dialogService: TdDialogService,
@@ -23,10 +23,10 @@ export class NoteTypeComponent implements OnInit {
         private _router: Router,
         private _activatedRoute: ActivatedRoute,
         public builder: FormBuilder,
-        private noteTypeService: NoteTypeFirebaseServiceProvider
+        private residentService: ResidentFirebaseServiceProvider
     ) {
-        this.frmNoteType = builder.group({
-            description: [{ value: '' }, Validators.required]
+        this.frmResident = builder.group({
+            name: [{ value: '' }, Validators.required]
         });
     }
 
@@ -34,9 +34,9 @@ export class NoteTypeComponent implements OnInit {
         this.subscriptions.push(
             this._activatedRoute.params.subscribe((params) => {
                 /* tslint:disable:no-string-literal */
-                this.noteTypeKey = params['noteTypeKey'];
-                if (this.noteTypeKey === '0') {
-                    this.noteTypeKey = '';
+                this.residentKey = params['residentKey'];
+                if (this.residentKey === '0') {
+                    this.residentKey = '';
                 }
                 this.loadData();
             })
@@ -44,18 +44,18 @@ export class NoteTypeComponent implements OnInit {
     }
 
     loadData() {
-        if (this.noteTypeKey === '') {
-            this.noteTypeModel = new NoteTypeModel();
-            this.frmNoteType.reset(this.noteTypeModel);
+        if (this.residentKey === '') {
+            this.residentModel = new ResidentModel();
+            this.frmResident.reset(this.residentModel);
             return;
         }
-        this.noteTypeService.getRecord(this.noteTypeKey, (e) => this.getRecordCallback(e));
+        this.residentService.getRecord(this.residentKey, (e) => this.getRecordCallback(e));
     }
 
     getRecordCallback(callback: CallbackModel) {
         if (callback.success) {
-            this.noteTypeModel = callback.data;
-            this.frmNoteType.reset(this.noteTypeModel);
+            this.residentModel = callback.data;
+            this.frmResident.reset(this.residentModel);
             return;
         }
 
@@ -65,33 +65,42 @@ export class NoteTypeComponent implements OnInit {
     }
 
     saveClick(frmCmps) {
-        if (this.noteTypeKey === '') {
+        if (this.residentKey === '') {
             // Add
-            let modelToSave: NoteTypeModel = {
+            let modelToSave: ResidentModel = {
                 key: this.getNewGuid(),
                 estateKey: localStorage.getItem('estateKey'),
-                description: this.frmNoteType.value.description
+                firstname: this.frmResident.value.firstname,
+                surname: this.frmResident.value.surname,
+                cellphone: this.frmResident.value.cellphone,
+                email: this.frmResident.value.email,
+                leaseStart: this.frmResident.value.leaseStart,
+                leaseEnd: this.frmResident.value.leaseEnd
             };
 
-            this.noteTypeService.insertRecord(modelToSave, (e) => this.insertUpdateRecord(e));
-            this._router.navigate(['/note-types']);
+            this.residentService.insertRecord(modelToSave, (e) => this.insertUpdateRecord(e));
+            this._router.navigate(['/residents']);
         } else {
             // Update
-            let modelToSave: NoteTypeModel = {
-                key: this.noteTypeKey,
+            let modelToSave: ResidentModel = {
+                key: this.residentKey,
                 estateKey: localStorage.getItem('estateKey'),
-                description: this.frmNoteType.value.description
+                firstname: this.frmResident.value.firstname,
+                surname: this.frmResident.value.surname,
+                cellphone: this.frmResident.value.cellphone,
+                email: this.frmResident.value.email,
+                leaseStart: this.frmResident.value.leaseStart,
+                leaseEnd: this.frmResident.value.leaseEnd
             };
 
-            this.noteTypeService.updateRecord(modelToSave, (e) => this.insertUpdateRecord(e));
-            this._router.navigate(['/note-types']);
+            this.residentService.updateRecord(modelToSave, (e) => this.insertUpdateRecord(e));
+            this._router.navigate(['/residents']);
         }
     }
 
     cancelClick() {
-        this._router.navigate(['/note-types']);
+        this._router.navigate(['/residents']);
     }
-
     insertUpdateRecord(callback: CallbackModel) {
         if (callback.success) {
             this._snackBarService.open('Execute successfull', undefined, { duration: 3000 });

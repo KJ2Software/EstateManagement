@@ -6,43 +6,44 @@ import { TdLoadingService } from '../../../node_modules/@covalent/core';
 import { NoteTypeFirebaseServiceProvider } from '../../services';
 
 @Component({
-  selector: 'app-note-types',
-  templateUrl: './note-types.component.html',
-  styleUrls: ['./note-types.component.scss']
+    selector: 'app-note-types',
+    templateUrl: './note-types.component.html',
+    styleUrls: ['./note-types.component.scss']
 })
 export class NoteTypesComponent implements OnInit {
-  noteTypes: NoteTypeModel[] = [];
-  public icon: string = 'mood_bad';
+    noteTypes: NoteTypeModel[] = [];
+    public icon: string = 'insert_comment';
+    estateKey: string = '';
 
-  constructor(
-    private _snackBarService: MatSnackBar,
-    private _router: Router,
-    public noteTypeService: NoteTypeFirebaseServiceProvider,
-    private _loadingService: TdLoadingService) { }
+    constructor(
+        private _snackBarService: MatSnackBar,
+        private _router: Router,
+        public noteTypeService: NoteTypeFirebaseServiceProvider,
+        private _loadingService: TdLoadingService
+    ) {}
 
-  ngOnInit() {
-    this.loadData();
-  }
-
-  loadData() {
-    let estateKey = localStorage.getItem('estateKey');
-    this.noteTypeService.getAll(estateKey, (e) => this.getAllForEstateCallback(e));
-  }
-
-  getAllForEstateCallback(callbackModel: CallbackModel) {
-    this.noteTypes = [];
-    if (callbackModel.success) {
-      this.noteTypes = callbackModel.data;
-      return;
+    ngOnInit() {
+        this.loadData();
     }
 
-    this._snackBarService.open('Error getting notes', '', {
-      duration: 2000
-    });
-  }
+    loadData() {
+        let estateKey = localStorage.getItem('estateKey');
+        this.noteTypeService.getAll(estateKey, (e) => this.getAllForNoteTypeCallback(e));
+    }
 
-  detailClick(noteTypeModel: NoteTypeModel) {
-    this._router.navigate(['/note-types/' + noteTypeModel.key]);
-  }
+    getAllForNoteTypeCallback(callbackModel: CallbackModel) {
+        this.noteTypes = [];
+        if (callbackModel.success) {
+            this.noteTypes = callbackModel.data;
+            return;
+        }
 
+        this._snackBarService.open('Error getting notes', '', {
+            duration: 2000
+        });
+    }
+
+    detailClick(noteTypeModel: NoteTypeModel) {
+        this._router.navigate(['/note-types/' + noteTypeModel.key]);
+    }
 }

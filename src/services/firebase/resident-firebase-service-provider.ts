@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
-import { NoteTypeModel } from '../../models';
+import { ResidentModel } from '../../models';
 
 @Injectable()
-export class NoteTypeFirebaseServiceProvider {
+export class ResidentFirebaseServiceProvider {
     // https://www.youtube.com/watch?v=-GjF9pSeFTs
 
-    private tableName: string = 'noteType';
+    private tableName: string = 'resident';
 
     constructor(private db: AngularFirestore) { }
 
-    public insertRecord(model: NoteTypeModel, callbackMethod) {
+    public insertRecord(model: ResidentModel, callbackMethod) {
         this.db.collection(this.tableName).doc(model.key).set(model).then((docRef) => {
             // console.log(docRef);
             callbackMethod({ success: true, data: undefined });
@@ -35,13 +35,13 @@ export class NoteTypeFirebaseServiceProvider {
 
     public getAll(estateKey: string, callbackMethod) {
         let collectionRef = this.db.collection(this.tableName, (ref) => {
-            return ref.where('estateKey', '==', estateKey).orderBy('description');
+            return ref.where('estateKey', '==', estateKey).orderBy('name');
         });
         // var notes = categoryCollectionRef.valueChanges();
         let snapshot = collectionRef.snapshotChanges()
             .map((changes) => {
                 return changes.map((snap) => {
-                    return snap.payload.doc.data() as NoteTypeModel;
+                    return snap.payload.doc.data() as ResidentModel;
                 });
             });
         let subscription = snapshot.subscribe((res) => {
@@ -53,13 +53,13 @@ export class NoteTypeFirebaseServiceProvider {
 
     public getAllForEstate(estateKey, callbackMethod) {
         let collectionRef = this.db.collection(this.tableName, (ref) => {
-            return ref.where('estateKey', '==', estateKey).orderBy('description');
+            return ref.where('estateKey', '==', estateKey).orderBy('name');
         });
         // var notes = categoryCollectionRef.valueChanges();
         let snapshot = collectionRef.snapshotChanges()
             .map((changes) => {
                 return changes.map((snap) => {
-                    return snap.payload.doc.data() as NoteTypeModel;
+                    return snap.payload.doc.data() as ResidentModel;
                 });
             });
         let subscription = snapshot.subscribe((res) => {
@@ -69,7 +69,7 @@ export class NoteTypeFirebaseServiceProvider {
         });
     }
 
-    public updateRecord(model: NoteTypeModel, callbackMethod) {
+    public updateRecord(model: ResidentModel, callbackMethod) {
         let docRef = this.db.doc(this.tableName + '/' + model.key);
         docRef.set(model).then((ok) => {
             callbackMethod({ success: true, data: ok });

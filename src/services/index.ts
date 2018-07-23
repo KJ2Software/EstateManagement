@@ -6,5 +6,7 @@ export { EstateFirebaseServiceProvider } from './firebase/estate-firebase-servic
 export { ApprovalTypeFirebaseServiceProvider } from './firebase/approval-type-firebase-service-provider';
 export { ApprovalSetupFirebaseServiceProvider } from './firebase/approval-setup-firebase-service-provider';
 export { NoteTypeFirebaseServiceProvider } from './firebase/note-type-firebase-service-provider';
+export { OwnerFirebaseServiceProvider } from './firebase/owner-firebase-service-provider';
+export { ResidentFirebaseServiceProvider } from './firebase/resident-firebase-service-provider';
 export { CommonService } from './common.service';
 export { SendgridService } from './sendgrid.service';
