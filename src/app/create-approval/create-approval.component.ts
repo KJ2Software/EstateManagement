@@ -72,7 +72,6 @@ export class CreateApprovalComponent implements OnInit {
     });
   }
 
-
   saveClick(frmCmps) {
     let serviceId = 'kj2SendGrid';
     let templateId = 'template_7TnlBUj0';
@@ -89,38 +88,5 @@ export class CreateApprovalComponent implements OnInit {
     }, function (error) {
       console.log('FAILED...', error);
     });
-  }
-
-  saveClick2(frmCmps) {
-    this.sendGridService.sendMail()
-      .subscribe((res) => {
-        console.log(res);
-      }, (err) => {
-        console.log(err);
-
-      });
-  }
-  saveClick1(frmCmps) {
-    let url = 'https://us-central1-kj2-estate-management.cloudfunctions.net/sendEmail';
-    let params: URLSearchParams = new URLSearchParams();
-    // let headers = new Headers({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-
-    let requestOptions: RequestOptionsArgs = {};
-
-    requestOptions.headers = headers;
-
-    params.set('to', 'jacobusjonker@gmail.com');
-    params.set('from', 'kj2software@gmail.com');
-    params.set('content', '<strong>Hello World!!</strong>');
-
-    return this.http.post(url, params, requestOptions)
-      .toPromise()
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   }
 }
