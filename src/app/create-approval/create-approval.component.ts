@@ -5,13 +5,10 @@ import { TdDialogService } from '../../../node_modules/@covalent/core';
 import { ActivatedRoute, Router } from '../../../node_modules/@angular/router';
 import {
   ApprovalSetupFirebaseServiceProvider, UserFirebaseServiceProvider,
-  ApprovalTypeFirebaseServiceProvider, CommonService, SendgridService
+  ApprovalTypeFirebaseServiceProvider, CommonService
 } from '../../services';
 import { MatSnackBar } from '../../../node_modules/@angular/material';
 import { UserModel, ApprovalTypeModel, CallbackModel, ApprovalModel } from '../../models';
-declare var require: any;
-declare var emailjs: any;
-
 
 @Component({
   selector: 'app-create-approval',
@@ -28,7 +25,7 @@ export class CreateApprovalComponent implements OnInit {
   frmCreateApproval: FormGroup;
 
   constructor(private http: Http,
-    private commonService: CommonService, private _dialogService: TdDialogService, private sendGridService: SendgridService,
+    private commonService: CommonService, private _dialogService: TdDialogService,
     private _snackBarService: MatSnackBar, private _router: Router,
     private _activatedRoute: ActivatedRoute, public builder: FormBuilder,
     private approvalSetupService: ApprovalSetupFirebaseServiceProvider,
@@ -73,20 +70,6 @@ export class CreateApprovalComponent implements OnInit {
   }
 
   saveClick(frmCmps) {
-    let serviceId = 'kj2SendGrid';
-    let templateId = 'template_7TnlBUj0';
-    let templateParams = {
-      to: 'jacobusjonker@gmail.com; kjrjessop@gmail.com',
-      to_name: 'Kobus',
-      from_name: 'KJ2',
-      message_html: 'This is awesome!',
-      reply_to: 'kj2software@gmail.com'
-    };
-
-    emailjs.send(serviceId, templateId, templateParams).then((response) => {
-      console.log('SUCCESS!', response.status, response.text);
-    }, function (error) {
-      console.log('FAILED...', error);
-    });
   }
+
 }

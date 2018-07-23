@@ -12,3 +12,4 @@ export { NoteTypeModel } from './note-types/note-type.model';
 export { ResidentModel } from './residents/resident.model';
 export { OwnerModel } from './owners/owner.model';
 export { OwnersViewModel } from './view-models/owners-view.model';
+export { EmailModel } from './email/email.model';

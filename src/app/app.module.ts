@@ -47,8 +47,9 @@ import {
     CommonService,
     NoteTypeFirebaseServiceProvider,
     OwnerFirebaseServiceProvider,
-    SendgridService,
-    ResidentFirebaseServiceProvider
+    FirebaseFunctionService,
+    ResidentFirebaseServiceProvider,
+    EmailService
 } from '../services';
 
 const httpInterceptorProviders: Type<any>[] = [RequestInterceptor];
@@ -116,7 +117,8 @@ const httpInterceptorProviders: Type<any>[] = [RequestInterceptor];
         OwnerFirebaseServiceProvider,
         ResidentFirebaseServiceProvider,
         CommonService,
-        SendgridService
+        FirebaseFunctionService,
+        EmailService
     ],
     exports: [],
     bootstrap: [AppComponent],
