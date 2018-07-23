@@ -23,7 +23,10 @@ import {
     AuthFirebaseServiceProvider,
     UserFirebaseServiceProvider,
     EstateFirebaseServiceProvider,
-    ApprovalSetupFirebaseServiceProvider
+    ApprovalSetupFirebaseServiceProvider,
+    ApprovalFirebaseServiceProvider,
+    ApprovalItemFirebaseServiceProvider,
+    ApprovalItemResultFirebaseServiceProvider
 } from '../services';
 import { EstateDialogComponent } from './estate-dialog/estate-dialog.component';
 import { MatDialogModule } from '../../node_modules/@angular/material';
@@ -33,13 +36,18 @@ import { NoteTypeComponent } from './note-types/note-type/note-type.component';
 import { ApprovalTypeComponent } from './approval-types/approval-type/approval-type.component';
 import { ApprovalSetupsComponent } from './approval-setups/approval-setups.component';
 import { ApprovalSetupComponent } from './approval-setups/approval-setup/approval-setup.component';
-import { CreateApprovalComponent } from './create-approval/create-approval.component';
 import { EmptyStateComponent } from '../components/empty-state/empty-state.component';
 import { NotesComponent } from './notes/notes.component';
 import { ResidentsComponent } from './residents/residents.component';
 import { ResidentComponent } from './residents/resident/resident.component';
 import { OwnersComponent } from './owners/owners.component';
 import { OwnerComponent } from './owners/owner/owner.component';
+
+import { ApprovalsComponent } from './approvals/approvals.component';
+import { ApprovalComponent } from './approvals/approval/approval.component';
+import { ApprovalItemsComponent } from './approvals/approval-items/approval-items.component';
+import { ApprovalItemComponent } from './approvals/approval-items/approval-item/approval-item.component';
+
 import {
     AuthService,
     HttpErrorService,
@@ -66,14 +74,17 @@ const httpInterceptorProviders: Type<any>[] = [RequestInterceptor];
         ApprovalSetupComponent,
         NoteTypesComponent,
         NoteTypeComponent,
-        CreateApprovalComponent,
         EmptyStateComponent,
         NoteTypesComponent,
         NotesComponent,
         ResidentsComponent,
         ResidentComponent,
         OwnersComponent,
-        OwnerComponent
+        OwnerComponent,
+        ApprovalsComponent,
+        ApprovalComponent,
+        ApprovalItemsComponent,
+        ApprovalItemComponent
     ],
     imports: [
         MatDialogModule,
@@ -118,7 +129,10 @@ const httpInterceptorProviders: Type<any>[] = [RequestInterceptor];
         ResidentFirebaseServiceProvider,
         CommonService,
         FirebaseFunctionService,
-        EmailService
+        EmailService,
+        ApprovalFirebaseServiceProvider,
+        ApprovalItemFirebaseServiceProvider,
+        ApprovalItemResultFirebaseServiceProvider
     ],
     exports: [],
     bootstrap: [AppComponent],

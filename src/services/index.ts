@@ -11,3 +11,6 @@ export { ResidentFirebaseServiceProvider } from './firebase/resident-firebase-se
 export { CommonService } from './common.service';
 export { FirebaseFunctionService } from './firebase-function.service';
 export { EmailService } from './email.service';
+export { ApprovalFirebaseServiceProvider } from './firebase/approval-firebase-service-provider';
+export { ApprovalItemFirebaseServiceProvider } from './firebase/approval-item-firebase-service-provider';
+export { ApprovalItemResultFirebaseServiceProvider } from './firebase/approval-item-result-firebase-service-provider';

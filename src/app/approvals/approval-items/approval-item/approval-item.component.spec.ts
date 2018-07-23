@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreateApprovalComponent } from './create-approval.component';
+import { ApprovalItemComponent } from './approval-item.component';
 
-describe('CreateApprovalComponent', () => {
-  let component: CreateApprovalComponent;
-  let fixture: ComponentFixture<CreateApprovalComponent>;
+describe('ApprovalItemComponent', () => {
+  let component: ApprovalItemComponent;
+  let fixture: ComponentFixture<ApprovalItemComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CreateApprovalComponent ]
+      declarations: [ ApprovalItemComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CreateApprovalComponent);
+    fixture = TestBed.createComponent(ApprovalItemComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
