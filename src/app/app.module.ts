@@ -10,6 +10,8 @@ import { routedComponents, AppRoutingModule } from './app.routing';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { SharedModule, CustomModule } from '../modules';
 import { RouteGuard } from '../guards/route.guard';
+import { AuthService, HttpErrorService, ApprovalTypeFirebaseServiceProvider, CommonService, NoteTypeFirebaseServiceProvider } from '../services';
+import { AuthService, HttpErrorService, ApprovalTypeFirebaseServiceProvider, CommonService, SendgridService, NoteTypeFirebaseServiceProvider } from '../services';
 import { AppStore, AuthStore } from '../stores';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 // import { DynamicDashboardsModule } from '@sgits/dynamic-dashboards';
@@ -114,7 +116,8 @@ const httpInterceptorProviders: Type<any>[] = [RequestInterceptor];
         NoteTypeFirebaseServiceProvider,
         OwnerFirebaseServiceProvider,
         ResidentFirebaseServiceProvider,
-        CommonService
+        CommonService,
+        SendgridService
     ],
     exports: [],
     bootstrap: [AppComponent],
