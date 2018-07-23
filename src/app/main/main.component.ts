@@ -1,10 +1,10 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Router, NavigationEnd, Event, ActivatedRoute, Routes, Route } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { TokenModel } from '../../models';
-import { AuthStore, AppStore } from '../../stores';
-import { environment } from '../../environments/environment';
+import { ActivatedRoute, Event, NavigationEnd, Route, Router, Routes } from '@angular/router';
 import { mainRouterTransition } from '../../animations';
+import { environment } from '../../environments/environment';
+import { TokenModel, UserModel } from '../../models';
+import { AppStore, AuthStore } from '../../stores';
 
 @Component({
     selector: 'app-main',
@@ -18,6 +18,7 @@ export class MainComponent implements OnInit {
     currentRoute: string;
     currentRouteIcon: string;
     token: TokenModel = new TokenModel();
+    // user: UserModel = new UserModel();
     appTitle: string = environment.appTitle;
     pageTitle: string;
     mainMenuRoutes: Routes = [];
@@ -34,6 +35,10 @@ export class MainComponent implements OnInit {
         this._authStore.token.subscribe((res: TokenModel) => {
             this.token = res;
         });
+
+        // this._authStore.user.subscribe((res: UserModel) => {
+        //     this.user = res;
+        // });
     }
 
     ngOnInit(): void {

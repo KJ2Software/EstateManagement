@@ -1,5 +1,5 @@
 <td-layout #layout>
-    <td-navigation-drawer color="primary" fxFlex sidenavTitle="{{appTitle}}" [name]="token.username">
+    <td-navigation-drawer color="primary" fxFlex sidenavTitle="{{appTitle}}" [name]="">
         <mat-nav-list>
             <ng-template let-route let-last="last" ngFor [ngForOf]="mainMenuRoutes">
                 <a mat-list-item [routerLink]="[route.data.url]" (click)="layout.close()">
@@ -45,7 +45,7 @@
                     <span class="mat-caption">Powered by KJ2-Software</span>
                 </div>
                 <div fxFlex fxLayoutAlign="end">
-                    <span class="mat-caption">{{token.username}}</span>
+                    <!-- <span class="mat-caption">{{user.name}}</span> -->
                 </div>
             </div>
         </td-layout-footer>

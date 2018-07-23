@@ -1,11 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+import { Http, Headers, Response, URLSearchParams, RequestOptionsArgs } from '@angular/http';
 import { Validators, FormGroup, FormBuilder } from '../../../node_modules/@angular/forms';
 import { TdDialogService } from '../../../node_modules/@covalent/core';
 import { ActivatedRoute, Router } from '../../../node_modules/@angular/router';
-import { ApprovalSetupFirebaseServiceProvider, UserFirebaseServiceProvider,
-  ApprovalTypeFirebaseServiceProvider, CommonService } from '../../services';
+import {
+  ApprovalSetupFirebaseServiceProvider, UserFirebaseServiceProvider,
+  ApprovalTypeFirebaseServiceProvider, CommonService, SendgridService
+} from '../../services';
 import { MatSnackBar } from '../../../node_modules/@angular/material';
 import { UserModel, ApprovalTypeModel, CallbackModel, ApprovalModel } from '../../models';
+declare var require: any;
+declare var emailjs: any;
+
 
 @Component({
   selector: 'app-create-approval',
@@ -21,7 +27,8 @@ export class CreateApprovalComponent implements OnInit {
 
   frmCreateApproval: FormGroup;
 
-  constructor(private commonService: CommonService, private _dialogService: TdDialogService,
+  constructor(private http: Http,
+    private commonService: CommonService, private _dialogService: TdDialogService, private sendGridService: SendgridService,
     private _snackBarService: MatSnackBar, private _router: Router,
     private _activatedRoute: ActivatedRoute, public builder: FormBuilder,
     private approvalSetupService: ApprovalSetupFirebaseServiceProvider,
@@ -66,16 +73,20 @@ export class CreateApprovalComponent implements OnInit {
   }
 
   saveClick(frmCmps) {
-    // // Add
-    // let modelToSave: ApprovalModel = {
-    //   key: this.commonService.getNewGuid(),
-    //   estateKey: localStorage.getItem('estateKey'),
-    //   approvalTypeKey: this.frmApprovalSetup.value.approvalTypeKey,
-    //   userKey: this.frmApprovalSetup.value.userKey,
-    //   sequence: 0
-    // };
+    let serviceId = 'kj2SendGrid';
+    let templateId = 'template_7TnlBUj0';
+    let templateParams = {
+      to: 'jacobusjonker@gmail.com; kjrjessop@gmail.com',
+      to_name: 'Kobus',
+      from_name: 'KJ2',
+      message_html: 'This is awesome!',
+      reply_to: 'kj2software@gmail.com'
+    };
 
-    // this.approvalSetupService.insertRecord(modelToSave, (e) => this.insertUpdateRecord(e));
-    // this._router.navigate(['/approval-setups']);
+    emailjs.send(serviceId, templateId, templateParams).then((response) => {
+      console.log('SUCCESS!', response.status, response.text);
+    }, function (error) {
+      console.log('FAILED...', error);
+    });
   }
 }

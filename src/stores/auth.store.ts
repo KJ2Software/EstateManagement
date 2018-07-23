@@ -3,14 +3,16 @@ import { Observable, BehaviorSubject } from 'rxjs/Rx';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import { TokenModel, Credentials } from '../models';
+import { TokenModel, Credentials, UserModel } from '../models';
 import { AuthService } from '../services';
 
 @Injectable()
 export class AuthStore {
     private _currentToken: TokenModel = new TokenModel();
     private _token: BehaviorSubject<TokenModel> = new BehaviorSubject(this.getToken());
+    // private _user: BehaviorSubject<UserModel> = new BehaviorSubject(this.getUser());
     public readonly token: Observable<TokenModel> = this._token.asObservable();
+    // public readonly user: Observable<UserModel> = this._user.asObservable();
 
     constructor(
         private _authService: AuthService,
@@ -91,6 +93,14 @@ export class AuthStore {
 
         return token;
     }
+
+    // private getUser(): UserModel {
+    //     const user = new UserModel();
+
+    //     user.key = localStorage.getItem('userKey');
+
+    //     return user;
+    // }
 
     private saveToken(token: TokenModel) {
         localStorage.setItem('token', token.result);
