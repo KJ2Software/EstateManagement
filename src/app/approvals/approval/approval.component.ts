@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ApprovalModel, CallbackModel, ApprovalTypeModel } from '../../../models';
 import { FormGroup, FormBuilder, Validators } from '../../../../node_modules/@angular/forms';
-import { TdDialogService } from '../../../../node_modules/@covalent/core';
 import { ActivatedRoute, Router } from '../../../../node_modules/@angular/router';
 import { ApprovalFirebaseServiceProvider, CommonService, ApprovalTypeFirebaseServiceProvider } from '../../../services';
 import { MatSnackBar } from '../../../../node_modules/@angular/material';
-import { NullTemplateVisitor } from '../../../../node_modules/@angular/compiler';
 
 @Component({
   selector: 'app-approval',
@@ -21,7 +19,7 @@ export class ApprovalComponent implements OnInit {
   public approvalTypes: ApprovalTypeModel[] = [];
   frmApproval: FormGroup;
 
-  constructor(private _dialogService: TdDialogService, private _snackBarService: MatSnackBar, private _router: Router,
+  constructor(private _snackBarService: MatSnackBar, private _router: Router,
     private _activatedRoute: ActivatedRoute, public builder: FormBuilder,
     private approvalService: ApprovalFirebaseServiceProvider,
     private approvalTypeService: ApprovalTypeFirebaseServiceProvider,
@@ -87,6 +85,7 @@ export class ApprovalComponent implements OnInit {
         estateKey: localStorage.getItem('estateKey'),
         description: this.frmApproval.value.description,
         approvalTypeKey: this.frmApproval.value.approvalTypeKey,
+        // tslint:disable-next-line:no-null-keyword
         approvedItemKey: null,
         createdUserKey: localStorage.getItem('userKey'),
         dateCreated: new Date().toString(),
@@ -102,6 +101,7 @@ export class ApprovalComponent implements OnInit {
         estateKey: localStorage.getItem('estateKey'),
         description: this.frmApproval.value.description,
         approvalTypeKey: this.frmApproval.value.approvalTypeKey,
+        // tslint:disable-next-line:no-null-keyword
         approvedItemKey: null,
         createdUserKey: localStorage.getItem('userKey'),
         dateCreated: new Date().toString(),

@@ -18,6 +18,7 @@ import { ResidentComponent } from './residents/resident/resident.component';
 import { ApprovalsComponent } from './approvals/approvals.component';
 import { ApprovalComponent } from './approvals/approval/approval.component';
 import { ApprovalItemsComponent } from './approvals/approval-items/approval-items.component';
+import { ApprovalItemComponent } from './approvals/approval-items/approval-item/approval-item.component';
 // import { DynamicDashboardsContainerComponent, DynamicWidgetDetailComponent } from '@sgits/dynamic-dashboards';
 
 const routes: Routes = [
@@ -81,8 +82,8 @@ const routes: Routes = [
                 data: { roles: [], url: '/approvals', title: 'Approvals', icon: 'home', show: false, seq: 1 }
             },
             {
-                path: 'approval-items/:approvalItemKey',
-                component: ApprovalComponent,
+                path: 'approval-item/:approvalKey/:approvalItemKey',
+                component: ApprovalItemComponent,
                 canActivate: [RouteGuard],
                 data: { roles: [], url: '/approval-items/approval-item', title: 'Approval', icon: 'home', show: false, seq: 1 }
             },
