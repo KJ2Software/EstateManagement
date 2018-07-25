@@ -89,7 +89,7 @@ export class ApprovalItemComponent implements OnInit {
       };
 
       this.approvalItemService.updateRecord(modelToSave, (e) => this.insertUpdateRecord(e));
-      this._router.navigate(['/approval-items/' + this.approvalKey]);
+      this._router.navigate(['/approvals/' + this.approvalKey + '/approval-items']);
     }
   }
 
@@ -103,7 +103,7 @@ export class ApprovalItemComponent implements OnInit {
   }
 
   cancelClick() {
-    this._router.navigate(['/approval-items/' + this.approvalKey]);
+    this._router.navigate(['/approvals/' + this.approvalKey + '/approval-items']);
 
   }
 

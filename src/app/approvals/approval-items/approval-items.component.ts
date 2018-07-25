@@ -48,11 +48,11 @@ export class ApprovalItemsComponent implements OnInit {
   }
 
   detailClick(approvalModel: ApprovalItemModel) {
-    this._router.navigate(['/approval-item/' +  this.approvalKey + '/' + approvalModel.key]);
+    this._router.navigate(['/approvals/' +  this.approvalKey + '/approval-items/' + approvalModel.key]);
   }
 
   addClick() {
-    this._router.navigate(['/approval-item/' + this.approvalKey + '/0']);
+    this._router.navigate(['/approvals/' + this.approvalKey + '/approval-items/0']);
   }
 
   backClick() {

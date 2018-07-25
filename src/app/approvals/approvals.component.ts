@@ -43,7 +43,7 @@ export class ApprovalsComponent implements OnInit {
   }
 
   itemsClick(approvalModel: ApprovalModel) {
-    this._router.navigate(['/approval-items/' + approvalModel.key]);
+    this._router.navigate(['/approvals/' + approvalModel.key + '/approval-items']);
   }
 
 }

@@ -76,13 +76,13 @@ const routes: Routes = [
                 data: { roles: [], url: '/approvals/approval', title: 'Approval', icon: 'home', show: false, seq: 1 }
             },
             {
-                path: 'approval-items/:approvalKey',
+                path: 'approvals/:approvalKey/approval-items',
                 component: ApprovalItemsComponent,
                 canActivate: [RouteGuard],
                 data: { roles: [], url: '/approvals', title: 'Approvals', icon: 'home', show: false, seq: 1 }
             },
             {
-                path: 'approval-item/:approvalKey/:approvalItemKey',
+                path: 'approvals/:approvalKey/approval-items/:approvalItemKey',
                 component: ApprovalItemComponent,
                 canActivate: [RouteGuard],
                 data: { roles: [], url: '/approval-items/approval-item', title: 'Approval', icon: 'home', show: false, seq: 1 }
