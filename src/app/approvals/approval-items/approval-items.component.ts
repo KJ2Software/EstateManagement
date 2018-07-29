@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApprovalItemModel, CallbackModel, ApprovalItemResultModel, ApprovalItemViewModel } from '../../../models';
 import { MatSnackBar } from '../../../../node_modules/@angular/material';
-import { ApprovalItemFirebaseServiceProvider, ApprovalItemResultFirebaseServiceProvider } from '../../../services';
+import { ApprovalItemFirebaseServiceProvider, ApprovalItemResultFirebaseServiceProvider, CommonService } from '../../../services';
 import { TdLoadingService } from '../../../../node_modules/@covalent/core';
 import { Router, ActivatedRoute } from '../../../../node_modules/@angular/router';
 
@@ -14,13 +14,18 @@ export class ApprovalItemsComponent implements OnInit {
   private subscriptions: any[] = [];
   private approvalKey: string;
   private approvalResults: ApprovalItemResultModel[] = [];
+  private userKey: string = '';
   public approvalItems: ApprovalItemModel[] = [];
   public approvalItemViewModel: ApprovalItemViewModel[] = [];
+  
 
   constructor(private _snackBarService: MatSnackBar, private _activatedRoute: ActivatedRoute, private _router: Router,
+    private commonService: CommonService,
     private approvalItemFirebaseService: ApprovalItemFirebaseServiceProvider,
     private approvalItemResultFirebaseService: ApprovalItemResultFirebaseServiceProvider,
-    private _loadingService: TdLoadingService) { }
+    private _loadingService: TdLoadingService) {
+      this.userKey = localStorage.getItem('userKey');
+     }
 
   ngOnInit() {
 
@@ -82,6 +87,12 @@ export class ApprovalItemsComponent implements OnInit {
           isApproved: false
         };
 
+        this.approvalResults.forEach((appResult) => {
+          if (appResult.userKey === this.userKey && appResult.approvalItemKey === appItem.key) {
+            viewModel.isApproved = true;
+          }
+        });
+
         this.approvalItemViewModel.push(viewModel);
       });
 
@@ -90,4 +101,30 @@ export class ApprovalItemsComponent implements OnInit {
 
   }
 
+  approveClick(approvalItem: ApprovalItemViewModel) {
+
+    let model: ApprovalItemResultModel = {
+      key: this.commonService.getNewGuid(),
+      approvalItemKey: approvalItem.key,
+      approvalKey: this.approvalKey,
+      comments: 'MyComments todo',
+      userKey: this.userKey
+    };
+
+    this.approvalItemResultFirebaseService.insertRecord(model, (e) => this.approveItemCallback(e));
+  }
+
+  approveItemCallback(callbackModel: CallbackModel) {
+    if (!callbackModel.success) {
+      this._snackBarService.open('Error approving', '', {
+        duration: 2000
+      });
+    }
+
+    this._snackBarService.open('Approved Successfully', '', {
+      duration: 2000
+    });
+
+    this.loadData();
+  }
 }

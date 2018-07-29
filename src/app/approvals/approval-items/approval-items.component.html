@@ -23,8 +23,12 @@
               {{record.price}}
             </div>
             <div flex="15" fxFlexAlign="center">
-              <mat-icon *ngIf="isApproved" style="text-align: center; width:25px; color: green">thumb_up</mat-icon>
-              <mat-icon *ngIf="!isApproved" style="text-align: center; width:25px; color: lightgray">thumb_up</mat-icon>
+              <mat-icon *ngIf="record.isApproved" style="text-align: center; width:25px; color: green">thumb_up</mat-icon>
+              
+              <button *ngIf="!record.isApproved" (click)="approveClick(record)" mat-icon-button>
+                  <mat-icon style="text-align: center; width:25px; color: lightgray" >thumb_up</mat-icon>
+          
+                </button>
             </div>
             <div style="text-align: right; width:25px;"  class="hand">
               <button mat-icon-button [matMenuTriggerFor]="cardToolbarMenu">
