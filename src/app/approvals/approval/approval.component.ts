@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ApprovalModel, CallbackModel, ApprovalTypeModel } from '../../../models';
+import { ApprovalModel, CallbackModel, ApprovalTypeModel, ApprovalItemModel } from '../../../models';
 import { FormGroup, FormBuilder, Validators } from '../../../../node_modules/@angular/forms';
 import { ActivatedRoute, Router } from '../../../../node_modules/@angular/router';
-import { ApprovalFirebaseServiceProvider, CommonService, ApprovalTypeFirebaseServiceProvider } from '../../../services';
+import { ApprovalFirebaseServiceProvider, CommonService, ApprovalTypeFirebaseServiceProvider, ApprovalItemFirebaseServiceProvider } from '../../../services';
 import { MatSnackBar } from '../../../../node_modules/@angular/material';
 
 @Component({
@@ -22,6 +22,7 @@ export class ApprovalComponent implements OnInit {
   constructor(private _snackBarService: MatSnackBar, private _router: Router,
     private _activatedRoute: ActivatedRoute, public builder: FormBuilder,
     private approvalService: ApprovalFirebaseServiceProvider,
+    private approvalItemService: ApprovalItemFirebaseServiceProvider,
     private approvalTypeService: ApprovalTypeFirebaseServiceProvider,
     private commonSerivce: CommonService) {
     this.frmApproval = builder.group({
@@ -91,8 +92,17 @@ export class ApprovalComponent implements OnInit {
         dateCreated: new Date().toString(),
         isFinalised: false
       };
+      this.approvalService.insertRecord(modelToSave, (e) => this.insertRecord(e));
 
-      this.approvalService.insertRecord(modelToSave, (e) => this.insertUpdateRecord(e));
+      let approvalItemModel: ApprovalItemModel = {
+        key: this.commonSerivce.getNewGuid(),
+        approvalKey: modelToSave.key,
+        attachmentLink: '',
+        comments: 'Reject All',
+        price: 0.00
+      };
+      this.approvalItemService.insertRecord(approvalItemModel, (e) => this.insertApprovalItemRecord(e));
+
       this._router.navigate(['/approvals']);
     } else {
       // Update
@@ -108,7 +118,7 @@ export class ApprovalComponent implements OnInit {
         isFinalised: false
       };
 
-      this.approvalService.updateRecord(modelToSave, (e) => this.insertUpdateRecord(e));
+      this.approvalService.updateRecord(modelToSave, (e) => this.updateRecord(e));
       this._router.navigate(['/approvals']);
     }
   }
@@ -118,12 +128,28 @@ export class ApprovalComponent implements OnInit {
 
   }
 
-  insertUpdateRecord(callback: CallbackModel) {
+  updateRecord(callback: CallbackModel) {
     if (callback.success) {
-      this._snackBarService.open('Execute successfull', undefined, { duration: 3000 });
-
+      this._snackBarService.open('Approval updated successfull', undefined, { duration: 3000 });
       return;
     }
     this._snackBarService.open('Execute failed', undefined, { duration: 3000 });
   }
+
+  insertRecord(callback: CallbackModel) {
+    if (callback.success) {
+      this._snackBarService.open('Apprval created successfull', undefined, { duration: 3000 });
+      return;
+    }
+    this._snackBarService.open('Execute failed', undefined, { duration: 3000 });
+  }
+
+  insertApprovalItemRecord(callback: CallbackModel) {
+    if (callback.success) {
+      this._snackBarService.open('Approval item created successfull', undefined, { duration: 3000 });
+      return;
+    }
+    this._snackBarService.open('Execute failed', undefined, { duration: 3000 });
+  }
+
 }

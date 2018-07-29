@@ -12,17 +12,21 @@
           </mat-list-item>
           <mat-list-item style="height: auto">
             <div flex>
-              <app-empty-state name="approval Items" icon="device_hub" [count]="approvalItems.length"></app-empty-state>
+              <app-empty-state name="approval Items" icon="device_hub" [count]="approvalItemViewModel.length"></app-empty-state>
             </div>
           </mat-list-item>
-          <mat-list-item *ngFor="let record of approvalItems">
+          <mat-list-item *ngFor="let record of approvalItemViewModel">
             <div flex fxFlexAlign="center">
-              {{record.key}}
+              {{record.comments}}
             </div>
             <div flex fxFlexAlign="center">
               {{record.price}}
             </div>
-            <span style="text-align: right; width:25px;"  class="hand">
+            <div flex="15" fxFlexAlign="center">
+              <mat-icon *ngIf="isApproved" style="text-align: center; width:25px; color: green">thumb_up</mat-icon>
+              <mat-icon *ngIf="!isApproved" style="text-align: center; width:25px; color: lightgray">thumb_up</mat-icon>
+            </div>
+            <div style="text-align: right; width:25px;"  class="hand">
               <button mat-icon-button [matMenuTriggerFor]="cardToolbarMenu">
                 <mat-icon matListAvatar class="push-bottom">more_vert</mat-icon>
         
@@ -36,7 +40,7 @@
     
     
               </mat-menu>
-            </span>
+            </div>
           
             <mat-divider></mat-divider>
 

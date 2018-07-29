@@ -34,9 +34,9 @@ export class ApprovalItemResultFirebaseServiceProvider {
         });
     }
 
-    public getAll(approvalItemKey: string, callbackMethod) {
+    public getAll(approvalKey: string, callbackMethod) {
         let collectionRef = this.db.collection(this.tableName, (ref) => {
-            return ref.where('approvalItemKey', '==', approvalItemKey);
+            return ref.where('approvalKey', '==', approvalKey);
         });
         // var notes = categoryCollectionRef.valueChanges();
         let snapshot = collectionRef.snapshotChanges()

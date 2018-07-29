@@ -15,3 +15,4 @@ export { EmailModel } from './email/email.model';
 export { ApprovalModel } from './approvals/approval.model';
 export { ApprovalItemModel } from './approvals/approval-item.model';
 export { ApprovalItemResultModel } from './approvals/approval-item-result.model';
+export { ApprovalItemViewModel } from './view-models/approval-item-view.model';

@@ -77,7 +77,7 @@ export class ApprovalItemComponent implements OnInit {
       };
 
       this.approvalItemService.insertRecord(modelToSave, (e) => this.insertUpdateRecord(e));
-      this._router.navigate(['/approval-items/' + this.approvalKey]);
+      this._router.navigate(['/approvals/' + this.approvalKey + '/approval-items']);
     } else {
       // Update
       let modelToSave: ApprovalItemModel = {

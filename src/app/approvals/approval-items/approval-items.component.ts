@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ApprovalItemModel, CallbackModel } from '../../../models';
+import { ApprovalItemModel, CallbackModel, ApprovalItemResultModel, ApprovalItemViewModel } from '../../../models';
 import { MatSnackBar } from '../../../../node_modules/@angular/material';
-import { ApprovalItemFirebaseServiceProvider } from '../../../services';
+import { ApprovalItemFirebaseServiceProvider, ApprovalItemResultFirebaseServiceProvider } from '../../../services';
 import { TdLoadingService } from '../../../../node_modules/@covalent/core';
 import { Router, ActivatedRoute } from '../../../../node_modules/@angular/router';
 
@@ -13,10 +13,13 @@ import { Router, ActivatedRoute } from '../../../../node_modules/@angular/router
 export class ApprovalItemsComponent implements OnInit {
   private subscriptions: any[] = [];
   private approvalKey: string;
-  approvalItems: ApprovalItemModel[] = [];
+  private approvalResults: ApprovalItemResultModel[] = [];
+  public approvalItems: ApprovalItemModel[] = [];
+  public approvalItemViewModel: ApprovalItemViewModel[] = [];
 
-  constructor(private _snackBarService: MatSnackBar, private _activatedRoute: ActivatedRoute,  private _router: Router,
+  constructor(private _snackBarService: MatSnackBar, private _activatedRoute: ActivatedRoute, private _router: Router,
     private approvalItemFirebaseService: ApprovalItemFirebaseServiceProvider,
+    private approvalItemResultFirebaseService: ApprovalItemResultFirebaseServiceProvider,
     private _loadingService: TdLoadingService) { }
 
   ngOnInit() {
@@ -39,6 +42,8 @@ export class ApprovalItemsComponent implements OnInit {
     this.approvalItems = [];
     if (callbackModel.success) {
       this.approvalItems = callbackModel.data;
+      this.approvalItemResultFirebaseService.getAll(this.approvalKey, (e) => this.getResultsCallback(e));
+
       return;
     }
 
@@ -48,7 +53,7 @@ export class ApprovalItemsComponent implements OnInit {
   }
 
   detailClick(approvalModel: ApprovalItemModel) {
-    this._router.navigate(['/approvals/' +  this.approvalKey + '/approval-items/' + approvalModel.key]);
+    this._router.navigate(['/approvals/' + this.approvalKey + '/approval-items/' + approvalModel.key]);
   }
 
   addClick() {
@@ -57,6 +62,31 @@ export class ApprovalItemsComponent implements OnInit {
 
   backClick() {
     this._router.navigate(['/approvals']);
+
+  }
+
+  getResultsCallback(callbackModel: CallbackModel) {
+    this.approvalResults = [];
+    if (callbackModel.success) {
+      this.approvalResults = callbackModel.data;
+
+      this.approvalItemViewModel = [];
+      this.approvalItems.forEach((appItem) => {
+        let viewModel: ApprovalItemViewModel = {
+          key: appItem.key,
+          comments: appItem.comments,
+          price: appItem.price,
+          attachmentLink: appItem.attachmentLink,
+          approvalKey: appItem.approvalKey,
+          approvalItemResultKey: '',
+          isApproved: false
+        };
+
+        this.approvalItemViewModel.push(viewModel);
+      });
+
+      return;
+    }
 
   }
 
