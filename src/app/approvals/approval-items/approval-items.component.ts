@@ -13,19 +13,19 @@ import { Router, ActivatedRoute } from '../../../../node_modules/@angular/router
 export class ApprovalItemsComponent implements OnInit {
   private subscriptions: any[] = [];
   private approvalKey: string;
-  private approvalResults: ApprovalItemResultModel[] = [];
+  private userApproved: ApprovalItemResultModel[] = [];
   private userKey: string = '';
   public approvalItems: ApprovalItemModel[] = [];
   public approvalItemViewModel: ApprovalItemViewModel[] = [];
-  
+
 
   constructor(private _snackBarService: MatSnackBar, private _activatedRoute: ActivatedRoute, private _router: Router,
     private commonService: CommonService,
     private approvalItemFirebaseService: ApprovalItemFirebaseServiceProvider,
     private approvalItemResultFirebaseService: ApprovalItemResultFirebaseServiceProvider,
     private _loadingService: TdLoadingService) {
-      this.userKey = localStorage.getItem('userKey');
-     }
+    this.userKey = localStorage.getItem('userKey');
+  }
 
   ngOnInit() {
 
@@ -47,7 +47,7 @@ export class ApprovalItemsComponent implements OnInit {
     this.approvalItems = [];
     if (callbackModel.success) {
       this.approvalItems = callbackModel.data;
-      this.approvalItemResultFirebaseService.getAll(this.approvalKey, (e) => this.getResultsCallback(e));
+      this.approvalItemResultFirebaseService.getAllForUserAndApproval(this.approvalKey, this.userKey, (e) => this.getResultsCallback(e));
 
       return;
     }
@@ -71,9 +71,9 @@ export class ApprovalItemsComponent implements OnInit {
   }
 
   getResultsCallback(callbackModel: CallbackModel) {
-    this.approvalResults = [];
+    this.userApproved = [];
     if (callbackModel.success) {
-      this.approvalResults = callbackModel.data;
+      this.userApproved = callbackModel.data;
 
       this.approvalItemViewModel = [];
       this.approvalItems.forEach((appItem) => {
@@ -84,14 +84,18 @@ export class ApprovalItemsComponent implements OnInit {
           attachmentLink: appItem.attachmentLink,
           approvalKey: appItem.approvalKey,
           approvalItemResultKey: '',
-          isApproved: false
+          isApproved: false,
+          approvedCount: 0
         };
 
-        this.approvalResults.forEach((appResult) => {
-          if (appResult.userKey === this.userKey && appResult.approvalItemKey === appItem.key) {
+        this.userApproved.forEach((appResult) => {
+          if (appResult.approvalItemKey === appItem.key) {
             viewModel.isApproved = true;
           }
         });
+
+        this.approvalItemResultFirebaseService.getAll(this.approvalKey, (e) => this.getAllCallback(e));
+
 
         this.approvalItemViewModel.push(viewModel);
       });
@@ -101,7 +105,52 @@ export class ApprovalItemsComponent implements OnInit {
 
   }
 
+  getAllCallback(callbackModel: CallbackModel) {
+    if (!callbackModel.success) {
+      this._snackBarService.open('Error', '', {
+        duration: 2000
+      });
+      return;
+    }
+
+    this.approvalItemViewModel.forEach((vm) => {
+      vm.approvedCount = 0;
+    });
+
+    let result: ApprovalItemResultModel[] = [];
+    result = callbackModel.data;
+
+    result.forEach((appItemResult) => {
+      this.approvalItemViewModel.forEach((vm) => {
+        if (vm.key === appItemResult.approvalItemKey) {
+          vm.approvedCount++;
+        }
+      });
+    });
+
+
+  }
+
   approveClick(approvalItem: ApprovalItemViewModel) {
+
+    let canProcess = true;
+    this.userApproved.forEach((userAppr) => {
+      if (userAppr.approvalItemKey === approvalItem.key) {
+        canProcess = false;
+        return;
+      }
+    });
+
+    if (!canProcess) {
+      this._snackBarService.open('Action not allowed', '', {
+        duration: 2000
+      });
+
+      return;
+    }
+    this.userApproved.forEach((userAppr) => {
+      this.approvalItemResultFirebaseService.deleteRecord(userAppr.key, (callbackModel) => { console.log(callbackModel); });
+    });
 
     let model: ApprovalItemResultModel = {
       key: this.commonService.getNewGuid(),

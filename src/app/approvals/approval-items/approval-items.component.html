@@ -15,18 +15,44 @@
               <app-empty-state name="approval Items" icon="device_hub" [count]="approvalItemViewModel.length"></app-empty-state>
             </div>
           </mat-list-item>
+
+          <mat-list-item>
+              <div flex fxFlexAlign="center" style="font-weight: bold">
+                Comment
+              </div>
+              <div flex fxFlexAlign="right" style="font-weight: bold">
+               Price
+              </div>
+              <div flex fxFlexAlign="center" style="font-weight: bold">
+                Approved Count
+              </div>
+              
+              <div flex="15" fxFlexAlign="center" style="font-weight: bold">
+                Approved
+              </div>
+              <div style="text-align: right; width:25px; font-weight: bold"  class="hand">
+                Action
+              </div>
+              <mat-divider></mat-divider>
+            </mat-list-item>
+
+
           <mat-list-item *ngFor="let record of approvalItemViewModel">
             <div flex fxFlexAlign="center">
               {{record.comments}}
             </div>
-            <div flex fxFlexAlign="center">
-              {{record.price}}
+            <div flex fxFlexAlign="right">
+              R {{record.price | number : '1.2-2'}}
             </div>
+            <div flex fxFlexAlign="center">
+              {{record.approvedCount}}
+            </div>
+            
             <div flex="15" fxFlexAlign="center">
               <mat-icon *ngIf="record.isApproved" style="text-align: center; width:25px; color: green">thumb_up</mat-icon>
               
-              <button *ngIf="!record.isApproved" (click)="approveClick(record)" mat-icon-button>
-                  <mat-icon style="text-align: center; width:25px; color: lightgray" >thumb_up</mat-icon>
+              <button *ngIf="!record.isApproved" (click)="approveClick(record)" style="text-align: center; width:25px; " mat-icon-button>
+                  <mat-icon style="color: lightgray" >thumb_up</mat-icon>
           
                 </button>
             </div>
@@ -39,6 +65,10 @@
                 <button (click)="detailClick(record)" mat-menu-item>
                   <mat-icon>create</mat-icon>
                   <span>Edit</span>
+                </button>
+                <button (click)="approveClick(record)" mat-menu-item>
+                    <mat-icon>thumb_up</mat-icon>
+                    <span>Approve</span>
                 </button>
                
     

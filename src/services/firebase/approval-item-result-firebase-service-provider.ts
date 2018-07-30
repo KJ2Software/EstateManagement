@@ -52,6 +52,25 @@ export class ApprovalItemResultFirebaseServiceProvider {
         });
     }
 
+    public getAllForUserAndApproval(approvalKey: string, userKey: string, callbackMethod) {
+        let collectionRef = this.db.collection(this.tableName, (ref) => {
+            return ref.where('approvalKey', '==', approvalKey).where('userKey', '==', userKey);
+        });
+        // var notes = categoryCollectionRef.valueChanges();
+        let snapshot = collectionRef.snapshotChanges()
+            .map((changes) => {
+                return changes.map((snap) => {
+                    return snap.payload.doc.data() as ApprovalItemResultModel;
+                });
+            });
+        let subscription = snapshot.subscribe((res) => {
+            callbackMethod({ success: true, data: res });
+        }, (err) => {
+            callbackMethod({ success: false, data: err });
+        });
+    }
+
+
     public updateRecord(model: ApprovalItemResultModel, callbackMethod) {
         let docRef = this.db.doc(this.tableName + '/' + model.key);
         docRef.set(model).then((ok) => {

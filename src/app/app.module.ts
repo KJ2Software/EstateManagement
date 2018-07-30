@@ -20,7 +20,6 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 
-
 import {
     AuthFirebaseServiceProvider,
     UserFirebaseServiceProvider,

@@ -7,4 +7,5 @@ export class ApprovalItemViewModel {
     comments: string;
     approvalItemResultKey: string;
     isApproved: boolean;
+    approvedCount: number;
 }
