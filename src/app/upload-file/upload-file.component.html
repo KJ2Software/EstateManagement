@@ -1,0 +1,65 @@
+<div class="flex-container" fxLayout="row" fxLayoutAlign="center center" style="padding-bottom:60px;">
+  <div flex-gt-md="50" flex="100">
+
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Please select a file to upload</mat-card-title>
+        <mat-card-subtitle>Only PDF file types allowed</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content style="margin-bottom:0px;" flex fxLayout="column">
+
+        <div>
+
+          <div *ngIf="showDrowZone" class="dropzone" appDropZone (hovered)="toggleHover($event)" (dropped)="startUpload($event)" [class.hovering]="isHovering">
+            <h3 class="dropZoneText">AngularFire Drop Zone</h3>
+          </div>
+
+          <!-- Select Button -->
+          <div>
+            <label class="material-button-raised">
+              <input type="file" (change)="startUpload($event.target.files)">
+              <span>Select a File</span>
+            </label>
+          </div>
+
+          <div *ngIf="percentage | async as pct" style="width:100%; padding: 10px 0px;">
+
+            <!-- Progress Bar -->
+            <progress [value]="pct" max="100">
+            </progress>
+
+            <!-- % -->
+            <div class="progressText" color="primary">
+
+              <span>{{ pct | number }}%</span>
+              <span *ngIf="snapshot | async as snap">{{ snap.bytesTransferred | fileSize }} of {{ snap.totalBytes | fileSize }}</span>
+            </div>
+
+            <!-- File Size -->
+            <div *ngIf="snapshot | async as snap" class="progressText">
+              <button mat-button color="secondary" mat-raised-button (click)="task.pause()" class="button is-warning" [disabled]="!isActive(snap)">Pause</button>
+              <button mat-button color="secondary" mat-raised-button (click)="task.cancel()" class="button is-danger" [disabled]="!isActive(snap)">Cancel</button>
+              <button mat-button color="secondary" mat-raised-button (click)="task.resume()" class="button is-info" [disabled]="!(snap?.state === 'paused')">Resume</button>
+            </div>
+
+          </div>
+
+          <!-- Image -->
+          <div *ngIf="showImage">
+            <div *ngIf="downloadURL | async as url" style="height:auto;">
+              <img [src]="url" style="height:150px;">
+              <br>
+              <a [href]="url" target="_blank" rel="noopener">Download Me!</a>
+            </div>
+          </div>
+
+        </div>
+
+
+      </mat-card-content>
+      <mat-card-actions class="text-right">
+        <button color="seconday" (click)="backClick()" mat-raised-button>Back</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

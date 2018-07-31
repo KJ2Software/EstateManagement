@@ -176,4 +176,8 @@ export class ApprovalItemsComponent implements OnInit {
 
     this.loadData();
   }
+
+  uploadFileClick(approvalItem: ApprovalItemModel) {
+    this._router.navigate(['uploadFile/approvals/' + this.approvalKey + '/approvalItems/' + approvalItem.key]);
+  }
 }

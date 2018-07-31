@@ -49,6 +49,9 @@ import { ApprovalComponent } from './approvals/approval/approval.component';
 import { ApprovalItemsComponent } from './approvals/approval-items/approval-items.component';
 import { ApprovalItemComponent } from './approvals/approval-items/approval-item/approval-item.component';
 
+import { FileSizePipe } from '../pipes/file-size.pipe';
+import { DropZoneDirective } from '../directives/drop-zone.directive';
+
 import {
     AuthService,
     HttpErrorService,
@@ -60,6 +63,7 @@ import {
     ResidentFirebaseServiceProvider,
     EmailService
 } from '../services';
+import { UploadFileComponent } from './upload-file/upload-file.component';
 
 const httpInterceptorProviders: Type<any>[] = [RequestInterceptor];
 
@@ -85,7 +89,11 @@ const httpInterceptorProviders: Type<any>[] = [RequestInterceptor];
         ApprovalsComponent,
         ApprovalComponent,
         ApprovalItemsComponent,
-        ApprovalItemComponent
+        ApprovalItemComponent,
+        DropZoneDirective,
+        FileSizePipe,
+        UploadFileComponent
+
     ],
     imports: [
         MatDialogModule,

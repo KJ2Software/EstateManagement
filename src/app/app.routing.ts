@@ -19,6 +19,7 @@ import { ApprovalsComponent } from './approvals/approvals.component';
 import { ApprovalComponent } from './approvals/approval/approval.component';
 import { ApprovalItemsComponent } from './approvals/approval-items/approval-items.component';
 import { ApprovalItemComponent } from './approvals/approval-items/approval-item/approval-item.component';
+import { UploadFileComponent } from './upload-file/upload-file.component';
 // import { DynamicDashboardsContainerComponent, DynamicWidgetDetailComponent } from '@sgits/dynamic-dashboards';
 
 const routes: Routes = [
@@ -123,8 +124,13 @@ const routes: Routes = [
                 component: ResidentComponent,
                 canActivate: [RouteGuard],
                 data: { roles: [], url: '/residents/resident', title: 'Resident', icon: 'people', show: false, seq: 1 }
+            },
+            {
+                path: 'uploadFile/approvals/:approvalKey/approvalItems/:approvalItemKey',
+                component: UploadFileComponent,
+                canActivate: [RouteGuard],
+                data: { roles: [], url: '/uploadFile', title: 'Owners', icon: 'person', show: false, seq: 1 }
             }
-
             // {
             //     path: '',
             //     component: DynamicDashboardsContainerComponent,

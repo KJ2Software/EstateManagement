@@ -18,6 +18,7 @@ export class ApprovalItemComponent implements OnInit {
   public approvalItemModel: ApprovalItemModel = new ApprovalItemModel();
   frmApprovalItem: FormGroup;
 
+
   constructor(private _snackBarService: MatSnackBar, private _router: Router,
     private _activatedRoute: ActivatedRoute, public builder: FormBuilder,
     private approvalItemService: ApprovalItemFirebaseServiceProvider,
@@ -106,5 +107,4 @@ export class ApprovalItemComponent implements OnInit {
     this._router.navigate(['/approvals/' + this.approvalKey + '/approval-items']);
 
   }
-
 }
