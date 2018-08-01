@@ -13,11 +13,11 @@ import { ApprovalSetupFirebaseServiceProvider, UserFirebaseServiceProvider, Appr
 export class ApprovalSetupsComponent implements OnInit {
   approvalSetups: ApprovalSetupModel[] = [];
   estateKey: string = '';
-  users: UserModel[] = [];
-  approvalTypes: ApprovalTypeModel[] = [];
   dataLoaded: boolean = false;
   viewModels: ApprovalSetupsViewModel[] = [];
+  public users: UserModel[] = [];
   public icon: string = 'build';
+  public approvalTypes: ApprovalTypeModel[] = [];
 
   constructor(private _snackBarService: MatSnackBar, private _router: Router,
     private approvalSetupService: ApprovalSetupFirebaseServiceProvider,

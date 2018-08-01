@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 @Injectable()
-export class SendgridService {
+export class FirebaseFunctionService {
 
     constructor(private _http: Http) {
     }
@@ -16,7 +16,6 @@ export class SendgridService {
         return this._http
             .post('https://us-central1-kj2-estate-management.cloudfunctions.net/helloWorld', undefined, { headers: header })
             .map((res) => {
-                console.log(res);
                 return res;
             })
             .catch((error: any) => Observable.throw(error) || 'Server error');

@@ -12,8 +12,8 @@ import { SgNotificationService } from '../../components';
 export class EstateDialogComponent {
   // @Output() newMarkerPosition = new EventEmitter<{ lat: string, lng: string }>();
   private incommingData: string = '';
-  private estates: EstateModel[] = [];
-  private estateKey = undefined;
+  public estates: EstateModel[] = [];
+  public estateKey = undefined;
 
   constructor(
     public dialogRef: MatDialogRef<EstateDialogComponent>,

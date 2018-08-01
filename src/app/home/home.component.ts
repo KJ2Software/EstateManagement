@@ -9,9 +9,9 @@ import { SgNotificationService } from '../../components';
     styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
-    private estate = undefined;
-    constructor(private estateService: EstateFirebaseServiceProvider, private _notificationService: SgNotificationService) { }
+    public estate = undefined;
+    constructor(private estateService: EstateFirebaseServiceProvider,
+        private _notificationService: SgNotificationService) { }
 
     ngOnInit() {
         this.getEstate();

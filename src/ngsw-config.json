@@ -29,22 +29,6 @@
                     "/MaterialIcons-Regular.*.eot"
                 ]
             }
-        },
-        {
-            "name": "external",
-            "installMode": "prefetch",
-            "updateMode": "prefetch",
-            "resources": {
-                "urls": [
-                    "https://www.amcharts.com/lib/3/*.js",
-                    "https://www.amcharts.com/lib/3/themes/*.js",
-                    "https://www.amcharts.com/lib/3/plugins/tools/polarScatter/*.js",
-                    "https://www.amcharts.com/lib/3/plugins/dataloader/*.js",
-                    "https://www.amcharts.com/lib/3/maps/js/*.js",
-                    "https://www.amcharts.com/lib/3/plugins/export/*.js",
-                    "https://www.amcharts.com/lib/3/plugins/export/*.css"
-                ]
-            }
         }
     ]
 }

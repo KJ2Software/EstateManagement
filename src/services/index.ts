@@ -9,4 +9,8 @@ export { NoteTypeFirebaseServiceProvider } from './firebase/note-type-firebase-s
 export { OwnerFirebaseServiceProvider } from './firebase/owner-firebase-service-provider';
 export { ResidentFirebaseServiceProvider } from './firebase/resident-firebase-service-provider';
 export { CommonService } from './common.service';
-export { SendgridService } from './sendgrid.service';
+export { FirebaseFunctionService } from './firebase-function.service';
+export { EmailService } from './email.service';
+export { ApprovalFirebaseServiceProvider } from './firebase/approval-firebase-service-provider';
+export { ApprovalItemFirebaseServiceProvider } from './firebase/approval-item-firebase-service-provider';
+export { ApprovalItemResultFirebaseServiceProvider } from './firebase/approval-item-result-firebase-service-provider';
