@@ -9,13 +9,17 @@ import { ApprovalTypeComponent } from './approval-types/approval-type/approval-t
 import { ApprovalTypesComponent } from './approval-types/approval-types.component';
 import { ApprovalSetupsComponent } from './approval-setups/approval-setups.component';
 import { ApprovalSetupComponent } from './approval-setups/approval-setup/approval-setup.component';
-import { CreateApprovalComponent } from './create-approval/create-approval.component';
 import { NoteTypesComponent } from './note-types/note-types.component';
 import { NoteTypeComponent } from './note-types/note-type/note-type.component';
 import { OwnersComponent } from './owners/owners.component';
 import { OwnerComponent } from './owners/owner/owner.component';
 import { ResidentsComponent } from './residents/residents.component';
 import { ResidentComponent } from './residents/resident/resident.component';
+import { ApprovalsComponent } from './approvals/approvals.component';
+import { ApprovalComponent } from './approvals/approval/approval.component';
+import { ApprovalItemsComponent } from './approvals/approval-items/approval-items.component';
+import { ApprovalItemComponent } from './approvals/approval-items/approval-item/approval-item.component';
+import { UploadFileComponent } from './upload-file/upload-file.component';
 // import { DynamicDashboardsContainerComponent, DynamicWidgetDetailComponent } from '@sgits/dynamic-dashboards';
 
 const routes: Routes = [
@@ -59,12 +63,32 @@ const routes: Routes = [
                 canActivate: [RouteGuard],
                 data: { roles: [], url: '/approval-setups/approval-setup', title: 'Approval Setup', icon: 'home', show: false, seq: 1 }
             },
+
             {
-                path: 'create-approval',
-                component: CreateApprovalComponent,
+                path: 'approvals',
+                component: ApprovalsComponent,
                 canActivate: [RouteGuard],
-                data: { roles: [], url: '/create-approval', title: 'Create Approval', icon: 'home', show: true, seq: 1 }
+                data: { roles: [], url: '/approvals', title: 'Approvals', icon: 'home', show: true, seq: 1 }
             },
+            {
+                path: 'approvals/:approvalKey',
+                component: ApprovalComponent,
+                canActivate: [RouteGuard],
+                data: { roles: [], url: '/approvals/approval', title: 'Approval', icon: 'home', show: false, seq: 1 }
+            },
+            {
+                path: 'approvals/:approvalKey/approval-items',
+                component: ApprovalItemsComponent,
+                canActivate: [RouteGuard],
+                data: { roles: [], url: '/approvals', title: 'Approvals', icon: 'home', show: false, seq: 1 }
+            },
+            {
+                path: 'approvals/:approvalKey/approval-items/:approvalItemKey',
+                component: ApprovalItemComponent,
+                canActivate: [RouteGuard],
+                data: { roles: [], url: '/approval-items/approval-item', title: 'Approval', icon: 'home', show: false, seq: 1 }
+            },
+
             {
                 path: 'note-types',
                 component: NoteTypesComponent,
@@ -100,8 +124,13 @@ const routes: Routes = [
                 component: ResidentComponent,
                 canActivate: [RouteGuard],
                 data: { roles: [], url: '/residents/resident', title: 'Resident', icon: 'people', show: false, seq: 1 }
+            },
+            {
+                path: 'uploadFile/approvals/:approvalKey/approvalItems/:approvalItemKey',
+                component: UploadFileComponent,
+                canActivate: [RouteGuard],
+                data: { roles: [], url: '/uploadFile', title: 'Owners', icon: 'person', show: false, seq: 1 }
             }
-
             // {
             //     path: '',
             //     component: DynamicDashboardsContainerComponent,

@@ -17,8 +17,8 @@ export class ApprovalSetupComponent implements OnInit {
   private subscriptions: any[] = [];
   private approvalSetupModel: ApprovalSetupModel = new ApprovalSetupModel();
   private estateKey: string = '';
-  private users: UserModel[] = [];
-  private approvalTypes: ApprovalTypeModel[] = [];
+  public users: UserModel[] = [];
+  public approvalTypes: ApprovalTypeModel[] = [];
 
   frmApprovalSetup: FormGroup;
 

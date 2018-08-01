@@ -3,6 +3,8 @@ export class ApprovalModel {
     estateKey: string;
     approvalTypeKey: string;
     createdUserKey: string;
-    notes: string;
+    description: string;
+    isFinalised: boolean;
+    approvedItemKey: string;
     dateCreated: string;
 }

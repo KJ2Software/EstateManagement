@@ -5,6 +5,7 @@ import { mainRouterTransition } from '../../animations';
 import { environment } from '../../environments/environment';
 import { TokenModel, UserModel } from '../../models';
 import { AppStore, AuthStore } from '../../stores';
+import { AngularFireModule } from 'angularfire2';
 
 @Component({
     selector: 'app-main',
@@ -32,9 +33,9 @@ export class MainComponent implements OnInit {
         private _currentRoute: ActivatedRoute) {
         _router.events.subscribe((event: Event) => this.routeChangedEvent(event));
 
-        this._authStore.token.subscribe((res: TokenModel) => {
-            this.token = res;
-        });
+        // this._authStore.token.subscribe((res: TokenModel) => {
+        //     this.token = res;
+        // });
 
         // this._authStore.user.subscribe((res: UserModel) => {
         //     this.user = res;

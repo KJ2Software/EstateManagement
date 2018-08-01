@@ -1,0 +1,174 @@
+
+.dropZoneText{
+    color: #B81F24;
+  }
+  
+  .dropzone { 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column; 
+      height: 100px;
+      border: 2px dashed #B81F24;
+      border-radius: 5px;
+      background: white;
+      margin: 10px 0;
+  
+      &.hovering {
+          border: 2px solid #B81F24;
+          color: #dadada !important;
+      }
+  }
+  
+  
+  progress::-webkit-progress-value {
+      transition: width 0.1s ease;
+  }
+  
+  .progressText {
+      padding: 5px;
+      color: #B81F24;
+      font-weight: bold;
+  }
+  
+  
+  progress[value] {
+      /* Reset the default appearance */
+      -webkit-appearance: none;
+          appearance: none;
+  
+      width: 100%;
+      height: 20px;
+  
+  }
+  
+  progress[value]::-webkit-progress-bar {
+      background-color: #eee;
+      border-radius: 2px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+  }
+  
+  progress[value]::-webkit-progress-value {
+      background-image:
+          -webkit-linear-gradient(-45deg, 
+                                  transparent 33%, rgba(0, 0, 0, .1) 33%, 
+                                  rgba(0,0, 0, .1) 66%, transparent 66%),
+          -webkit-linear-gradient(top, 
+                                  rgba(255, 255, 255, .25), 
+                                  rgba(0, 0, 0, .25)),
+          -webkit-linear-gradient(left, #c1898b, #B81F24);
+  
+      border-radius: 10px; 
+      background-size: 35px 20px, 100% 100%, 100% 100%;
+  }
+  
+  .custom-file-upload {
+      border: 1px solid #ccc;
+      display: inline-block;
+      padding: 6px 12px;
+      cursor: pointer;
+  }
+  
+  input[type="file"] {
+      display: none;
+  }
+
+  
+//------
+
+.material-button-raised {
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box;
+    
+    border: none;
+    border-radius: 2px;
+    padding: 0 16px;
+    min-width: 64px;
+    height: 36px;
+    vertical-align: middle;
+    text-align: center;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+    color: #fff;
+    background-color: #B81F24;
+    box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+    font-family: "Roboto", "Segoe UI", BlinkMacSystemFont, system-ui, -apple-system;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 36px;
+    overflow: hidden;
+    outline: none;
+    cursor: pointer;
+    transition: box-shadow 0.2s;
+  }
+
+  
+.material-button-raised:hover,
+.material-button-raised:focus {
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+}
+
+.material-button-raised:active {
+  box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.material-button-raised:disabled {
+  color: rgba(0, 0, 0, 0.38);
+  background-color: rgba(0, 0, 0, 0.12);
+  box-shadow: none;
+  cursor: initial;
+}
+
+.material-button-raised::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: currentColor;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.material-button-raised:hover::before {
+  opacity: 0.12;
+}
+
+.material-button-raised:focus::before {
+  opacity: 0.2;
+}
+
+.material-button-raised:active::before {
+  opacity: 0.32;
+}
+
+.material-button-raised:disabled::before {
+  opacity: 0;
+}
+
+.material-button-raised::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 18px;
+  border-radius: 50%;
+  padding: 50%;
+  width: 32px;
+  height: 32px;
+  background-color: currentColor;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(1) ;
+  transition: opacity 1s, transform 0.5s;
+}
+
+.material-button-raised:active::after {
+  opacity: 0.4;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0s;
+}
+
+.material-button-raised:disabled::after {
+  opacity: 0;
+}

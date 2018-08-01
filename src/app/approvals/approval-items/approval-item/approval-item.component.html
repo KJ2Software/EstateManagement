@@ -1,0 +1,27 @@
+<div class="flex-container" fxLayout="row" fxLayoutAlign="center center" style="padding-bottom:60px;">
+  <div flex-gt-md="50" flex="100">
+    <mat-card>
+      <mat-card-content style="margin-bottom:0px;" flex fxLayout="column">
+        <form [formGroup]="frmApprovalItem" class="example-form" novalidate>
+          <mat-list>
+            <mat-list-item>
+              <mat-form-field flex="50" style="min-width: 250px !important" class="example-full-width">
+                <input matInput placeholder="Price" formControlName="price" maxlength="50">
+              </mat-form-field>
+            </mat-list-item>
+            <mat-list-item>
+              <mat-form-field flex="50" style="min-width: 250px !important" class="example-full-width">
+                <input matInput placeholder="Comments" formControlName="comments" maxlength="50">
+              </mat-form-field>
+            </mat-list-item>
+          </mat-list>
+        </form>
+      </mat-card-content>
+      <mat-card-actions class="text-right">
+        <button color="seconday" (click)="cancelClick()" mat-raised-button>Cancel</button>
+        <button color="primary" (click)="saveClick(frmApprovalItem.value)" [disabled]='!frmApprovalItem.valid' mat-raised-button>Save</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+

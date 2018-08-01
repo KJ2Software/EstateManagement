@@ -13,10 +13,10 @@ import { ApprovalSetupFirebaseServiceProvider, UserFirebaseServiceProvider, Appr
 export class ApprovalSetupsComponent implements OnInit {
   approvalSetups: ApprovalSetupModel[] = [];
   estateKey: string = '';
-  users: UserModel[] = [];
-  approvalTypes: ApprovalTypeModel[] = [];
   dataLoaded: boolean = false;
   viewModels: ApprovalSetupsViewModel[] = [];
+  public users: UserModel[] = [];
+  public approvalTypes: ApprovalTypeModel[] = [];
 
   constructor(private _snackBarService: MatSnackBar, private _router: Router,
     private approvalSetupService: ApprovalSetupFirebaseServiceProvider,
@@ -44,7 +44,7 @@ export class ApprovalSetupsComponent implements OnInit {
 
       return;
     }
-    console.log(callbackModel.data);
+    // console.log(callbackModel.data);
     this._snackBarService.open('Error getting users', '', {
       duration: 2000
     });
@@ -58,7 +58,7 @@ export class ApprovalSetupsComponent implements OnInit {
       this.approvalSetupService.getAll(this.estateKey, (e) => this.getAllForEstateCallback(e));
       return;
     }
-    console.log(callbackModel.data);
+    // console.log(callbackModel.data);
     this._snackBarService.open('Error getting approval Type', '', {
       duration: 2000
     });
@@ -71,7 +71,7 @@ export class ApprovalSetupsComponent implements OnInit {
       this.buildModel();
       return;
     }
-    console.log(callbackModel.data);
+    // console.log(callbackModel.data);
     this._snackBarService.open('Error getting approval setups', '', {
       duration: 2000
     });
