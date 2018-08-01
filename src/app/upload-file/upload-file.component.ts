@@ -21,7 +21,7 @@ export class UploadFileComponent implements OnInit {
 
   @Output() uploadedUrlChange = new EventEmitter<{ id: string, imageUrl: string }>();
   @Input() showDrowZone: boolean = false;
-  @Input() showImage: boolean = false;
+  @Input() showImage: boolean = true;
   // Main task
   task: AngularFireUploadTask;
   // Progress monitoring
@@ -58,6 +58,9 @@ export class UploadFileComponent implements OnInit {
     // The File object
     const file = event.item(0);
 
+    console.log('startUpload');
+
+
     // Client-side validation example
     // if (file.type.split('/')[0] !== 'image') {
 
@@ -83,6 +86,8 @@ export class UploadFileComponent implements OnInit {
 
         if (snap.bytesTransferred === snap.totalBytes) {
           // Update firestore on completion
+          console.log(' Update firestore on completion');
+
         }
       })
     );
@@ -91,6 +96,9 @@ export class UploadFileComponent implements OnInit {
       tap((res) => {
         this.uploadedUrlChange.emit({ id: this.imageId, imageUrl: res });
         this.urlToSave = res;
+        console.log('urlToSave');
+        console.log(res);
+
         this.saveUrl();
       }
       ));
@@ -117,7 +125,6 @@ export class UploadFileComponent implements OnInit {
       });
       return;
     }
-
     let approvalItemModel: ApprovalItemModel = callbackModel.data;
     approvalItemModel.attachmentLink = this.urlToSave;
 
