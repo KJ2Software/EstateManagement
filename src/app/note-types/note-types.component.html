@@ -1,17 +1,20 @@
-<td-layout-card-over cardTitle="Note Types">
+<td-layout-card-over>
   <mat-card-content flex fxLayout="column">
     <div *ngIf="noteTypes.length > 0">
+
       <mat-list>
         <mat-list-item>
           <span class="pad-right">
-            <mat-icon matListAvatar>keyboard_arrow_right</mat-icon>
+            <mat-icon matListAvatar fxHide fxShow.gt-md>{{icon}}</mat-icon>
           </span>
-          <span fxFlex="90" class="mat-body-1 tc-grey-500">Description</span>
+          <span class="mat-body-1 tc-grey-500" fxFlex="100" >Description</span>
         </mat-list-item>
+
         <mat-divider></mat-divider>
-        <mat-list-item *ngFor="let record of noteTypes" (click)="detailClick(record)" class="hand">
-          <span class="pad-right top-bottom-padding">
-            <mat-icon color="primary" matListAvatar>keyboard_arrow_right</mat-icon>
+
+        <mat-list-item *ngFor="let record of noteTypes" (click)="detailClick(record)" class="hand gridRow">
+          <span class="pad-right">
+            <mat-icon color="primary" matListAvatar fxHide fxShow.gt-md>keyboard_arrow_right</mat-icon>
           </span>
           <span fxFlex="100">
             {{record.description}}
@@ -19,6 +22,7 @@
           <mat-divider></mat-divider>
         </mat-list-item>
       </mat-list>
+
     </div>
     <app-empty-state name="note types" [icon]="icon" [count]="noteTypes.length"></app-empty-state>
   </mat-card-content>

@@ -43,19 +43,19 @@ const routes: Routes = [
                 path: 'approval-types',
                 component: ApprovalTypesComponent,
                 canActivate: [RouteGuard],
-                data: { roles: [], url: '/approval-types', title: 'Approval Types', icon: 'home', show: true, seq: 1 }
+                data: { roles: [], url: '/approval-types', title: 'Approval Types', icon: 'thumb_up', show: true, seq: 1 }
             },
             {
                 path: 'approval-types/:approvalTypeKey',
                 component: ApprovalTypeComponent,
                 canActivate: [RouteGuard],
-                data: { roles: [], url: '/approval-types/approval-type', title: 'Approval Type', icon: 'home', show: false, seq: 1 }
+                data: { roles: [], url: '/approval-types/approval-type', title: 'Approval Type', icon: 'thumb_up', show: false, seq: 1 }
             },
             {
                 path: 'approval-setups',
                 component: ApprovalSetupsComponent,
                 canActivate: [RouteGuard],
-                data: { roles: [], url: '/approval-setups', title: 'Approval Setup', icon: 'home', show: true, seq: 1 }
+                data: { roles: [], url: '/approval-setups', title: 'Approval Setups', icon: 'build', show: true, seq: 1 }
             },
             {
                 path: 'approval-setups/:approvalSetupKey',
@@ -68,7 +68,7 @@ const routes: Routes = [
                 path: 'approvals',
                 component: ApprovalsComponent,
                 canActivate: [RouteGuard],
-                data: { roles: [], url: '/approvals', title: 'Approvals', icon: 'home', show: true, seq: 1 }
+                data: { roles: [], url: '/approvals', title: 'Approvals', icon: 'gavel', show: true, seq: 1 }
             },
             {
                 path: 'approvals/:approvalKey',

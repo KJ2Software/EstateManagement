@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { OwnerModel, CallbackModel, OwnersViewModel } from '../../models';
+import { OwnerModel, CallbackModel } from '../../models';
 import { MatSnackBar } from '../../../node_modules/@angular/material';
 import { Router } from '../../../node_modules/@angular/router';
 import { OwnerFirebaseServiceProvider } from '../../services';
@@ -12,7 +12,6 @@ import { TdLoadingService } from '../../../node_modules/@covalent/core';
 })
 export class OwnersComponent implements OnInit {
     owners: OwnerModel[] = [];
-    viewModels: OwnersViewModel[] = [];
     dataLoaded: boolean = false;
     estateKey: string = '';
     public icon: string = 'person';

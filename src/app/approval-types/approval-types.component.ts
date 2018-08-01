@@ -12,6 +12,7 @@ import { ApprovalTypeFirebaseServiceProvider } from '../../services';
 })
 export class ApprovalTypesComponent implements OnInit {
   approvalTypes: ApprovalTypeModel[] = [];
+  public icon: string = 'thumb_up';
 
   constructor(private _snackBarService: MatSnackBar, private _router: Router,
     private approvalTypeService: ApprovalTypeFirebaseServiceProvider,

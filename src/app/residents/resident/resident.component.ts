@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TdDialogService } from '../../../../node_modules/@covalent/core';
-import { MatSnackBar } from '../../../../node_modules/@angular/material';
+import { MatSnackBar, MatDatepickerModule } from '../../../../node_modules/@angular/material';
 import { Router, ActivatedRoute } from '../../../../node_modules/@angular/router';
 import { FormBuilder, FormGroup, Validators } from '../../../../node_modules/@angular/forms';
 import { ResidentFirebaseServiceProvider } from '../../../services';
@@ -26,7 +26,12 @@ export class ResidentComponent implements OnInit {
         private residentService: ResidentFirebaseServiceProvider
     ) {
         this.frmResident = builder.group({
-            name: [{ value: '' }, Validators.required]
+            firstname: [{ value: '' }, Validators.required],
+            surname: [{ value: '' }, Validators.required],
+            cellphone: [{ value: '' }, Validators.required],
+            email: [{ value: '' }, Validators.required],
+            leaseStart: [{ value: '' }, Validators.required],
+            leaseEnd: [{ value: '' }, Validators.required]
         });
     }
 
