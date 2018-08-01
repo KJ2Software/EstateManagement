@@ -1,70 +1,36 @@
-<td-layout-card-over cardTitle="Owners">
+<td-layout-card-over>
   <mat-card-content flex fxLayout="column">
     <div *ngIf="owners.length > 0">
+
       <mat-list>
         <mat-list-item>
           <span class="pad-right">
-            <mat-icon matListAvatar>keyboard_arrow_right</mat-icon>
+            <mat-icon matListAvatar fxHide fxShow.gt-md>{{icon}}</mat-icon>
           </span>
-          <span fxFlex="90" class="mat-body-1 tc-grey-500" fxFlex="25">Firstsname</span>
-          <span fxFlex="90" class="mat-body-1 tc-grey-500" fxFlex="25" fxHide fxShow.gt-md>Surname</span>
-          <span fxFlex="90" class="mat-body-1 tc-grey-500" fxFlex="20" fxHide fxShow.gt-md>Cellphone</span>
-          <span fxFlex="90" class="mat-body-1 tc-grey-500" fxFlex="30" fxHide fxShow.gt-md>E-mail</span>
+          <span class="mat-body-1 tc-grey-500" fxFlex="50">Fullname</span>
+          <span class="mat-body-1 tc-grey-500" fxFlex="20" fxHide fxShow.gt-xs>Cellphone</span>
+          <span class="mat-body-1 tc-grey-500" fxFlex="30" fxHide fxShow.gt-md>E-mail</span>
         </mat-list-item>
+
         <mat-divider></mat-divider>
+
         <mat-list-item *ngFor="let record of owners" (click)="detailClick(record)" class="hand gridRow">
-          <span class="pad-right top-bottom-padding">
-            <mat-icon color="primary" matListAvatar>keyboard_arrow_right</mat-icon>
+          <span class="pad-right">
+            <mat-icon color="primary" matListAvatar fxHide fxShow.gt-md>keyboard_arrow_right</mat-icon>
           </span>
-          <span fxHide fxShow.gt-md fxFlex="25">
-            {{record.firstname}}
+          <span fxFlex="50">
+            {{record.firstname}} {{record.surname}}
           </span>
-
-
-          <!-- For Mobile -->
-          <!-- <span fxHide.gt-md fxFlex class="top-bottom-padding">
-
-            <div (click)="record.selected = !record.selected" class=" hand" fxFlex fxLayout="row" fxLayoutAlign="center center">
-              <span fxFlex *ngIf="!record.selected">{{record.firstname}}</span>
-              <span fxFlex *ngIf="record.selected" style="font-weight: 500">{{record.firstname}}</span>
-              <span fxFlex="20">
-                <mat-icon *ngIf="!record.selected">expand_more</mat-icon>
-                <mat-icon *ngIf="record.selected">expand_less</mat-icon>
-              </span>
-            </div>
-            <div class="md-padding pad-top pad-left-none pad-right-none" [style.overflow]="'hidden'" [@tdCollapse]="!item.selected">
-              <div fxFlex fxLayout="column">
-                <div fxFlex fxLayout="column" class="pad-bottom">
-                  <div class="tc-grey-500 pad-bottom-xs">Surname:</div>
-                  <div class="tc-grey-300">{{record.surname}}</div>
-                </div>
-                <div fxFlex fxLayout="column">
-                  <div class="tc-grey-500 pad-bottom-xs">Cellphone:</div>
-                  <div class="tc-grey-300">{{record.cellphone}}</div>
-                </div>
-                <div fxFlex fxLayout="column">
-                  <div class="tc-grey-500 pad-bottom-xs">Email:</div>
-                  <div class="tc-grey-300">{{record.email}}</div>
-                </div>
-              </div>
-            </div>
-
-          </span> -->
-
-          <!-- For PC -->
-          <span fxHide fxShow.gt-md fxFlex="25">
-            {{record.surname}}
-          </span>
-          <span fxHide fxShow.gt-md fxFlex="20">
+          <span fxHide fxShow.gt-xs fxFlex="20">
             {{record.cellphone}}
           </span>
           <span fxHide fxShow.gt-md fxFlex="30">
             {{record.email}}
           </span>
-
           <mat-divider></mat-divider>
         </mat-list-item>
       </mat-list>
+
     </div>
     <app-empty-state name="owners" [icon]="icon" [count]="owners.length"></app-empty-state>
   </mat-card-content>

@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ResidentModel, CallbackModel } from '../../models';
 import { MatSnackBar } from '../../../node_modules/@angular/material';
 import { Router } from '../../../node_modules/@angular/router';
-import { ResidentFirebaseServiceProvider } from '../../services/firebase/resident-firebase-service-provider';
+import { ResidentFirebaseServiceProvider } from '../../services';
+import { TdLoadingService } from '../../../node_modules/@covalent/core';
 
 @Component({
     selector: 'app-residents',
@@ -11,27 +12,31 @@ import { ResidentFirebaseServiceProvider } from '../../services/firebase/residen
 })
 export class ResidentsComponent implements OnInit {
     residents: ResidentModel[] = [];
+    dataLoaded: boolean = false;
+    estateKey: string = '';
     public icon: string = 'people';
 
     constructor(
-      private _snackBarService: MatSnackBar,
-      private _router: Router,
-      public residentService: ResidentFirebaseServiceProvider
+        private _snackBarService: MatSnackBar,
+        private _router: Router,
+        public residentService: ResidentFirebaseServiceProvider,
+        private _loadingService: TdLoadingService
     ) {}
 
     ngOnInit() {
+        this.estateKey = localStorage.getItem('estateKey');
         this.loadData();
     }
 
     loadData() {
-        let estateKey = localStorage.getItem('estateKey');
-        this.residentService.getAll(estateKey, (e) => this.getAllForEstateCallback(e));
+        this.residentService.getAll(this.estateKey, (e) => this.getAllForResidentCallback(e));
     }
 
-    getAllForEstateCallback(callbackModel: CallbackModel) {
+    getAllForResidentCallback(callbackModel: CallbackModel) {
         this.residents = [];
         if (callbackModel.success) {
             this.residents = callbackModel.data;
+            // this.buildModel();
             return;
         }
 

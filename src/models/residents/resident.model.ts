@@ -5,6 +5,6 @@ export class ResidentModel {
     surname: string;
     cellphone: string;
     email: string;
-    leaseStart: Date;
-    leaseEnd: Date;
+    leaseStart: string;
+    leaseEnd: string;
 }
