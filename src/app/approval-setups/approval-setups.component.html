@@ -1,54 +1,36 @@
-<div class="flex-container" fxLayout="row" fxLayoutAlign="center center" style="padding-bottom:60px;">
-  <div flex-gt-md="50" flex="100">
-    <mat-card>
-      <mat-card-content style="margin-bottom:0px;" fxLayout="column" flex>
+<td-layout-card-over>
+  <mat-card-content flex fxLayout="column">
+    <div *ngIf="approvalSetups.length > 0">
+      <mat-list>
 
-        <mat-list>
-          <mat-list-item class='listHeading'>
-            <div flex fxFlexAlign="center">
-              Approval Setup List
-            </div>
-            <mat-divider></mat-divider>
-          </mat-list-item>
-          <mat-list-item style="height: auto">
-            <div flex  *ngIf="approvalSetups.length === 0">
-              <br/>
-              <div flex layout="column" layout-align="center center" class="tc-grey-500 mat-typography pad-lg">
-                <mat-icon flex  matListAvatar class="text-super push-bottom">device_hub</mat-icon>
-                <h2>No data</h2>
-                <h3>There are no data</h3>
-              </div>
-            </div>
-          </mat-list-item>
-          <mat-list-item>
-            <div flex fxFlexAlign="center" style="font-weight: bold">
-              User
-            </div>
-            <div flex fxFlexAlign="center" style="font-weight: bold">
-              Approval Type
-            </div>
-            <mat-divider></mat-divider>
-          </mat-list-item>
-          <mat-list-item *ngFor="let record of viewModels" (click)="detailClick(record)" class="hand gridRow">
-            <div flex fxFlexAlign="center">
-              {{record.name}}
-            </div>
-            <div flex fxFlexAlign="center">
-              {{record.approvalType}}
-            </div>
+        <mat-list-item>
+          <span class="pad-right">
+            <mat-icon matListAvatar fxHide fxShow.gt-md>{{icon}}</mat-icon>
+          </span>
+          <span class="mat-body-1 tc-grey-500" fxFlex="50">User</span>
+          <span class="mat-body-1 tc-grey-500" fxFlex="50">Approval Type</span>
+        </mat-list-item>
 
-          </mat-list-item>
-        </mat-list>
+        <mat-divider></mat-divider>
 
-      </mat-card-content>
-    </mat-card>
+        <mat-list-item *ngFor="let record of viewModels" (click)="detailClick(record)" class="hand gridRow">
+          <span class="pad-right">
+            <mat-icon color="primary" matListAvatar fxHide fxShow.gt-md>keyboard_arrow_right</mat-icon>
+          </span>
+          <span fxFlex="50" class="pad-right">
+            {{record.name}}
+          </span>
+          <span fxFlex="50" class="pad-right">
+            {{record.approvalType}}
+          </span>
+          <mat-divider></mat-divider>
+        </mat-list-item>
 
-   
-  </div>
-</div>
-
-
-
-<a mat-fab routerLink="/approval-setups/0" color="primary" style="top:auto; right:15px; left:auto; bottom:50px; position:fixed;">
-  <mat-icon>add</mat-icon>
-</a>
+      </mat-list>
+    </div>
+  </mat-card-content>
+  <app-empty-state name="approvalSetups" [icon]="icon" [count]="approvalSetups.length"></app-empty-state>
+  <a mat-fab routerLink="/approval-setups/0" color="primary" class="custom-fab-button">
+    <mat-icon>add</mat-icon>
+  </a>
+</td-layout-card-over>

@@ -35,7 +35,7 @@ export class ResidentFirebaseServiceProvider {
 
     public getAll(estateKey: string, callbackMethod) {
         let collectionRef = this.db.collection(this.tableName, (ref) => {
-            return ref.where('estateKey', '==', estateKey).orderBy('name');
+            return ref.where('estateKey', '==', estateKey).orderBy('firstname');
         });
         // var notes = categoryCollectionRef.valueChanges();
         let snapshot = collectionRef.snapshotChanges()
@@ -53,7 +53,7 @@ export class ResidentFirebaseServiceProvider {
 
     public getAllForEstate(estateKey, callbackMethod) {
         let collectionRef = this.db.collection(this.tableName, (ref) => {
-            return ref.where('estateKey', '==', estateKey).orderBy('name');
+            return ref.where('estateKey', '==', estateKey).orderBy('firstname');
         });
         // var notes = categoryCollectionRef.valueChanges();
         let snapshot = collectionRef.snapshotChanges()

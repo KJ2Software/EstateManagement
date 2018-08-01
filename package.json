@@ -31,6 +31,7 @@
         "@covalent/http": "^1.0.0",
         "@covalent/markdown": "^1.0.0",
         "@sendgrid/mail": "^6.3.1",
+        "angular-mat-datepicker": "0.0.2",
         "angular2-jwt": "^0.2.3",
         "angular2-moment": "^1.6.0",
         "angularfire2": "^5.0.0-rc.6",
