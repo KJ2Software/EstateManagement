@@ -52,6 +52,24 @@ export class ApprovalSetupFirebaseServiceProvider {
         });
     }
 
+    public getAllForApprovalType(estateKey: string, approvalTypeKey, callbackMethod) {
+        let collectionRef = this.db.collection(this.tableName, (ref) => {
+            return ref.where('estateKey', '==', estateKey).where('approvalTypeKey', '==', approvalTypeKey).orderBy('sequence');
+        });
+        // var notes = categoryCollectionRef.valueChanges();
+        let snapshot = collectionRef.snapshotChanges()
+            .map((changes) => {
+                return changes.map((snap) => {
+                    return snap.payload.doc.data() as ApprovalSetupModel;
+                });
+            });
+        let subscription = snapshot.subscribe((res) => {
+            callbackMethod({ success: true, data: res });
+        }, (err) => {
+            callbackMethod({ success: false, data: err });
+        });
+    }
+
     public updateRecord(model: ApprovalSetupModel, callbackMethod) {
         let docRef = this.db.doc(this.tableName + '/' + model.key);
         docRef.set(model).then((ok) => {
