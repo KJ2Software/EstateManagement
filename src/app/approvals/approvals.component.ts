@@ -84,7 +84,15 @@ export class ApprovalsComponent implements OnInit {
       return;
     }
 
-    callbackModel.data.forEach((appSetup: ApprovalSetupModel) => {
+    let appSetupModels: ApprovalSetupModel[] = callbackModel.data;
+
+    if (appSetupModels.length === 0) {
+      this._snackBarService.open('No users for this approval type', '', {
+        duration: 2000
+      });
+    }
+
+    appSetupModels.forEach((appSetup: ApprovalSetupModel) => {
       this.userFirebaseService.getRecord(appSetup.userKey, (e) => this.userCallback(e));
     });
 
@@ -107,7 +115,6 @@ export class ApprovalsComponent implements OnInit {
       toName: userModel.name + ' ' + userModel.surname,
       messageHtml: '<strong>Please note that there are new approvals loaded</string>'
     };
-
     this.emailService.sendEmail(emailModel, (e) => this.emailCallback(e));
   }
 
