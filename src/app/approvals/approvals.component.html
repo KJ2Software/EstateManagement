@@ -8,6 +8,12 @@
             <div flex fxFlexAlign="center">
               Approvals
             </div>
+            <div flex fxFlexAlign="center">
+              Finalised
+            </div>
+            <div style="text-align: right; width:50px;">
+              Action
+            </div>
             <mat-divider></mat-divider>
           </mat-list-item>
           <mat-list-item style="height: auto">
@@ -16,10 +22,15 @@
             </div>
           </mat-list-item>
           <mat-list-item *ngFor="let record of approvals">
+           
             <div flex fxFlexAlign="center">
               {{record.description}}
             </div>
-            <span style="text-align: right; width:25px;"  class="hand">
+            <div flex fxFlexAlign="center">
+                <mat-icon *ngIf="!record.isFinalised" style="text-align: center; width:25px; color: lightgray">clear</mat-icon>
+                <mat-icon *ngIf="record.isFinalised" style="text-align: center; width:25px; color: green">done</mat-icon>
+            </div>
+            <span style="text-align: right; width:50px;"  class="hand">
               <button mat-icon-button [matMenuTriggerFor]="cardToolbarMenu">
                 <mat-icon matListAvatar class="push-bottom">more_vert</mat-icon>
         
@@ -32,6 +43,14 @@
                 <button (click)="itemsClick(record)" mat-menu-item>
                   <mat-icon>attach_file</mat-icon>
                   <span>Items</span>
+                </button>
+                <button (click)="finalizeClick(record)" mat-menu-item>
+                  <mat-icon>assistant_photo</mat-icon>
+                  <span>Finalise</span>
+                </button>
+                <button (click)="emailClick(record)" mat-menu-item>
+                  <mat-icon>email</mat-icon>
+                  <span>Email</span>
                 </button>
     
     

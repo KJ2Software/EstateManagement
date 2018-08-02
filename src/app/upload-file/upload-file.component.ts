@@ -18,7 +18,6 @@ export class UploadFileComponent implements OnInit {
   private approvalKey: string;
   private urlToSave: string = '';
 
-
   @Output() uploadedUrlChange = new EventEmitter<{ id: string, imageUrl: string }>();
   @Input() showDrowZone: boolean = false;
   @Input() showImage: boolean = true;
@@ -58,9 +57,6 @@ export class UploadFileComponent implements OnInit {
     // The File object
     const file = event.item(0);
 
-    console.log('startUpload');
-
-
     // Client-side validation example
     // if (file.type.split('/')[0] !== 'image') {
 
@@ -86,8 +82,6 @@ export class UploadFileComponent implements OnInit {
 
         if (snap.bytesTransferred === snap.totalBytes) {
           // Update firestore on completion
-          console.log(' Update firestore on completion');
-
         }
       })
     );
@@ -96,9 +90,6 @@ export class UploadFileComponent implements OnInit {
       tap((res) => {
         this.uploadedUrlChange.emit({ id: this.imageId, imageUrl: res });
         this.urlToSave = res;
-        console.log('urlToSave');
-        console.log(res);
-
         this.saveUrl();
       }
       ));
@@ -126,13 +117,27 @@ export class UploadFileComponent implements OnInit {
       return;
     }
     let approvalItemModel: ApprovalItemModel = callbackModel.data;
+
+    let oldLink =  approvalItemModel.attachmentLink;
+    if (oldLink && oldLink.length > 0) {
+      let ref = this.storage.storage.refFromURL(oldLink);
+      ref.delete().then((res) => {
+        this._snackBarService.open('Removed old file', '', {
+          duration: 2000
+        });
+      }, (err) => {
+        this._snackBarService.open('Failing to remove old file', '', {
+          duration: 2000
+        });
+      });
+    }
     approvalItemModel.attachmentLink = this.urlToSave;
 
     this.approvalItemService.updateRecord(approvalItemModel, (e) => this.updateCallback(e));
 
   }
 
-  updateCallback(callbackModel: CallbackModel){
+  updateCallback(callbackModel: CallbackModel) {
     if (!callbackModel.success) {
       this._snackBarService.open('Error saving approval Item', '', {
         duration: 2000
