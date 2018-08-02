@@ -64,6 +64,8 @@ import {
     EmailService
 } from '../services';
 import { UploadFileComponent } from './upload-file/upload-file.component';
+import { RegisterUserComponent } from './users/register-user/register-user.component';
+import { UsersComponent } from './users/users.component';
 
 const httpInterceptorProviders: Type<any>[] = [RequestInterceptor];
 
@@ -92,7 +94,9 @@ const httpInterceptorProviders: Type<any>[] = [RequestInterceptor];
         ApprovalItemComponent,
         DropZoneDirective,
         FileSizePipe,
-        UploadFileComponent
+        UploadFileComponent,
+        RegisterUserComponent,
+        UsersComponent
 
     ],
     imports: [
