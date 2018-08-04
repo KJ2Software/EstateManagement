@@ -2,18 +2,14 @@
   <div flex-gt-md="50" flex="100">
     <mat-card>
       <mat-card-content style="margin-bottom:0px;" flex fxLayout="column">
-       
-          <mat-list>
 
-              <form [formGroup]="frmUser" class="example-form" novalidate>
-            <mat-list-item>
-              <mat-form-field flex="50" style="min-width: 250px !important" class="example-full-width">
-                <input matInput placeholder="Email" formControlName="email" maxlength="50">
-              </mat-form-field>
-            </mat-list-item>
+        <mat-list>
 
-            <mat-list-item>
-              <mat-slide-toggle formControlName="isAdmin">Is Admin</mat-slide-toggle>
+          <form [formGroup]="frmUser" class="example-form" novalidate>
+
+
+            <mat-list-item >
+              <mat-slide-toggle [disabled]="!loggedInAdmin" formControlName="isAdmin">Is Admin</mat-slide-toggle>
             </mat-list-item>
 
             <mat-list-item>
@@ -29,22 +25,23 @@
             </mat-list-item>
 
           </form>
-            <!-- <mat-list-item>
-            <mat-select placeholder="Unit" formControlName="unitKey">
-              <mat-option *ngFor="let unitOption of units" [value]="unitOption?.key">{{unitOption?.name}}</mat-option>
-            </mat-select>
-          </mat-list-item> -->
+        
+          <mat-list-item>
+            <mat-form-field flex="50" style="min-width: 250px !important" class="example-full-width">
+              <input matInput placeholder="Email" [(ngModel)]="email" [disabled]="userKey !== ''" maxlength="50">
+            </mat-form-field>
+          </mat-list-item>
 
-           <mat-list-item *ngIf="userKey === ''">
-              <mat-form-field flex="50" style="min-width: 250px !important" class="example-full-width">
-                <input matInput type="Password" placeholder="Password" [(ngModel)]="password" maxlength="50">
-              </mat-form-field>
-            </mat-list-item>
+          <mat-list-item *ngIf="userKey === ''">
+            <mat-form-field flex="50" style="min-width: 250px !important" class="example-full-width">
+              <input matInput type="Password" placeholder="Password" [(ngModel)]="password" maxlength="50">
+            </mat-form-field>
+          </mat-list-item>
 
-          </mat-list>
-       
+        </mat-list>
 
-       
+
+
 
       </mat-card-content>
       <mat-card-actions class="text-right">

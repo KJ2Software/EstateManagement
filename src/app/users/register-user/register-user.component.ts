@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthFirebaseServiceProvider, UserFirebaseServiceProvider, EstateFirebaseServiceProvider } from '../../../services';
+import { AuthFirebaseServiceProvider, UserFirebaseServiceProvider, EstateFirebaseServiceProvider, CommonService } from '../../../services';
 import { CallbackModel, UserModel, EstateModel } from '../../../models';
 import { MatSnackBar } from '../../../../node_modules/@angular/material';
 import { FormBuilder, FormGroup, Validators } from '../../../../node_modules/@angular/forms';
@@ -16,21 +16,27 @@ export class RegisterUserComponent implements OnInit {
   public userKey: string = '';
   public userModel: UserModel = new UserModel();
   public password: string = '';
+  public email: string = '';
+  public loggedInAdmin = false;
 
   frmUser: FormGroup;
 
-  constructor(private _snackBarService: MatSnackBar, private _router: Router,
+  constructor(private _snackBarService: MatSnackBar, private _router: Router, private commonSevice: CommonService,
     private estateFirebaseService: EstateFirebaseServiceProvider, public builder: FormBuilder,
     private _activatedRoute: ActivatedRoute, private userFirebaseService: UserFirebaseServiceProvider,
     private authFirebaseService: AuthFirebaseServiceProvider) {
     this.frmUser = builder.group({
-      'email': [{ value: '' }, Validators.required],
+      // 'email': [{ value: '' }, Validators.required],
       'isAdmin': [{ value: '' }],
       'name': [{ value: '' }, Validators.required],
       'surname': [{ value: '' }, Validators.required]
       // 'password': [{ value: '' }, Validators.required]
     });
 
+    this.loggedInAdmin = false;
+    if (localStorage.getItem('isAdmin') === 'true') {
+      this.loggedInAdmin = true;
+    }
     this.estateKey = localStorage.getItem('estateKey');
   }
 
@@ -56,6 +62,10 @@ export class RegisterUserComponent implements OnInit {
       return false;
     }
 
+    if (this.userKey === '' && this.email === '') {
+      return false;
+    }
+
     return true;
   }
 
@@ -73,6 +83,7 @@ export class RegisterUserComponent implements OnInit {
   getRecordCallback(callback: CallbackModel) {
     if (callback.success) {
       this.userModel = callback.data;
+      this.email = this.userModel.email;
       this.frmUser.reset(this.userModel);
       return;
     }
@@ -86,8 +97,7 @@ export class RegisterUserComponent implements OnInit {
 
     if (this.userKey === '') {
       // Add new
-      this.authFirebaseService.createUserWithEmailPassword(this.frmUser.value.email, this.password,
-        (e) => this.createFirebaseUserCallback(e));
+      this.authFirebaseService.createUserWithEmailPassword(this.email, this.password, (e) => this.createFirebaseUserCallback(e));
       return;
     }
 
@@ -97,16 +107,17 @@ export class RegisterUserComponent implements OnInit {
       myEstateKey = '';
     }
 
-    let userModel: UserModel = {
+    let userCreateModel: UserModel = {
       key: this.userKey,
-      email: this.frmUser.value.email,
+      authKey: this.userModel.authKey,
+      email: this.email,
       estateKey: myEstateKey,
       isAdmin: this.frmUser.value.isAdmin,
       name: this.frmUser.value.name,
       surname: this.frmUser.value.surname,
       unitKey: ''
     };
-    this.userFirebaseService.insertRecord(userModel, (e) => this.insertUserCallback(e));
+    this.userFirebaseService.updateRecord(userCreateModel, (e) => this.updateUserCallback(e));
   }
 
   createFirebaseUserCallback(callback: CallbackModel) {
@@ -123,8 +134,9 @@ export class RegisterUserComponent implements OnInit {
     }
 
     let userModel: UserModel = {
-      key: callback.data.uid,
-      email: this.frmUser.value.email,
+      key: this.commonSevice.getNewGuid(),
+      authKey: callback.data.uid,
+      email: this.email,
       estateKey: myEstateKey,
       isAdmin: this.frmUser.value.isAdmin,
       name: this.frmUser.value.name,
@@ -143,7 +155,22 @@ export class RegisterUserComponent implements OnInit {
       return;
     }
 
-    this._snackBarService.open('Registartion completed', '', {
+    this._snackBarService.open('User created successfully', '', {
+      duration: 2000
+    });
+
+    this.cancelClick();
+  }
+
+  updateUserCallback(callback: CallbackModel) {
+    if (!callback.success) {
+      this._snackBarService.open('Something went wrong updating user! Please contact your Administrator', '', {
+        duration: 2000
+      });
+      return;
+    }
+
+    this._snackBarService.open('User updated successfully', '', {
       duration: 2000
     });
 

@@ -45,7 +45,7 @@ const routes: Routes = [
                 path: 'users',
                 component: UsersComponent,
                 canActivate: [RouteGuard],
-                data: { roles: [], url: '/users', title: 'Users', icon: 'thumb_up', show: true, seq: 1 }
+                data: { roles: [], url: '/users', title: 'Users', icon: 'person_outline', show: true, seq: 1 }
             },
             {
                 path: 'users/:userKey',
