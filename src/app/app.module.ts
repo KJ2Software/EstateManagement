@@ -51,6 +51,7 @@ import { ApprovalItemComponent } from './approvals/approval-items/approval-item/
 
 import { FileSizePipe } from '../pipes/file-size.pipe';
 import { DropZoneDirective } from '../directives/drop-zone.directive';
+import { CovalentDialogsModule } from '@covalent/core/dialogs';
 
 import {
     AuthService,
@@ -64,6 +65,8 @@ import {
     EmailService
 } from '../services';
 import { UploadFileComponent } from './upload-file/upload-file.component';
+import { RegisterUserComponent } from './users/register-user/register-user.component';
+import { UsersComponent } from './users/users.component';
 
 const httpInterceptorProviders: Type<any>[] = [RequestInterceptor];
 
@@ -92,7 +95,9 @@ const httpInterceptorProviders: Type<any>[] = [RequestInterceptor];
         ApprovalItemComponent,
         DropZoneDirective,
         FileSizePipe,
-        UploadFileComponent
+        UploadFileComponent,
+        RegisterUserComponent,
+        UsersComponent
 
     ],
     imports: [
@@ -111,7 +116,8 @@ const httpInterceptorProviders: Type<any>[] = [RequestInterceptor];
         CommonModule,
         InfiniteScrollModule,
         CustomModule,
-        CovalentHttpModule.forRoot({
+        CovalentDialogsModule,
+         CovalentHttpModule.forRoot({
             interceptors: [
                 {
                     interceptor: RequestInterceptor,
@@ -147,4 +153,4 @@ const httpInterceptorProviders: Type<any>[] = [RequestInterceptor];
     bootstrap: [AppComponent],
     entryComponents: [EstateDialogComponent]
 })
-export class AppModule {}
+export class AppModule { }

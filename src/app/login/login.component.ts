@@ -54,22 +54,24 @@ export class LoginComponent implements OnInit {
         }
     }
 
-    getUser(userKey: string) {
-        this.userService.getRecord(userKey, (e) => this.getUserCallback(e));
+    getUser(authKey: string) {
+        this.userService.getRecordFromAuthKey(authKey, (e) => this.getUserCallback(e));
     }
 
     getUserCallback(callbackModel: CallbackModel) {
         if (callbackModel.success) {
-            localStorage.setItem('userKey', callbackModel.data.key);
-            localStorage.setItem('estateKey', callbackModel.data.estateKey);
-            localStorage.setItem('isAdmin', callbackModel.data.isAdmin);
-            if (!callbackModel.data.isAdmin) {
+
+            localStorage.setItem('userKey', callbackModel.data[0].key);
+            localStorage.setItem('authKey', callbackModel.data[0].authKey);
+            localStorage.setItem('estateKey', callbackModel.data[0].estateKey);
+            localStorage.setItem('isAdmin', callbackModel.data[0].isAdmin);
+            if (!callbackModel.data[0].isAdmin) {
                 this._router.navigate(['/']);
                 return;
             }
             this.showEstateDialog();
         } else {
-            this._notificationService.displayMessage(callbackModel.data.message);
+            this._notificationService.displayMessage(callbackModel.data[0].message);
         }
     }
 
@@ -91,7 +93,11 @@ export class LoginComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        localStorage.setItem('userKey', '');
+        localStorage.removeItem('userKey');
+        localStorage.removeItem('authKey');
+        localStorage.removeItem('estateKey');
+        localStorage.removeItem('isAdmin');
+
         this.authFirebaseService.logout((e) => this.logoutCallback(e));
         this._titleService.setTitle(this.appTitle + ' | ' + 'Login');
     }

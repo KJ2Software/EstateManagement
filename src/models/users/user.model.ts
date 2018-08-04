@@ -1,5 +1,6 @@
 export class UserModel {
     key: string;
+    authKey: string;
     email: string;
     isAdmin: boolean;
     name: string;
