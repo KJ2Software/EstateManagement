@@ -33,9 +33,49 @@ export class UserFirebaseServiceProvider {
             subscription.unsubscribe();
         });
     }
+
+    public getRecordFromAuthKey(authKey, callbackMethod) {
+
+        let collectionRef = this.db.collection(this.tableName, (ref) => {
+            return ref.where('authKey', '==', authKey);
+        });
+
+        let snapshot = collectionRef.snapshotChanges()
+            .map((changes) => {
+                return changes.map((snap) => {
+                    return snap.payload.doc.data() as UserModel;
+                });
+            });
+        let subscription = snapshot.subscribe((res) => {
+            callbackMethod({ success: true, data: res });
+            subscription.unsubscribe();
+        }, (err) => {
+            callbackMethod({ success: false, data: err });
+            subscription.unsubscribe();
+        });
+    }
+
     public getAll(estateKey: string, callbackMethod) {
         let collectionRef = this.db.collection(this.tableName, (ref) => {
             return ref.where('estateKey', '==', estateKey).orderBy('name').orderBy('surname');
+        });
+        // var notes = categoryCollectionRef.valueChanges();
+        let snapshot = collectionRef.snapshotChanges()
+            .map((changes) => {
+                return changes.map((snap) => {
+                    return snap.payload.doc.data() as UserModel;
+                });
+            });
+        let subscription = snapshot.subscribe((res) => {
+            callbackMethod({ success: true, data: res });
+        }, (err) => {
+            callbackMethod({ success: false, data: err });
+        });
+    }
+
+    public getAllAdmin(callbackMethod) {
+        let collectionRef = this.db.collection(this.tableName, (ref) => {
+            return ref.where('isAdmin', '==', true).orderBy('name').orderBy('surname');
         });
         // var notes = categoryCollectionRef.valueChanges();
         let snapshot = collectionRef.snapshotChanges()

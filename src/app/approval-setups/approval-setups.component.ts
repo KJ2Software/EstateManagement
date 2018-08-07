@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { CallbackModel, ApprovalSetupModel, UserModel, ApprovalTypeModel, ApprovalSetupsViewModel } from '../../models';
 import { Router } from '../../../node_modules/@angular/router';
 import { MatSnackBar } from '../../../node_modules/@angular/material';
-import { TdLoadingService } from '../../../node_modules/@covalent/core';
+import { TdLoadingService, TdDialogService } from '../../../node_modules/@covalent/core';
 import { ApprovalSetupFirebaseServiceProvider, UserFirebaseServiceProvider, ApprovalTypeFirebaseServiceProvider } from '../../services';
 
 @Component({
@@ -20,6 +20,8 @@ export class ApprovalSetupsComponent implements OnInit {
   public approvalTypes: ApprovalTypeModel[] = [];
 
   constructor(private _snackBarService: MatSnackBar, private _router: Router,
+    private _dialogService: TdDialogService,
+    private _viewContainerRef: ViewContainerRef,
     private approvalSetupService: ApprovalSetupFirebaseServiceProvider,
     private userService: UserFirebaseServiceProvider,
     private approvalTypeService: ApprovalTypeFirebaseServiceProvider,
@@ -101,4 +103,37 @@ export class ApprovalSetupsComponent implements OnInit {
     this._router.navigate(['/approval-setups/' + approvalSetupsViewModel.approvalSetupKey]);
   }
 
+  deleteClick(approvalSetupsViewModel: ApprovalSetupsViewModel) {
+    this.deleteConfirm(approvalSetupsViewModel);
+  }
+
+  deleteCallback(callbackModel: CallbackModel) {
+    if (callbackModel.success) {
+      this._snackBarService.open('Deleted Successfully', undefined, { duration: 3000 });
+      return;
+    }
+
+    this._snackBarService.open('Delete Failed', undefined, { duration: 3000 });
+
+  }
+
+  deleteConfirm(approvalSetupsViewModel: ApprovalSetupsViewModel): void {
+    this._dialogService.openConfirm({
+      // tslint:disable-next-line:max-line-length
+      message: 'Are you sure you want to delete this record',
+      disableClose: true, // defaults to false
+      viewContainerRef: this._viewContainerRef, // OPTIONAL
+      title: 'Confirm', // OPTIONAL, hides if not provided
+      cancelButton: 'Cancel', // OPTIONAL, defaults to 'CANCEL'
+      acceptButton: 'OK', // OPTIONAL, defaults to 'ACCEPT'
+      width: '500px' // OPTIONAL, defaults to 400px
+    }).afterClosed().subscribe((accept: boolean) => {
+      if (accept) {
+        // DO SOMETHING
+        this.approvalSetupService.deleteRecord(approvalSetupsViewModel.approvalSetupKey, (e) => this.deleteCallback(e));
+      } else {
+        // DO SOMETHING ELSE
+      }
+    });
+  }
 }

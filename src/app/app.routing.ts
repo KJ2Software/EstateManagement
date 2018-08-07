@@ -20,6 +20,8 @@ import { ApprovalComponent } from './approvals/approval/approval.component';
 import { ApprovalItemsComponent } from './approvals/approval-items/approval-items.component';
 import { ApprovalItemComponent } from './approvals/approval-items/approval-item/approval-item.component';
 import { UploadFileComponent } from './upload-file/upload-file.component';
+import { RegisterUserComponent } from './users/register-user/register-user.component';
+import { UsersComponent } from './users/users.component';
 // import { DynamicDashboardsContainerComponent, DynamicWidgetDetailComponent } from '@sgits/dynamic-dashboards';
 
 const routes: Routes = [
@@ -38,6 +40,18 @@ const routes: Routes = [
                 component: HomeComponent,
                 canActivate: [RouteGuard],
                 data: { roles: [], url: '/', title: 'Home', icon: 'home', show: true, seq: 1 }
+            },
+            {
+                path: 'users',
+                component: UsersComponent,
+                canActivate: [RouteGuard],
+                data: { roles: [], url: '/users', title: 'Users', icon: 'person_outline', show: true, seq: 1 }
+            },
+            {
+                path: 'users/:userKey',
+                component: RegisterUserComponent,
+                canActivate: [RouteGuard],
+                data: { roles: [], url: '/users/register-user', title: 'Register User', icon: 'thumb_up', show: false, seq: 1 }
             },
             {
                 path: 'approval-types',
