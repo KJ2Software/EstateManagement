@@ -91,8 +91,6 @@ export class UserFirebaseServiceProvider {
         });
     }
 
-
-
     public updateRecord(model: UserModel, callbackMethod) {
         let docRef = this.db.doc(this.tableName + '/' + model.key);
         docRef.set(model).then((ok) => {

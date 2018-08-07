@@ -39,7 +39,6 @@ export class AuthFirebaseServiceProvider {
 
     }
 
-
     logout(callbackMethod) {
         const promise = this.afAuth.auth.signOut();
         promise.then((res) => {

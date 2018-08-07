@@ -3,8 +3,10 @@ import { TdDialogService } from '../../../../node_modules/@covalent/core';
 import { MatSnackBar } from '../../../../node_modules/@angular/material';
 import { Router, ActivatedRoute } from '../../../../node_modules/@angular/router';
 import { FormBuilder, FormGroup, Validators } from '../../../../node_modules/@angular/forms';
-import { ApprovalSetupFirebaseServiceProvider, ApprovalTypeFirebaseServiceProvider,
-  UserFirebaseServiceProvider, CommonService } from '../../../services';
+import {
+  ApprovalSetupFirebaseServiceProvider, ApprovalTypeFirebaseServiceProvider,
+  UserFirebaseServiceProvider, CommonService
+} from '../../../services';
 import { CallbackModel, ApprovalSetupModel, UserModel, ApprovalTypeModel } from '../../../models';
 
 @Component({
@@ -94,7 +96,10 @@ export class ApprovalSetupComponent implements OnInit {
   }
 
   saveClick(frmCmps) {
+    this.confirmNoDuplicates(this.frmApprovalSetup.value.userKey);
+  }
 
+  save() {
     if (this.approvalSetupKey === '') {
       // Add
       let modelToSave: ApprovalSetupModel = {
@@ -120,6 +125,34 @@ export class ApprovalSetupComponent implements OnInit {
       this.approvalSetupService.updateRecord(modelToSave, (e) => this.insertUpdateRecord(e));
       this._router.navigate(['/approval-setups']);
     }
+
+  }
+
+  confirmNoDuplicates(userKey: string) {
+    this.approvalSetupService.getAllForUser(this.estateKey, userKey, (e) => this.confirmNoDuplicatesCallback(e));
+
+  }
+
+  confirmNoDuplicatesCallback(callbackModel: CallbackModel) {
+    if (callbackModel.success) {
+      let haveDup = false;
+      callbackModel.data.forEach((existing: ApprovalSetupModel) => {
+        if (existing.approvalTypeKey === this.frmApprovalSetup.value.approvalTypeKey) {
+          if (existing.key !== this.approvalSetupKey) {
+            haveDup = true;
+            return;
+          }
+        }
+      });
+
+      if (haveDup) {
+        this._snackBarService.open('Duplicate entry detected', undefined, { duration: 3000 });
+        return;
+      }
+      this.save();
+      return;
+    }
+    this._snackBarService.open('Unable to verify duplicates', undefined, { duration: 3000 });
   }
 
   cancelClick() {
