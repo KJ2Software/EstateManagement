@@ -1,5 +1,4 @@
 <td-layout-card-over>
-  <mat-card-content flex fxLayout="column">
     <div *ngIf="approvalSetups.length > 0">
       <mat-list>
 
@@ -50,7 +49,6 @@
 
       </mat-list>
     </div>
-  </mat-card-content>
   <app-empty-state name="approvalSetups" [icon]="icon" [count]="approvalSetups.length"></app-empty-state>
   <a mat-fab routerLink="/approval-setups/0" color="primary" class="custom-fab-button">
     <mat-icon>add</mat-icon>

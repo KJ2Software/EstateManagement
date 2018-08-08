@@ -1,39 +1,37 @@
 <td-layout-card-over>
-  <mat-card-content flex fxLayout="column">
-    <div *ngIf="residents.length > 0">
+  <div *ngIf="residents.length > 0">
 
-      <mat-list>
-        <mat-list-item>
-          <span class="pad-right">
-            <mat-icon matListAvatar fxHide fxShow.gt-md>{{icon}}</mat-icon>
-          </span>
-          <span class="mat-body-1 tc-grey-500" fxFlex="50">Fullname</span>
-          <span class="mat-body-1 tc-grey-500" fxFlex="20" fxHide fxShow.gt-xs>Cellphone</span>
-          <span class="mat-body-1 tc-grey-500" fxFlex="30" fxHide fxShow.gt-md>E-mail</span>
-        </mat-list-item>
+    <mat-list>
+      <mat-list-item>
+        <span class="pad-right">
+          <mat-icon matListAvatar fxHide fxShow.gt-md>{{icon}}</mat-icon>
+        </span>
+        <span class="mat-body-1 tc-grey-500" fxFlex="50">Fullname</span>
+        <span class="mat-body-1 tc-grey-500" fxFlex="20" fxHide fxShow.gt-xs>Cellphone</span>
+        <span class="mat-body-1 tc-grey-500" fxFlex="30" fxHide fxShow.gt-md>E-mail</span>
+      </mat-list-item>
 
+      <mat-divider></mat-divider>
+
+      <mat-list-item *ngFor="let record of residents" (click)="detailClick(record)" class="hand gridRow">
+        <span class="pad-right">
+          <mat-icon color="primary" matListAvatar fxHide fxShow.gt-md>keyboard_arrow_right</mat-icon>
+        </span>
+        <span fxFlex="50">
+          {{record.firstname}} {{record.surname}}
+        </span>
+        <span fxHide fxShow.gt-xs fxFlex="20">
+          {{record.cellphone}}
+        </span>
+        <span fxHide fxShow.gt-md fxFlex="30">
+          {{record.email}}
+        </span>
         <mat-divider></mat-divider>
+      </mat-list-item>
+    </mat-list>
 
-        <mat-list-item *ngFor="let record of residents" (click)="detailClick(record)" class="hand gridRow">
-          <span class="pad-right">
-            <mat-icon color="primary" matListAvatar fxHide fxShow.gt-md>keyboard_arrow_right</mat-icon>
-          </span>
-          <span fxFlex="50">
-            {{record.firstname}} {{record.surname}}
-          </span>
-          <span fxHide fxShow.gt-xs fxFlex="20">
-            {{record.cellphone}}
-          </span>
-          <span fxHide fxShow.gt-md fxFlex="30">
-            {{record.email}}
-          </span>
-          <mat-divider></mat-divider>
-        </mat-list-item>
-      </mat-list>
-
-    </div>
-    <app-empty-state name="residents" [icon]="icon" [count]="residents.length"></app-empty-state>
-  </mat-card-content>
+  </div>
+  <app-empty-state name="residents" [icon]="icon" [count]="residents.length"></app-empty-state>
   <a mat-fab routerLink="/residents/0" color="primary" class="custom-fab-button">
     <mat-icon>add</mat-icon>
   </a>
