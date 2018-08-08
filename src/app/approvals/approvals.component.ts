@@ -13,6 +13,7 @@ import { ApprovalFirebaseServiceProvider, ApprovalSetupFirebaseServiceProvider, 
 export class ApprovalsComponent implements OnInit {
   approvals: ApprovalModel[] = [];
   estateKey: string = '';
+  public icon: string = 'device_hub';
 
   constructor(private _snackBarService: MatSnackBar, private _router: Router,
     private approvalFirebaseService: ApprovalFirebaseServiceProvider,

@@ -1,76 +1,71 @@
-<div class="flex-container" fxLayout="row" fxLayoutAlign="center center" style="padding-bottom:60px;">
-  <div flex-gt-md="50" flex="100">
-    <mat-card>
-      <mat-card-content style="margin-bottom:0px;" fxLayout="column" flex>
+<td-layout-card-over>
+  <mat-card-content flex fxLayout="column">
+    <div *ngIf="approvals.length > 0">
 
-        <mat-list>
-          <mat-list-item class='listHeading'>
-            <div flex fxFlexAlign="center">
-              Approvals
-            </div>
-            <div flex fxFlexAlign="center">
-              Finalised
-            </div>
-            <div style="text-align: right; width:50px;">
-              Action
-            </div>
-            <mat-divider></mat-divider>
-          </mat-list-item>
-          <mat-list-item style="height: auto">
-            <div flex>
-              <app-empty-state name="approvals" icon="device_hub" [count]="approvals.length"></app-empty-state>
-            </div>
-          </mat-list-item>
-          <mat-list-item *ngFor="let record of approvals">
-           
-            <div flex fxFlexAlign="center">
-              {{record.description}}
-            </div>
-            <div flex fxFlexAlign="center">
-                <mat-icon *ngIf="!record.isFinalised" style="text-align: center; width:25px; color: lightgray">clear</mat-icon>
-                <mat-icon *ngIf="record.isFinalised" style="text-align: center; width:25px; color: green">done</mat-icon>
-            </div>
-            <span style="text-align: right; width:50px;"  class="hand">
-              <button mat-icon-button [matMenuTriggerFor]="cardToolbarMenu">
-                <mat-icon matListAvatar class="push-bottom">more_vert</mat-icon>
-        
+      <mat-list>
+        <mat-list-item>
+          <span class="pad-right">
+            <mat-icon matListAvatar fxHide fxShow.gt-md>{{icon}}</mat-icon>
+          </span>
+          <div flex fxFlexAlign="center">
+            Description
+          </div>
+          <div flex fxFlexAlign="center">
+            Finalised
+          </div>
+          <div style="text-align: right; width:50px;">
+            Action
+          </div>
+          <mat-divider></mat-divider>
+        </mat-list-item>
+        <mat-list-item style="height: auto">
+          <div flex>
+            <app-empty-state name="approvals" icon="device_hub" [count]="approvals.length"></app-empty-state>
+          </div>
+        </mat-list-item>
+        <mat-list-item *ngFor="let record of approvals">
+
+          <div flex fxFlexAlign="center">
+            {{record.description}}
+          </div>
+          <div flex fxFlexAlign="center">
+            <mat-icon *ngIf="!record.isFinalised" style="text-align: center; width:25px; color: lightgray">clear</mat-icon>
+            <mat-icon *ngIf="record.isFinalised" style="text-align: center; width:25px; color: green">done</mat-icon>
+          </div>
+
+          <span style="text-align: right; width:50px;" class="hand">
+            <button mat-icon-button [matMenuTriggerFor]="cardToolbarMenu">
+              <mat-icon matListAvatar class="push-bottom">more_vert</mat-icon>
+            </button>
+            <mat-menu #cardToolbarMenu="matMenu">
+              <button (click)="detailClick(record)" mat-menu-item>
+                <mat-icon>create</mat-icon>
+                <span>Edit</span>
               </button>
-              <mat-menu #cardToolbarMenu="matMenu">
-                <button (click)="detailClick(record)" mat-menu-item>
-                  <mat-icon>create</mat-icon>
-                  <span>Edit</span>
-                </button>
-                <button (click)="itemsClick(record)" mat-menu-item>
-                  <mat-icon>attach_file</mat-icon>
-                  <span>Items</span>
-                </button>
-                <button (click)="finalizeClick(record)" mat-menu-item>
-                  <mat-icon>assistant_photo</mat-icon>
-                  <span>Finalise</span>
-                </button>
-                <button (click)="emailClick(record)" mat-menu-item>
-                  <mat-icon>email</mat-icon>
-                  <span>Email</span>
-                </button>
-    
-    
-              </mat-menu>
-            </span>
-          
-            <mat-divider></mat-divider>
+              <button (click)="itemsClick(record)" mat-menu-item>
+                <mat-icon>attach_file</mat-icon>
+                <span>Items</span>
+              </button>
+              <button (click)="finalizeClick(record)" mat-menu-item>
+                <mat-icon>assistant_photo</mat-icon>
+                <span>Finalise</span>
+              </button>
+              <button (click)="emailClick(record)" mat-menu-item>
+                <mat-icon>email</mat-icon>
+                <span>Email</span>
+              </button>
+            </mat-menu>
+          </span>
 
-          </mat-list-item>
-        </mat-list>
+          <mat-divider></mat-divider>
 
-      </mat-card-content>
-    </mat-card>
+        </mat-list-item>
+      </mat-list>
+    </div>
+    <app-empty-state name="approvals" [icon]="icon" [count]="approvals.length"></app-empty-state>
+  </mat-card-content>
 
-   
-  </div>
-</div>
-
-
-
-<a mat-fab routerLink="/approvals/0" color="primary" style="top:auto; right:15px; left:auto; bottom:50px; position:fixed;">
-  <mat-icon>add</mat-icon>
-</a>
+  <a mat-fab routerLink="/approvals/0" color="primary" class="custom-fab-button">
+    <mat-icon>add</mat-icon>
+  </a>
+</td-layout-card-over>
