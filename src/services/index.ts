@@ -14,3 +14,4 @@ export { EmailService } from './email.service';
 export { ApprovalFirebaseServiceProvider } from './firebase/approval-firebase-service-provider';
 export { ApprovalItemFirebaseServiceProvider } from './firebase/approval-item-firebase-service-provider';
 export { ApprovalItemResultFirebaseServiceProvider } from './firebase/approval-item-result-firebase-service-provider';
+export { UnitFirebaseServiceProvider } from './firebase/unit-firebase-service-provider';

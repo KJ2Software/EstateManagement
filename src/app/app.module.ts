@@ -67,6 +67,8 @@ import {
 import { UploadFileComponent } from './upload-file/upload-file.component';
 import { RegisterUserComponent } from './users/register-user/register-user.component';
 import { UsersComponent } from './users/users.component';
+import { UnitsComponent } from './units/units.component';
+import { UnitComponent } from './units/unit/unit.component';
 
 const httpInterceptorProviders: Type<any>[] = [RequestInterceptor];
 
@@ -97,7 +99,9 @@ const httpInterceptorProviders: Type<any>[] = [RequestInterceptor];
         FileSizePipe,
         UploadFileComponent,
         RegisterUserComponent,
-        UsersComponent
+        UsersComponent,
+        UnitsComponent,
+        UnitComponent
 
     ],
     imports: [

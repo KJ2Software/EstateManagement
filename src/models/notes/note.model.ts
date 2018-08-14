@@ -4,4 +4,5 @@ export class NoteTypeModel {
     noteTypeKey: string;
     unitKey: string;
     comments: string;
+    attachmentLink: string;
 }

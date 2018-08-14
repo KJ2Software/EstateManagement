@@ -22,6 +22,9 @@ import { ApprovalItemComponent } from './approvals/approval-items/approval-item/
 import { UploadFileComponent } from './upload-file/upload-file.component';
 import { RegisterUserComponent } from './users/register-user/register-user.component';
 import { UsersComponent } from './users/users.component';
+import { UnitComponent } from './units/unit/unit.component';
+import { UnitsComponent } from './units/units.component';
+
 // import { DynamicDashboardsContainerComponent, DynamicWidgetDetailComponent } from '@sgits/dynamic-dashboards';
 
 const routes: Routes = [
@@ -52,6 +55,18 @@ const routes: Routes = [
                 component: RegisterUserComponent,
                 canActivate: [RouteGuard],
                 data: { roles: [], url: '/users/register-user', title: 'Register User', icon: 'thumb_up', show: false, seq: 1 }
+            },
+            {
+                path: 'units',
+                component: UnitsComponent,
+                canActivate: [RouteGuard],
+                data: { roles: [], url: '/units', title: 'Units', icon: 'thumb_up', show: true, seq: 1 }
+            },
+            {
+                path: 'units/:unitKey',
+                component: UnitComponent,
+                canActivate: [RouteGuard],
+                data: { roles: [], url: '/units/unit', title: 'Unit', icon: 'thumb_up', show: false, seq: 1 }
             },
             {
                 path: 'approval-types',
