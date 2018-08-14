@@ -43,7 +43,7 @@ export class UnitFirebaseServiceProvider {
 
     public getAll(estateKey: string, callbackMethod) {
         let collectionRef = this.db.collection(this.tableName, (ref) => {
-            return ref.where('estateKey', '==', estateKey).orderBy('sequence');
+            return ref.where('estateKey', '==', estateKey).orderBy('firstname');
         });
         // var notes = categoryCollectionRef.valueChanges();
         let snapshot = collectionRef.snapshotChanges().map((changes) => {
@@ -61,12 +61,11 @@ export class UnitFirebaseServiceProvider {
         );
     }
 
-    public getAllForApprovalType(estateKey: string, approvalTypeKey, callbackMethod) {
+    public getAllForUnitNumber(estateKey: string, unitNumber, callbackMethod) {
         let collectionRef = this.db.collection(this.tableName, (ref) => {
             return ref
                 .where('estateKey', '==', estateKey)
-                .where('approvalTypeKey', '==', approvalTypeKey)
-                .orderBy('sequence');
+                .where('number', '==', unitNumber);
         });
         // var notes = categoryCollectionRef.valueChanges();
         let snapshot = collectionRef.snapshotChanges().map((changes) => {
@@ -80,31 +79,6 @@ export class UnitFirebaseServiceProvider {
             },
             (err) => {
                 callbackMethod({ success: false, data: err });
-            }
-        );
-    }
-
-    public getAllForUser(estateKey: string, userKey, callbackMethod) {
-        let collectionRef = this.db.collection(this.tableName, (ref) => {
-            return ref
-                .where('estateKey', '==', estateKey)
-                .where('userKey', '==', userKey)
-                .orderBy('sequence');
-        });
-        // var notes = categoryCollectionRef.valueChanges();
-        let snapshot = collectionRef.snapshotChanges().map((changes) => {
-            return changes.map((snap) => {
-                return snap.payload.doc.data() as UnitModel;
-            });
-        });
-        let subscription = snapshot.subscribe(
-            (res) => {
-                callbackMethod({ success: true, data: res });
-                subscription.unsubscribe();
-            },
-            (err) => {
-                callbackMethod({ success: false, data: err });
-                subscription.unsubscribe();
             }
         );
     }

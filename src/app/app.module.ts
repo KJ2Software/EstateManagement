@@ -27,7 +27,8 @@ import {
     ApprovalSetupFirebaseServiceProvider,
     ApprovalFirebaseServiceProvider,
     ApprovalItemFirebaseServiceProvider,
-    ApprovalItemResultFirebaseServiceProvider
+    ApprovalItemResultFirebaseServiceProvider,
+    UnitFirebaseServiceProvider
 } from '../services';
 import { EstateDialogComponent } from './estate-dialog/estate-dialog.component';
 import { MatDialogModule } from '../../node_modules/@angular/material';
@@ -151,7 +152,8 @@ const httpInterceptorProviders: Type<any>[] = [RequestInterceptor];
         EmailService,
         ApprovalFirebaseServiceProvider,
         ApprovalItemFirebaseServiceProvider,
-        ApprovalItemResultFirebaseServiceProvider
+        ApprovalItemResultFirebaseServiceProvider,
+        UnitFirebaseServiceProvider
     ],
     exports: [],
     bootstrap: [AppComponent],

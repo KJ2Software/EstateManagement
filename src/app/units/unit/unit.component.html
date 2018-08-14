@@ -1,31 +1,35 @@
 <td-layout-card-over>
-    <mat-card-content flex fxLayout="column">
-      <form [formGroup]="frmUnit" novalidate>
-        <mat-list>
-          <mat-list-item>
-            <mat-form-field>
-              <mat-select placeholder="Owner" formControlName="ownerKey">
-                <mat-option *ngFor="let ownerOption of owners" [value]="ownerOption?.key">
-                  {{ownerOption?.firstname}} {{ownerOption?.surname}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </mat-list-item>
-          <mat-list-item>
-            <mat-form-field>
-              <mat-select placeholder="Resident" formControlName="residentKey">
-                <mat-option *ngFor="let residentOption of residents" [value]="residentOption?.key">
-                  {{residentOption?.firstname}} {{residentOption?.surname}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </mat-list-item>
-        </mat-list>
-      </form>
-      <mat-card-actions class="text-right">
-        <button color="seconday" (click)="cancelClick()" mat-raised-button>Cancel</button>
-        <button color="primary" (click)="saveClick(frmUnit.value)" [disabled]='!frmUnit.valid' mat-raised-button>Save</button>
-      </mat-card-actions>
-    </mat-card-content>
-  </td-layout-card-over>
-  
+  <mat-card-content flex fxLayout="column">
+    <form [formGroup]="frmUnit" novalidate>
+      <mat-list>
+        <mat-list-item>
+          <mat-form-field>
+            <input matInput placeholder="Number" formControlName="number" maxlength="3">
+          </mat-form-field>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-form-field>
+            <mat-select placeholder="Owner" formControlName="ownerKey">
+              <mat-option *ngFor="let ownerOption of owners" [value]="ownerOption?.key">
+                {{ownerOption?.firstname}} {{ownerOption?.surname}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-form-field>
+            <mat-select placeholder="Resident" formControlName="residentKey">
+              <mat-option *ngFor="let residentOption of residents" [value]="residentOption?.key">
+                {{residentOption?.firstname}} {{residentOption?.surname}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-list-item>
+      </mat-list>
+    </form>
+    <mat-card-actions class="text-right">
+      <button color="seconday" (click)="cancelClick()" mat-raised-button>Cancel</button>
+      <button color="primary" (click)="saveClick(frmUnit.value)" [disabled]='!frmUnit.valid' mat-raised-button>Save</button>
+    </mat-card-actions>
+  </mat-card-content>
+</td-layout-card-over>

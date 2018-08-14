@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
-import { OwnerModel } from '../../models';
+import { OwnerModel, ResidentModel } from '../../models';
 
 @Injectable()
 export class OwnerFirebaseServiceProvider {

@@ -31,6 +31,7 @@ export class UnitComponent implements OnInit {
         private commonService: CommonService
     ) {
         this.frmUnit = builder.group({
+            number: [{ value: '' }, Validators.required],
             ownerKey: [{ value: '' }, Validators.required],
             residentKey: [{ value: '' }, Validators.required]
         });
@@ -100,18 +101,18 @@ export class UnitComponent implements OnInit {
     }
 
     saveClick(frmCmps) {
-        this.confirmNoDuplicates(this.frmUnit.value.userKey);
+        this.confirmNoDuplicates(this.frmUnit.value.number);
     }
 
-    confirmNoDuplicates(userKey: string) {
-        this.unitService.getAllForUser(this.estateKey, userKey, (e) => this.confirmNoDuplicatesCallback(e));
+    confirmNoDuplicates(unitNumber: number) {
+        this.unitService.getAllForUnitNumber(this.estateKey, unitNumber, (e) => this.confirmNoDuplicatesCallback(e));
     }
 
     confirmNoDuplicatesCallback(callbackModel: CallbackModel) {
         if (callbackModel.success) {
             let haveDup = false;
             callbackModel.data.forEach((existing: UnitModel) => {
-                if (existing.ownerKey === this.frmUnit.value.ownerKey) {
+                if (existing.number === this.frmUnit.value.number) {
                     if (existing.key !== this.unitKey) {
                         haveDup = true;
                         return;
@@ -135,6 +136,7 @@ export class UnitComponent implements OnInit {
             let modelToSave: UnitModel = {
                 key: this.commonService.getNewGuid(),
                 estateKey: localStorage.getItem('estateKey'),
+                number: this.frmUnit.value.number,
                 ownerKey: this.frmUnit.value.ownerKey,
                 residentKey: this.frmUnit.value.residentKey
             };
@@ -146,6 +148,7 @@ export class UnitComponent implements OnInit {
             let modelToSave: UnitModel = {
                 key: this.unitKey,
                 estateKey: localStorage.getItem('estateKey'),
+                number: this.frmUnit.value.number,
                 ownerKey: this.frmUnit.value.ownerKey,
                 residentKey: this.frmUnit.value.residentKey
             };
