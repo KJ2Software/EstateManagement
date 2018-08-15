@@ -97,7 +97,7 @@ export class UnitComponent implements OnInit {
     }
 
     cancelClick() {
-        this._router.navigate(['/approval-setups']);
+        this._router.navigate(['/units']);
     }
 
     saveClick(frmCmps) {

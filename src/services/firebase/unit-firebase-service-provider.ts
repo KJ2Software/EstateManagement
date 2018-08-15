@@ -43,7 +43,7 @@ export class UnitFirebaseServiceProvider {
 
     public getAll(estateKey: string, callbackMethod) {
         let collectionRef = this.db.collection(this.tableName, (ref) => {
-            return ref.where('estateKey', '==', estateKey).orderBy('firstname');
+            return ref.where('estateKey', '==', estateKey).orderBy('number');
         });
         // var notes = categoryCollectionRef.valueChanges();
         let snapshot = collectionRef.snapshotChanges().map((changes) => {

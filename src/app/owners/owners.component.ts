@@ -12,7 +12,6 @@ import { TdLoadingService } from '../../../node_modules/@covalent/core';
 })
 export class OwnersComponent implements OnInit {
     owners: OwnerModel[] = [];
-    dataLoaded: boolean = false;
     estateKey: string = '';
     public icon: string = 'person';
 
@@ -36,6 +35,7 @@ export class OwnersComponent implements OnInit {
         this.owners = [];
         if (callbackModel.success) {
             this.owners = callbackModel.data;
+            console.log(callbackModel);
             // this.buildModel();
             return;
         }
