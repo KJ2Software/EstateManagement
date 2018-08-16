@@ -31,7 +31,7 @@ export class UnitComponent implements OnInit {
         private commonService: CommonService
     ) {
         this.frmUnit = builder.group({
-            number: [{ value: '' }, Validators.required],
+            number: [{ value: '', disabled: true }, Validators.required],
             ownerKey: [{ value: '' }, Validators.required],
             residentKey: [{ value: '' }, Validators.required]
         });
@@ -105,25 +105,23 @@ export class UnitComponent implements OnInit {
     }
 
     confirmNoDuplicates(unitNumber: number) {
-        this.unitService.getAllForUnitNumber(this.estateKey, unitNumber, (e) => this.confirmNoDuplicatesCallback(e));
+        this.unitService.getAllForUnitNumberOnceOff(this.estateKey, unitNumber, (e) => this.confirmNoDuplicatesCallback(e));
     }
 
     confirmNoDuplicatesCallback(callbackModel: CallbackModel) {
         if (callbackModel.success) {
             let haveDup = false;
-            callbackModel.data.forEach((existing: UnitModel) => {
-                if (existing.number === this.frmUnit.value.number) {
-                    if (existing.key !== this.unitKey) {
-                        haveDup = true;
-                        return;
-                    }
-                }
-            });
 
-            if (haveDup) {
+            if (callbackModel.data.length > 0) {
+
+                if (callbackModel.data[0].key === this.unitKey) {
+                    this.save();
+                    return;
+                }
                 this._snackBarService.open('Duplicate entry detected', undefined, { duration: 3000 });
                 return;
             }
+
             this.save();
             return;
         }
@@ -142,7 +140,7 @@ export class UnitComponent implements OnInit {
             };
 
             this.unitService.insertRecord(modelToSave, (e) => this.insertUpdateRecord(e));
-            this._router.navigate(['/approval-setups']);
+            this._router.navigate(['/units']);
         } else {
             // Update
             let modelToSave: UnitModel = {
@@ -154,7 +152,7 @@ export class UnitComponent implements OnInit {
             };
 
             this.unitService.updateRecord(modelToSave, (e) => this.insertUpdateRecord(e));
-            this._router.navigate(['/approval-setups']);
+            this._router.navigate(['/units']);
         }
     }
 

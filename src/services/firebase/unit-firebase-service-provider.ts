@@ -61,7 +61,7 @@ export class UnitFirebaseServiceProvider {
         );
     }
 
-    public getAllForUnitNumber(estateKey: string, unitNumber, callbackMethod) {
+    public getAllForUnitNumberOnceOff(estateKey: string, unitNumber, callbackMethod) {
         let collectionRef = this.db.collection(this.tableName, (ref) => {
             return ref
                 .where('estateKey', '==', estateKey)
@@ -76,9 +76,11 @@ export class UnitFirebaseServiceProvider {
         let subscription = snapshot.subscribe(
             (res) => {
                 callbackMethod({ success: true, data: res });
+                subscription.unsubscribe();
             },
             (err) => {
                 callbackMethod({ success: false, data: err });
+                subscription.unsubscribe();
             }
         );
     }
