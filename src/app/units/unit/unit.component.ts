@@ -31,7 +31,7 @@ export class UnitComponent implements OnInit {
         private commonService: CommonService
     ) {
         this.frmUnit = builder.group({
-            number: [{ value: '', disabled: true }, Validators.required],
+            number: [{ value: '' }, Validators.required],
             ownerKey: [{ value: '' }, Validators.required],
             residentKey: [{ value: '' }, Validators.required]
         });

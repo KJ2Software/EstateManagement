@@ -40,6 +40,7 @@ import { ApprovalSetupsComponent } from './approval-setups/approval-setups.compo
 import { ApprovalSetupComponent } from './approval-setups/approval-setup/approval-setup.component';
 import { EmptyStateComponent } from '../components/empty-state/empty-state.component';
 import { NotesComponent } from './notes/notes.component';
+import { NoteComponent } from './notes/note/note.component';
 import { ResidentsComponent } from './residents/residents.component';
 import { ResidentComponent } from './residents/resident/resident.component';
 import { OwnersComponent } from './owners/owners.component';
@@ -70,6 +71,7 @@ import { RegisterUserComponent } from './users/register-user/register-user.compo
 import { UsersComponent } from './users/users.component';
 import { UnitsComponent } from './units/units.component';
 import { UnitComponent } from './units/unit/unit.component';
+import { NoteFirebaseServiceProvider } from '../services/firebase/note-firebase-service-provider';
 
 const httpInterceptorProviders: Type<any>[] = [RequestInterceptor];
 
@@ -88,6 +90,7 @@ const httpInterceptorProviders: Type<any>[] = [RequestInterceptor];
         EmptyStateComponent,
         NoteTypesComponent,
         NotesComponent,
+        NoteComponent,
         ResidentsComponent,
         ResidentComponent,
         OwnersComponent,
@@ -153,7 +156,9 @@ const httpInterceptorProviders: Type<any>[] = [RequestInterceptor];
         ApprovalFirebaseServiceProvider,
         ApprovalItemFirebaseServiceProvider,
         ApprovalItemResultFirebaseServiceProvider,
-        UnitFirebaseServiceProvider
+        UnitFirebaseServiceProvider,
+        NoteFirebaseServiceProvider
+
     ],
     exports: [],
     bootstrap: [AppComponent],
