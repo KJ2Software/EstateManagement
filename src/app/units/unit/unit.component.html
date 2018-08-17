@@ -1,10 +1,9 @@
-<mat-tab-group color="accent" backgroundColor="primary">
+<mat-tab-group color="warn" backgroundColor="primary" mat-stretch-tabs>
 
   <mat-tab label="Info">
     <div class="flex-container" fxLayout="row" fxLayoutAlign="center center">
       <div flex-gt-md="50" flex="100">
         <mat-card class="flex-container">
-          <!-- <mat-card-content flex fxLayout="column"> -->
           <form [formGroup]="frmUnit" novalidate>
 
             <mat-list class="pad-top-md">
@@ -44,7 +43,6 @@
         </mat-card>
       </div>
     </div>
-    <!-- </mat-card-content> -->
   </mat-tab>
 
   <mat-tab label="Notes">

@@ -16,3 +16,4 @@ export { ApprovalItemModel } from './approvals/approval-item.model';
 export { ApprovalItemResultModel } from './approvals/approval-item-result.model';
 export { ApprovalItemViewModel } from './view-models/approval-item-view.model';
 export { UnitModel } from './units/unit.model';
+export { NoteModel } from './notes/note.model';
