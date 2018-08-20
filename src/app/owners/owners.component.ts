@@ -35,8 +35,6 @@ export class OwnersComponent implements OnInit {
         this.owners = [];
         if (callbackModel.success) {
             this.owners = callbackModel.data;
-            console.log(callbackModel);
-            // this.buildModel();
             return;
         }
 

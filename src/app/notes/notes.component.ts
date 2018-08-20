@@ -16,31 +16,34 @@ export class NotesComponent implements OnInit {
     public icon: string = 'build';
 
     constructor(
-      private _snackBarService: MatSnackBar,
+        private _snackBarService: MatSnackBar,
         private _router: Router,
         public noteService: NoteFirebaseServiceProvider,
         private _loadingService: TdLoadingService
     ) {}
 
-    ngOnInit() {}
-
-    loadData() {
-      this.noteService.getAll(this.estateKey, (e) => this.getAllForNoteCallback(e));
-  }
-
-  getAllForNoteCallback(callbackModel: CallbackModel) {
-    this.notes = [];
-    if (callbackModel.success) {
-        this.notes = callbackModel.data;
-        return;
+    ngOnInit() {
+        this.estateKey = localStorage.getItem('estateKey');
+        this.loadData();
     }
 
-    this._snackBarService.open('Error getting notes', '', {
-        duration: 2000
-    });
-}
+    loadData() {
+        this.noteService.getAll(this.estateKey, (e) => this.getAllForNoteCallback(e));
+    }
 
-detailClick(noteModel: NoteModel) {
-    this._router.navigate(['/notes/' + noteModel.key]);
-}
+    getAllForNoteCallback(callbackModel: CallbackModel) {
+        this.notes = [];
+        if (callbackModel.success) {
+            this.notes = callbackModel.data;
+            return;
+        }
+
+        this._snackBarService.open('Error getting notes', '', {
+            duration: 2000
+        });
+    }
+
+    detailClick(noteModel: NoteModel) {
+        this._router.navigate(['/notes/' + noteModel.key]);
+    }
 }

@@ -4,6 +4,6 @@ export class NoteModel {
     noteTypeKey: string;
     unitKey: string;
     comment: string;
-    date: Date;
+    date: string;
     // attachmentLink: string;
 }
