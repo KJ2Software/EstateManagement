@@ -43,7 +43,7 @@ export class NoteFirebaseServiceProvider {
 
     public getAll(estateKey: string, callbackMethod) {
         let collectionRef = this.db.collection(this.tableName, (ref) => {
-            return ref.where('estateKey', '==', estateKey).orderBy('date');
+            return ref.where('estateKey', '==', estateKey).orderBy('comment');
         });
         // var notes = categoryCollectionRef.valueChanges();
         let snapshot = collectionRef.snapshotChanges().map((changes) => {

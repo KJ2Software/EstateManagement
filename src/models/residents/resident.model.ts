@@ -7,4 +7,5 @@ export class ResidentModel {
     email: string;
     leaseStart: string;
     leaseEnd: string;
+    showButton: boolean;
 }

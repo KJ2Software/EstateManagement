@@ -14,6 +14,7 @@ export class ResidentsComponent implements OnInit {
     residents: ResidentModel[] = [];
     dataLoaded: boolean = false;
     estateKey: string = '';
+    rowHover: boolean = false;
     public icon: string = 'people';
 
     constructor(
@@ -22,6 +23,14 @@ export class ResidentsComponent implements OnInit {
         public residentService: ResidentFirebaseServiceProvider,
         private _loadingService: TdLoadingService
     ) {}
+
+    mouseEnter(row: ResidentModel) {
+        row.showButton = true;
+    }
+
+    mouseLeave(row: ResidentModel) {
+        row.showButton = false;
+    }
 
     ngOnInit() {
         this.estateKey = localStorage.getItem('estateKey');
