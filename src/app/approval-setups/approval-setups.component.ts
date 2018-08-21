@@ -29,7 +29,6 @@ export class ApprovalSetupsComponent implements OnInit {
 
   ngOnInit() {
     this.estateKey = localStorage.getItem('estateKey');
-
     this.loadData();
   }
 

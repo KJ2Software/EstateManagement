@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '../../../../node_modules/@angular/material';
-import { NoteTypeModel, CallbackModel, NoteModel } from '../../../models';
+import { NoteTypeModel, CallbackModel, NoteModel, UnitModel } from '../../../models';
 import { ActivatedRoute, Router } from '../../../../node_modules/@angular/router';
-import { NoteTypeFirebaseServiceProvider, CommonService } from '../../../services';
+import { NoteTypeFirebaseServiceProvider, CommonService, UnitFirebaseServiceProvider } from '../../../services';
 import { FormGroup, FormBuilder, Validators } from '../../../../node_modules/@angular/forms';
 import { NoteFirebaseServiceProvider } from '../../../services/firebase/note-firebase-service-provider';
 
@@ -17,11 +17,13 @@ export class NoteComponent implements OnInit {
     private estateKey: string = '';
     private noteModel: NoteModel = new NoteModel();
     public noteTypes: NoteTypeModel[] = [];
+    public units: UnitModel[] = [];
     frmNote: FormGroup;
 
     constructor(
         private _activatedRoute: ActivatedRoute,
         private noteTypeService: NoteTypeFirebaseServiceProvider,
+        private unitService: UnitFirebaseServiceProvider,
         private noteService: NoteFirebaseServiceProvider,
         private _snackBarService: MatSnackBar,
         public builder: FormBuilder,
@@ -32,7 +34,7 @@ export class NoteComponent implements OnInit {
             noteTypeKey: [{ value: '' }, Validators.required],
             date: [{ value: '' }, Validators.required],
             comment: [{ value: '' }, Validators.required],
-            unit: [{ value: '' }, Validators.required]
+            unitKey: [{ value: '' }, Validators.required]
         });
         this.estateKey = localStorage.getItem('estateKey');
     }
@@ -52,6 +54,7 @@ export class NoteComponent implements OnInit {
 
     loadData() {
         this.noteTypeService.getAll(this.estateKey, (e) => this.getNoteTypesCallback(e));
+        this.unitService.getAll(this.estateKey, (e) => this.getUnitsCallback(e));
 
         if (this.noteKey === '') {
             this.noteModel = new NoteModel();
@@ -67,6 +70,16 @@ export class NoteComponent implements OnInit {
             return;
         }
         this._snackBarService.open('Error getting note Types', '', {
+            duration: 2000
+        });
+    }
+
+    getUnitsCallback(callback: CallbackModel) {
+        if (callback.success) {
+            this.units = callback.data;
+            return;
+        }
+        this._snackBarService.open('Error getting units', '', {
             duration: 2000
         });
     }
@@ -94,26 +107,26 @@ export class NoteComponent implements OnInit {
                 key: this.commonService.getNewGuid(),
                 estateKey: localStorage.getItem('estateKey'),
                 noteTypeKey: this.frmNote.value.noteTypeKey,
-                unitKey: this.frmNote.value.unit,
+                unitKey: this.frmNote.value.unitKey,
                 date: this.frmNote.value.date,
                 comment: this.frmNote.value.comment
             };
 
             this.noteService.insertRecord(modelToSave, (e) => this.insertUpdateRecord(e));
-            this._router.navigate(['/units']);
+            this._router.navigate(['/notes']);
         } else {
             // Update
             let modelToSave: NoteModel = {
                 key: this.noteKey,
                 estateKey: localStorage.getItem('estateKey'),
                 noteTypeKey: this.frmNote.value.noteTypeKey,
-                unitKey: this.frmNote.value.unit,
+                unitKey: this.frmNote.value.unitKey,
                 date: this.frmNote.value.date,
                 comment: this.frmNote.value.comment
             };
 
             this.noteService.updateRecord(modelToSave, (e) => this.insertUpdateRecord(e));
-            this._router.navigate(['/units']);
+            this._router.navigate(['/notes']);
         }
     }
 
