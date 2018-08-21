@@ -80,7 +80,8 @@ export class ResidentComponent implements OnInit {
                 cellphone: this.frmResident.value.cellphone,
                 email: this.frmResident.value.email,
                 leaseStart: this.frmResident.value.leaseStart,
-                leaseEnd: this.frmResident.value.leaseEnd
+                leaseEnd: this.frmResident.value.leaseEnd,
+                showButton: this.frmResident.value.showButton
             };
 
             this.residentService.insertRecord(modelToSave, (e) => this.insertUpdateRecord(e));
@@ -95,7 +96,8 @@ export class ResidentComponent implements OnInit {
                 cellphone: this.frmResident.value.cellphone,
                 email: this.frmResident.value.email,
                 leaseStart: this.frmResident.value.leaseStart,
-                leaseEnd: this.frmResident.value.leaseEnd
+                leaseEnd: this.frmResident.value.leaseEnd,
+                showButton: this.frmResident.value.showButton
             };
 
             this.residentService.updateRecord(modelToSave, (e) => this.insertUpdateRecord(e));

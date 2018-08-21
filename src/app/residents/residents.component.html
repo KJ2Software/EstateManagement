@@ -8,35 +8,49 @@
             <!-- <span class="pad-right">
               <mat-icon matListAvatar fxHide fxShow.gt-md>{{icon}}</mat-icon>
             </span> -->
-            <span class="mat-body-1 tc-grey-500" fxFlex="42">Fullname</span>
-            <span class="mat-body-1 tc-grey-500" fxFlex="20" fxHide fxShow.gt-xs>Cellphone</span>
+            <span class="mat-body-1 tc-grey-500" fxFlex="40">Fullname</span>
             <span class="mat-body-1 tc-grey-500" fxFlex="30" fxHide fxShow.gt-md>E-mail</span>
-            <!-- <div class="mat-body-1 tc-grey-500">
-                Action
-              </div> -->
+            <span class="mat-body-1 tc-grey-500" fxFlex="30" fxHide fxShow.gt-xs>Cellphone</span>
+            <div class="mat-body-1 tc-grey-500">Action</div>
           </mat-list-item>
 
           <mat-divider></mat-divider>
 
           <!-- <mat-list-item *ngFor="let record of residents" (click)="detailClick(record)" class="hand gridRow"> -->
-          <mat-list-item *ngFor="let record of residents" class="gridRow" (mouseenter) ="mouseEnter(record)" (mouseleave) ="mouseLeave(record)">
+          <mat-list-item *ngFor="let record of residents" class="gridRow" (mouseenter)="mouseEnter(record)" (mouseleave)="mouseLeave(record)">
 
             <!-- <span class="pad-right">
               <mat-icon color="primary" matListAvatar fxHide fxShow.gt-md>keyboard_arrow_right</mat-icon>
             </span> -->
-            <span fxFlex="42">
+            <span fxFlex="40">
               {{record.firstname}} {{record.surname}}
-            </span>
-            <span fxHide fxShow.gt-xs fxFlex="20">
-              {{record.cellphone}}
             </span>
             <span fxHide fxShow.gt-md fxFlex="30">
               {{record.email}}
             </span>
+            <span fxHide fxShow.gt-xs fxFlex="20">
+              {{record.cellphone}}
+            </span>
 
-            <span *ngIf="record.showButton" style="text-align: right; width:10px;" class="hand">
+            <span fxLayoutAlign="end start" class="hand" fxFlex="10">
+              <button mat-icon-button [matMenuTriggerFor]="cardToolbarMenu">
+                <mat-icon matListAvatar class="push-bottom">more_vert</mat-icon>
+              </button>
+              <mat-menu #cardToolbarMenu="matMenu">
+                <button (click)="detailClick(record)" mat-menu-item>
+                  <mat-icon>create</mat-icon>
+                  <span>Edit</span>
+                </button>
+                <button mat-menu-item>
+                  <mat-icon>delete</mat-icon>
+                  <span>Delete</span>
+                </button>
+              </mat-menu>
+            </span>
+
+            <!-- <span *ngIf="record.showButton" style="text-align: right; width:10px;" class="hand">
                 <button mat-icon-button [matMenuTriggerFor]="cardToolbarMenu">
-                  <mat-icon>more_vert</mat-icon>
+                  <mat-icon class="mat-icon">more_vert</mat-icon>
   
                 </button>
                 <mat-menu #cardToolbarMenu="matMenu">
@@ -44,24 +58,16 @@
                     <mat-icon>create</mat-icon>
                     <span>Edit</span>
                   </button>
-                  <button (click)="deleteClick(record)" mat-menu-item>
+                  <button  mat-menu-item>
                     <mat-icon>delete</mat-icon>
                     <span>Delete</span>
                   </button>
                 </mat-menu>
-              </span>
+              </span> -->
 
             <mat-divider></mat-divider>
           </mat-list-item>
         </mat-list>
-
-        <!-- <div (mouseover) ="mouseEnter('div a') ">
-          <h2>Div A</h2>
-   </div> 
-   <div (mouseenter) ="mouseEnter('div b')"  (mouseleave) ="mouseLeave('div B')">
-          <h2>Div B</h2>
-   </div> -->
-
       </div>
       <app-empty-state name="residents" [icon]="icon" [count]="residents.length"></app-empty-state>
       <a mat-fab routerLink="/residents/0" color="primary" class="custom-fab-button">

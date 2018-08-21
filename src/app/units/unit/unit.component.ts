@@ -12,10 +12,10 @@ import { UnitFirebaseServiceProvider } from '../../../services/firebase/unit-fir
     styleUrls: ['./unit.component.scss']
 })
 export class UnitComponent implements OnInit {
-    private unitKey: string;
     private subscriptions: any[] = [];
-    private estateKey: string = '';
     private unitModel: UnitModel = new UnitModel();
+    public estateKey: string = '';
+    public unitKey: string;
     public owners: OwnerModel[] = [];
     public residents: ResidentModel[] = [];
     frmUnit: FormGroup;

@@ -31,7 +31,7 @@ import {
     UnitFirebaseServiceProvider
 } from '../services';
 import { EstateDialogComponent } from './estate-dialog/estate-dialog.component';
-import { MatDialogModule } from '../../node_modules/@angular/material';
+import { MatDialogModule, MatDatepickerModule } from '../../node_modules/@angular/material';
 import { ApprovalTypesComponent } from './approval-types/approval-types.component';
 import { NoteTypesComponent } from './note-types/note-types.component';
 import { NoteTypeComponent } from './note-types/note-type/note-type.component';
@@ -72,6 +72,7 @@ import { UsersComponent } from './users/users.component';
 import { UnitsComponent } from './units/units.component';
 import { UnitComponent } from './units/unit/unit.component';
 import { NoteFirebaseServiceProvider } from '../services/firebase/note-firebase-service-provider';
+import { UnitNotesComponent } from '../components';
 
 const httpInterceptorProviders: Type<any>[] = [RequestInterceptor];
 
@@ -88,6 +89,7 @@ const httpInterceptorProviders: Type<any>[] = [RequestInterceptor];
         NoteTypesComponent,
         NoteTypeComponent,
         EmptyStateComponent,
+        UnitNotesComponent,
         NoteTypesComponent,
         NotesComponent,
         NoteComponent,
@@ -110,9 +112,9 @@ const httpInterceptorProviders: Type<any>[] = [RequestInterceptor];
     ],
     imports: [
         MatDialogModule,
+        MatDatepickerModule,
         AngularFireModule.initializeApp(environment.firebase),
         AngularFirestoreModule.enablePersistence(),
-        // AngularFirestoreModule,
         AngularFireAuthModule,
         AngularFireStorageModule,
         AppRoutingModule,
@@ -120,7 +122,6 @@ const httpInterceptorProviders: Type<any>[] = [RequestInterceptor];
         BrowserModule,
         BrowserAnimationsModule,
         SharedModule,
-        // DynamicDashboardsModule.forRoot(environment.webApiBaseAddress),
         CommonModule,
         InfiniteScrollModule,
         CustomModule,

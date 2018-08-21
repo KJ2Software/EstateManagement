@@ -61,11 +61,32 @@ export class NoteFirebaseServiceProvider {
         );
     }
 
-    public getAllForNoteNumberOnceOff(estateKey: string, unit, callbackMethod) {
+    public getAllForUnit(estateKey: string, unitKey: string, callbackMethod) {
         let collectionRef = this.db.collection(this.tableName, (ref) => {
             return ref
                 .where('estateKey', '==', estateKey)
-                .where('unitKey', '==', unit);
+                .where('unitKey', '==', unitKey)
+                .orderBy('comment');
+        });
+        // var notes = categoryCollectionRef.valueChanges();
+        let snapshot = collectionRef.snapshotChanges().map((changes) => {
+            return changes.map((snap) => {
+                return snap.payload.doc.data() as NoteModel;
+            });
+        });
+        let subscription = snapshot.subscribe(
+            (res) => {
+                callbackMethod({ success: true, data: res });
+            },
+            (err) => {
+                callbackMethod({ success: false, data: err });
+            }
+        );
+    }
+
+    public getAllForNoteNumberOnceOff(estateKey: string, unit, callbackMethod) {
+        let collectionRef = this.db.collection(this.tableName, (ref) => {
+            return ref.where('estateKey', '==', estateKey).where('unitKey', '==', unit);
         });
         // var notes = categoryCollectionRef.valueChanges();
         let snapshot = collectionRef.snapshotChanges().map((changes) => {

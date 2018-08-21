@@ -50,6 +50,9 @@
       <div flex-gt-md="50" flex="100">
         <mat-card class="flex-container">
           <form [formGroup]="frmUnit" novalidate>
+
+            <app-unit-notes [unitKey]="unitKey" [estateKey]="estateKey"></app-unit-notes>
+
             <a mat-fab routerLink="/approval-types/0" color="primary" class="custom-fab-button">
               <mat-icon>add</mat-icon>
             </a>
