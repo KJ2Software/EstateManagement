@@ -8,8 +8,8 @@
             <span class="pad-right">
               <mat-icon matListAvatar fxHide fxShow.gt-md>{{icon}}</mat-icon>
             </span>
-            <span class="mat-body-1 tc-grey-500" fxFlex="50">User</span>
-            <span class="mat-body-1 tc-grey-500" fxFlex="50">Approval Type</span>
+            <span class="mat-body-1 tc-grey-500" fxHide fxShow.gt-md fxFlex="50">User</span>
+            <span class="mat-body-1 tc-grey-500" fxFlex="100" gt-md="50">Approval Type</span>
             <div class="mat-body-1 tc-grey-500">
               Action
             </div>
@@ -21,10 +21,10 @@
             <span class="pad-right">
               <mat-icon color="primary" matListAvatar fxHide fxShow.gt-md>keyboard_arrow_right</mat-icon>
             </span>
-            <span fxFlex="50" class="pad-right">
+            <span fxFlex="50" fxHide fxShow.gt-md class="pad-right">
               {{record.name}}
             </span>
-            <span fxFlex="50" class="pad-right">
+            <span fxFlex="100" gt-md="50" class="pad-right">
               {{record.approvalType}}
             </span>
 

@@ -59,30 +59,6 @@ const routes: Routes = [
                 data: { roles: [], url: '/users/register-user', title: 'Register User', icon: 'thumb_up', show: false, seq: 1 }
             },
             {
-                path: 'units',
-                component: UnitsComponent,
-                canActivate: [RouteGuard],
-                data: { roles: [], url: '/units', title: 'Units', icon: 'thumb_up', show: true, seq: 1 }
-            },
-            {
-                path: 'units/:unitKey',
-                component: UnitComponent,
-                canActivate: [RouteGuard],
-                data: { roles: [], url: '/units/unit', title: 'Unit', icon: 'thumb_up', show: false, seq: 1 }
-            },
-            {
-                path: 'notes',
-                component: NotesComponent,
-                canActivate: [RouteGuard],
-                data: { roles: [], url: '/notes', title: 'Notes', icon: 'thumb_up', show: true, seq: 1 }
-            },
-            {
-                path: 'notes/:noteKey',
-                component: NoteComponent,
-                canActivate: [RouteGuard],
-                data: { roles: [], url: '/notes/note', title: 'Note', icon: 'thumb_up', show: false, seq: 1 }
-            },
-            {
                 path: 'approval-types',
                 component: ApprovalTypesComponent,
                 canActivate: [RouteGuard],
@@ -131,7 +107,6 @@ const routes: Routes = [
                 canActivate: [RouteGuard],
                 data: { roles: [], url: '/approval-items/approval-item', title: 'Approval', icon: 'home', show: false, seq: 1 }
             },
-
             {
                 path: 'note-types',
                 component: NoteTypesComponent,
@@ -143,6 +118,30 @@ const routes: Routes = [
                 component: NoteTypeComponent,
                 canActivate: [RouteGuard],
                 data: { roles: [], url: '/note-types/note-type', title: 'Note Type', icon: 'insert_comment', show: false, seq: 1 }
+            },
+            {
+                path: 'notes',
+                component: NotesComponent,
+                canActivate: [RouteGuard],
+                data: { roles: [], url: '/notes', title: 'Notes', icon: 'comment', show: true, seq: 1 }
+            },
+            {
+                path: 'notes/:noteKey',
+                component: NoteComponent,
+                canActivate: [RouteGuard],
+                data: { roles: [], url: '/notes/note', title: 'Note', icon: 'comment', show: false, seq: 1 }
+            },
+            {
+                path: 'units',
+                component: UnitsComponent,
+                canActivate: [RouteGuard],
+                data: { roles: [], url: '/units', title: 'Units', icon: 'location_city', show: true, seq: 1 }
+            },
+            {
+                path: 'units/:unitKey',
+                component: UnitComponent,
+                canActivate: [RouteGuard],
+                data: { roles: [], url: '/units/unit', title: 'Unit', icon: 'location_city', show: false, seq: 1 }
             },
             {
                 path: 'owners',

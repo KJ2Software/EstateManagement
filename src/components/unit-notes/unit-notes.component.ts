@@ -37,7 +37,7 @@ export class UnitNotesComponent implements OnInit {
             this.notes = callbackModel.data;
             return;
         }
-
+console.log(callbackModel.data);
         this._snackBarService.open('Error getting notes', '', {
             duration: 2000
         });

@@ -13,7 +13,7 @@ import { TdLoadingService } from '../../../node_modules/@covalent/core';
 export class UnitsComponent implements OnInit {
     units: UnitModel[] = [];
     estateKey: string = '';
-    public icon: string = 'build';
+    public icon: string = 'location_city';
 
     constructor(
         private _snackBarService: MatSnackBar,

@@ -13,7 +13,7 @@ import { NoteFirebaseServiceProvider } from '../../services/firebase/note-fireba
 export class NotesComponent implements OnInit {
     notes: NoteModel[] = [];
     estateKey: string = '';
-    public icon: string = 'build';
+    public icon: string = 'comment';
 
     constructor(
         private _snackBarService: MatSnackBar,

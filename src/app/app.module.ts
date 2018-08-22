@@ -19,6 +19,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireStorageModule } from 'angularfire2/storage';
+import { MatDatepickerModule, MatNativeDateModule } from '@angular/material';
 
 import {
     AuthFirebaseServiceProvider,
@@ -31,7 +32,7 @@ import {
     UnitFirebaseServiceProvider
 } from '../services';
 import { EstateDialogComponent } from './estate-dialog/estate-dialog.component';
-import { MatDialogModule, MatDatepickerModule } from '../../node_modules/@angular/material';
+import { MatDialogModule } from '../../node_modules/@angular/material';
 import { ApprovalTypesComponent } from './approval-types/approval-types.component';
 import { NoteTypesComponent } from './note-types/note-types.component';
 import { NoteTypeComponent } from './note-types/note-type/note-type.component';
@@ -124,6 +125,8 @@ const httpInterceptorProviders: Type<any>[] = [RequestInterceptor];
         SharedModule,
         CommonModule,
         InfiniteScrollModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
         CustomModule,
         CovalentDialogsModule,
          CovalentHttpModule.forRoot({
