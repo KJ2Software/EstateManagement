@@ -58,7 +58,6 @@ import { CovalentDialogsModule } from '@covalent/core/dialogs';
 
 import {
     AuthService,
-    HttpErrorService,
     ApprovalTypeFirebaseServiceProvider,
     CommonService,
     NoteTypeFirebaseServiceProvider,
@@ -143,7 +142,6 @@ const httpInterceptorProviders: Type<any>[] = [RequestInterceptor];
         Title,
         RouteGuard,
         AuthService,
-        HttpErrorService,
         AppStore,
         AuthStore,
         AuthFirebaseServiceProvider,

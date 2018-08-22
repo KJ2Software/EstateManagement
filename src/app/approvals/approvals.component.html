@@ -1,37 +1,22 @@
-<td-layout-card-over>
-  <mat-card-content flex fxLayout="column">
+<div fxLayout="row" fxLayoutAlign="center center">
+  <mat-card class="flex-container" flex-gt-md="70" flex="100">
     <div *ngIf="approvals.length > 0">
-
       <mat-list>
-        <mat-list-item>
-          <span class="pad-right">
-            <mat-icon matListAvatar fxHide fxShow.gt-md>{{icon}}</mat-icon>
-          </span>
-          <div flex fxFlexAlign="center">
-            Description
-          </div>
-          <div flex fxFlexAlign="center">
-            Finalised
-          </div>
-          <div style="text-align: right; width:50px;">
-            Action
-          </div>
-          <mat-divider></mat-divider>
-        </mat-list-item>
-        <mat-list-item style="height: auto">
-          <div flex>
-            <app-empty-state name="approvals" icon="device_hub" [count]="approvals.length"></app-empty-state>
-          </div>
-        </mat-list-item>
-        <mat-list-item *ngFor="let record of approvals">
 
-          <div flex fxFlexAlign="center">
-            {{record.description}}
-          </div>
-          <div flex fxFlexAlign="center">
+        <mat-list-item>
+          <span class="mat-body-1 tc-grey-500" fxFlex="80">Description</span>
+          <span class="mat-body-1 tc-grey-500" fxFlex="20">Finalised</span>
+          <span class="mat-body-1 tc-grey-500">Action</span>
+        </mat-list-item>
+
+        <mat-divider></mat-divider>
+        <mat-list-item *ngFor="let record of approvals" class="gridRow">
+
+          <span fxFlex="80">{{record.description}}</span>
+          <span fxFlex="20">
             <mat-icon *ngIf="!record.isFinalised" style="text-align: center; width:25px; color: lightgray">clear</mat-icon>
             <mat-icon *ngIf="record.isFinalised" style="text-align: center; width:25px; color: green">done</mat-icon>
-          </div>
+          </span>
 
           <span style="text-align: right; width:50px;" class="hand">
             <button mat-icon-button [matMenuTriggerFor]="cardToolbarMenu">
@@ -58,14 +43,13 @@
           </span>
 
           <mat-divider></mat-divider>
-
         </mat-list-item>
       </mat-list>
     </div>
-    <app-empty-state name="approvals" [icon]="icon" [count]="approvals.length"></app-empty-state>
-  </mat-card-content>
 
-  <a mat-fab routerLink="/approvals/0" color="primary" class="custom-fab-button">
-    <mat-icon>add</mat-icon>
-  </a>
-</td-layout-card-over>
+    <app-empty-state name="approvals" [icon]="icon" [count]="approvals.length"></app-empty-state>
+    <a mat-fab routerLink="/approvals/0" color="primary" class="custom-fab-button">
+      <mat-icon>add</mat-icon>
+    </a>
+  </mat-card>
+</div>

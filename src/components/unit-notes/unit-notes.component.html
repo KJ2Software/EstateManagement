@@ -2,27 +2,17 @@
 
     <mat-list>
         <mat-list-item>
-            <span class="pad-right">
-                <mat-icon matListAvatar fxHide fxShow.gt-md>{{icon}}</mat-icon>
-            </span>
-            <!-- <span class="mat-body-1 tc-grey-500" fxFlex="50">Note Type</span>
-            <span class="mat-body-1 tc-grey-500" fxFlex="50">Date</span> -->
+            <span class="mat-body-1 tc-grey-500" fxFlex="50">Type</span>
             <span class="mat-body-1 tc-grey-500" fxFlex="50">Comments</span>
         </mat-list-item>
 
         <mat-divider></mat-divider>
 
-        <mat-list-item *ngFor="let record of notes" (click)="detailClick(record)" class="hand gridRow">
-            <span class="pad-right">
-                <mat-icon color="primary" matListAvatar fxHide fxShow.gt-md>keyboard_arrow_right</mat-icon>
+        <mat-list-item *ngFor="let record of viewModels" class="gridRow">
+            <span fxFlex="50">
+                {{record.type}}
             </span>
-            <!-- <span fxFlex="100">
-              {{record.noteTypeKey}}
-            </span>
-            <span fxFlex="100">
-              {{record.date}}
-            </span> -->
-            <span fxFlex="100">
+            <span fxFlex="50">
                 {{record.comment}}
             </span>
             <mat-divider></mat-divider>

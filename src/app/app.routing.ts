@@ -119,12 +119,12 @@ const routes: Routes = [
                 canActivate: [RouteGuard],
                 data: { roles: [], url: '/note-types/note-type', title: 'Note Type', icon: 'insert_comment', show: false, seq: 1 }
             },
-            {
-                path: 'notes',
-                component: NotesComponent,
-                canActivate: [RouteGuard],
-                data: { roles: [], url: '/notes', title: 'Notes', icon: 'comment', show: true, seq: 1 }
-            },
+            // {
+            //     path: 'notes',
+            //     component: NotesComponent,
+            //     canActivate: [RouteGuard],
+            //     data: { roles: [], url: '/notes', title: 'Notes', icon: 'comment', show: true, seq: 1 }
+            // },
             {
                 path: 'notes/:noteKey',
                 component: NoteComponent,

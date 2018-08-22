@@ -1,21 +1,18 @@
 <div fxLayout="row" fxLayoutAlign="center center">
   <mat-card class="flex-container" flex-gt-md="70" flex="100">
     <div *ngIf="residents.length > 0">
-
       <mat-list>
+
         <mat-list-item>
           <span class="mat-body-1 tc-grey-500" fxFlex="100" gt-xs="60" gt-sm="40">Fullname</span>
           <span class="mat-body-1 tc-grey-500" fxFlex="30" fxHide fxShow.gt-sm>E-mail</span>
           <span class="mat-body-1 tc-grey-500" fxFlex="40" gt-xs="30" fxHide fxShow.gt-xs>Cellphone</span>
-          <span class="mat-body-1 tc-grey-500">
-            Action
-          </span>
+          <span class="mat-body-1 tc-grey-500">Action</span>
         </mat-list-item>
 
         <mat-divider></mat-divider>
 
         <mat-list-item *ngFor="let record of residents" class="gridRow" (mouseenter)="mouseEnter(record)" (mouseleave)="mouseLeave(record)">
-
           <span fxFlex="100" gt-xs="60" gt-sm="40">
             {{record.firstname}} {{record.surname}}
           </span>

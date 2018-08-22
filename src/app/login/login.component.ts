@@ -4,7 +4,7 @@ import { Title } from '@angular/platform-browser';
 import { environment } from '../../environments/environment';
 import { TdLoadingService, TdDialogService } from '@covalent/core';
 import { AuthStore } from '../../stores';
-import { HttpErrorService, AuthFirebaseServiceProvider, UserFirebaseServiceProvider, EstateFirebaseServiceProvider } from '../../services';
+import { AuthFirebaseServiceProvider, UserFirebaseServiceProvider, EstateFirebaseServiceProvider } from '../../services';
 import { SgNotificationService } from '../../components';
 import { CallbackModel } from '../../models';
 import { EstateDialogComponent } from '../estate-dialog/estate-dialog.component';
@@ -31,8 +31,7 @@ export class LoginComponent implements OnInit {
         private _sgNotificationService: SgNotificationService,
         private authFirebaseService: AuthFirebaseServiceProvider,
         private userService: UserFirebaseServiceProvider,
-        private estateService: EstateFirebaseServiceProvider,
-        private _httpErrorService: HttpErrorService) {
+        private estateService: EstateFirebaseServiceProvider) {
         this.authFirebaseService.logout((e) => this.logoutCallback(e));
 
         this.email = 'kj2software@gmail.com';

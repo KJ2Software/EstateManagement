@@ -52,7 +52,7 @@ export class ApprovalTypesComponent implements OnInit {
   deleteConfirm(approvalTypeModel: ApprovalTypeModel): void {
     this._dialogService.openConfirm({
       // tslint:disable-next-line:max-line-length
-      message: 'Are you sure you want to delete this record',
+      message: 'Are you sure you want to delete this record?',
       disableClose: true, // defaults to false
       viewContainerRef: this._viewContainerRef, // OPTIONAL
       title: 'Confirm', // OPTIONAL, hides if not provided
@@ -75,7 +75,6 @@ export class ApprovalTypesComponent implements OnInit {
       return;
     }
     this._snackBarService.open('Delete Failed', undefined, { duration: 3000 });
-
   }
 
 }

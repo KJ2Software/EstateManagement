@@ -18,7 +18,6 @@ export class ApprovalItemsComponent implements OnInit {
   public approvalItems: ApprovalItemModel[] = [];
   public approvalItemViewModel: ApprovalItemViewModel[] = [];
 
-
   constructor(private _snackBarService: MatSnackBar, private _activatedRoute: ActivatedRoute, private _router: Router,
     private commonService: CommonService,
     private approvalItemFirebaseService: ApprovalItemFirebaseServiceProvider,
@@ -96,7 +95,6 @@ export class ApprovalItemsComponent implements OnInit {
 
         this.approvalItemResultFirebaseService.getAll(this.approvalKey, (e) => this.getAllCallback(e));
 
-
         this.approvalItemViewModel.push(viewModel);
       });
 
@@ -128,7 +126,6 @@ export class ApprovalItemsComponent implements OnInit {
       });
     });
 
-
   }
 
   approveClick(approvalItem: ApprovalItemViewModel) {
@@ -149,7 +146,7 @@ export class ApprovalItemsComponent implements OnInit {
       return;
     }
     this.userApproved.forEach((userAppr) => {
-      this.approvalItemResultFirebaseService.deleteRecord(userAppr.key, (callbackModel) => { console.log(callbackModel); });
+      this.approvalItemResultFirebaseService.deleteRecord(userAppr.key, (callbackModel) => { });
     });
 
     let model: ApprovalItemResultModel = {

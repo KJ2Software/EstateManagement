@@ -7,6 +7,7 @@ export { EstateModel } from './estates/estate.model';
 export { ApprovalSetupModel } from './approval-setups/approval-setup.model';
 export { ApprovalTypeModel } from './approval-types/approval-type.model';
 export { ApprovalSetupsViewModel } from './view-models/approval-setups-view.model';
+export { NotesViewModel } from './view-models/notes-view.model';
 export { NoteTypeModel } from './note-types/note-type.model';
 export { ResidentModel } from './residents/resident.model';
 export { OwnerModel } from './owners/owner.model';

@@ -1,8 +1,7 @@
-<div class="flex-container" fxLayout="row" fxLayoutAlign="center center">
-  <div flex-gt-md="50" flex="100">
-    <mat-card class="flex-container">
+<div fxLayout="row" fxLayoutAlign="center center">
+    <mat-card class="flex-container" flex-gt-md="50" flex="100">
       <form [formGroup]="frmApprovalType" novalidate>
-        <mat-list class="pad-top-md">
+        <mat-list>
           <mat-list-item>
             <mat-form-field>
               <input matInput placeholder="Description" formControlName="name" maxlength="50">
@@ -16,4 +15,3 @@
       </mat-card-actions>
     </mat-card>
   </div>
-</div>
